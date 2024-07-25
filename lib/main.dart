@@ -26,18 +26,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const FluentApp(
-      localizationsDelegates: [
+    return FluentApp(
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('zh', 'CN'),
         Locale('en', 'US'),
       ],
+      theme: FluentThemeData(
+        accentColor: Colors.teal,
+      ),
       debugShowCheckedModeBanner: false,
-      home: MainWindow(),
+      home: const MainWindow(),
     );
   }
 }
