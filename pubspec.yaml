@@ -1,0 +1,28 @@
+name: aria_ui
+description: "Aria UI Application"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  file_picker: ^8.0.0+1
+  fluent_ui: ^4.9.0
+  flutter:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+  get: ^4.6.6
+  google_fonts: ^6.2.1
+  http: ^1.2.2
+  shared_preferences: ^2.2.3
+  url_launcher: ^6.3.0
+  window_manager: ^0.3.9
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
