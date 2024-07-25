@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:aria_ui/main_window.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
@@ -24,12 +26,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return const FluentApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: [
+        Locale('zh', 'CN'),
+        Locale('en', 'US'),
+      ],
+      debugShowCheckedModeBanner: false,
+      home: MainWindow(),
     );
   }
 }

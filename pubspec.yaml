@@ -11,6 +11,8 @@ dependencies:
   fluent_ui: ^4.9.0
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_launcher_icons: ^0.13.1
   get: ^4.6.6
   google_fonts: ^6.2.1
