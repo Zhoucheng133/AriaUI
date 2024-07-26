@@ -89,19 +89,19 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "aria_ui" "\0"
+            VALUE "CompanyName", "zhouc" "\0"
+            VALUE "FileDescription", "AriaUI" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "aria_ui" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "aria_ui.exe" "\0"
-            VALUE "ProductName", "aria_ui" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 zhouc. All rights reserved." "\0"
+            VALUE "OriginalFilename", "ui.exe" "\0"
+            VALUE "ProductName", "ariaUI" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x409, 1252
+        VALUE "Translation", 0x0804, 936
     END
 END
 
