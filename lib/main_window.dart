@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:aria_ui/conponents/side_bar.dart';
+import 'package:aria_ui/funcs/prefs.dart';
 import 'package:aria_ui/pages/downloading.dart';
 import 'package:aria_ui/pages/finished.dart';
 import 'package:aria_ui/pages/settings.dart';
@@ -25,6 +26,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
+    // Prefs().initPrefs();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Prefs().initPrefs(context);
+    });
   }
 
   @override
