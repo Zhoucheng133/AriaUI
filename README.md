@@ -1,3 +1,3 @@
-# aria_ui
+# AriaUI
 
-A new Flutter project.
+This project is under developing
