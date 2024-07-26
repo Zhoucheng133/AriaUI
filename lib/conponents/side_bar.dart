@@ -33,7 +33,10 @@ class _SideBarState extends State<SideBar> {
                 const SizedBox(height: 5,),
                 SideBarItem(name: '下载中', icon: FontAwesomeIcons.download),
                 const SizedBox(height: 5,),
-                SideBarItem(name: '已完成', icon: FontAwesomeIcons.check)
+                SideBarItem(name: '已完成', icon: FontAwesomeIcons.check),
+                Expanded(child: Container()),
+                SideBarItem(name: '设置', icon: FontAwesomeIcons.gear),
+                SizedBox(height: 20,),
               ],
             ),
           ),
