@@ -1,3 +1,4 @@
+import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -9,6 +10,7 @@ class Prefs{
   late SharedPreferences prefs;
   final SettingVar s=Get.put(SettingVar());
   final PageVar p=Get.put(PageVar());
+  
 
   Future<void> initPrefs(BuildContext context) async {
     prefs=await SharedPreferences.getInstance();
@@ -17,6 +19,9 @@ class Prefs{
     if(rpc!=null && secret!=null){
       s.rpc.value=rpc;
       s.secret.value=secret;
+      if(context.mounted){
+        Services().getActives(context);
+      }
     }else{
       if(context.mounted){
         showDialog(
