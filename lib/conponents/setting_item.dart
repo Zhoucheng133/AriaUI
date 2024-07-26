@@ -32,7 +32,7 @@ class _SettingItemState extends State<SettingItem> {
         ),
         const SizedBox(width: 10,),
         SizedBox(
-          width: 250,
+          width: 270,
           child: widget.item,
         )
       ],

@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:aria_ui/conponents/setting_item.dart';
+import 'package:aria_ui/funcs/prefs.dart';
+import 'package:aria_ui/variables/setting_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Settings extends StatefulWidget {
@@ -15,6 +18,18 @@ class _SettingsState extends State<Settings> {
 
   TextEditingController rpc=TextEditingController();
   TextEditingController secret=TextEditingController();
+  final SettingVar s=Get.put(SettingVar());
+
+  @override
+  void initState() {
+    super.initState();
+    if(s.rpc.value.isNotEmpty){
+      rpc.text=s.rpc.value;
+    }
+    if(s.secret.value.isNotEmpty){
+      secret.text=s.secret.value;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +63,46 @@ class _SettingsState extends State<Settings> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Button(
-              child: const Text('放弃保存'), 
+              child: Text('放弃保存', style: GoogleFonts.notoSansSc(),),
               onPressed: (){
-                // TODO 放弃保存
+                showDialog(
+                  context: context, 
+                  builder: (context)=>ContentDialog(
+                    title: Text('放弃保存?', style: GoogleFonts.notoSansSc(),),
+                    content: Text('这不会保留你的所有修改', style: GoogleFonts.notoSansSc(),),
+                    actions: [
+                      Button(
+                        child: Text('取消', style: GoogleFonts.notoSansSc(),), 
+                        onPressed: (){
+                          Navigator.pop(context);
+                        }
+                      ),
+                      FilledButton(
+                        child: Text('放弃', style: GoogleFonts.notoSansSc(),),
+                        onPressed: (){
+                          rpc.text=s.rpc.value;
+                          secret.text=s.secret.value;
+                          Navigator.pop(context);
+                        }
+                      )
+                    ],
+                  )
+                );
               }
             ),
             SizedBox(width: 10,),
             FilledButton(
-              child: const Text('保存'), 
-              onPressed: (){
-                // TODO 保存设置
+              child: Text('保存', style: GoogleFonts.notoSansSc(),), 
+              onPressed: () async {
+                Prefs().setPrefs(rpc.text, secret.text);
+                await displayInfoBar(
+                  context, 
+                  builder: (context, close) => InfoBar(
+                    title: Text('保存设置成功', style: GoogleFonts.notoSansSc(),),
+                    severity: InfoBarSeverity.success,
+                  )
+                );
+                // Navigator.pop(context);
               }
             )
           ],
