@@ -13,6 +13,31 @@ class Downloading extends StatefulWidget {
 }
 
 class _DownloadingState extends State<Downloading> {
+
+  void addTask(){
+    // TODO 添加
+  }
+
+  void selectMode(){
+    // TODO 选择
+  }
+
+  void selectAll(){
+    // TODO 全选
+  }
+
+  void continueTask(){
+    // TODO 继续
+  }
+
+  void pauseTask(){
+    // TODO 暂停
+  }
+
+  void removeTask(){
+    // TODO 移除
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,17 +46,17 @@ class _DownloadingState extends State<Downloading> {
         children: [
           Row(
             children: [
-              MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: (){}),
+              MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: (){}),
+              MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.list, name: '全选', func: (){}),
+              MenuButton(icon: FontAwesomeIcons.list, name: '全选', func: ()=>selectAll()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: (){}, enable: false,),
+              MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: false,),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: (){}, enable: false,),
+              MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: false,),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: (){}, enable: false,),
+              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
             ],
           ),
           const SizedBox(height: 5,),
