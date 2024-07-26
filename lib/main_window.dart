@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:aria_ui/conponents/side_bar.dart';
+import 'package:aria_ui/pages/downloading.dart';
+import 'package:aria_ui/pages/finished.dart';
+import 'package:aria_ui/pages/settings.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
@@ -109,7 +112,12 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                         ],
                         borderRadius: BorderRadius.circular(10)
                       ),
-                      child: Container()
+                      child: Obx(()=>
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 200),
+                          child: p.nowPage.value=='下载中' ? const Downloading() : p.nowPage.value=='已完成' ? const Finished() : const Settings(),
+                        )
+                      )
                     ), 
                   )
                 )

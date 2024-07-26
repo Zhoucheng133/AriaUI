@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:aria_ui/conponents/side_bar_item.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +27,14 @@ class _SideBarState extends State<SideBar> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10,),
-                SideBarItem(name: '折叠', icon: FontAwesomeIcons.bars),
+                const SideBarItem(name: '折叠', icon: FontAwesomeIcons.bars),
                 const SizedBox(height: 5,),
-                SideBarItem(name: '下载中', icon: FontAwesomeIcons.download),
+                const SideBarItem(name: '下载中', icon: FontAwesomeIcons.download),
                 const SizedBox(height: 5,),
-                SideBarItem(name: '已完成', icon: FontAwesomeIcons.check),
+                const SideBarItem(name: '已完成', icon: FontAwesomeIcons.check),
                 Expanded(child: Container()),
-                SideBarItem(name: '设置', icon: FontAwesomeIcons.gear),
-                SizedBox(height: 20,),
+                const SideBarItem(name: '设置', icon: FontAwesomeIcons.gear),
+                const SizedBox(height: 20,),
               ],
             ),
           ),
