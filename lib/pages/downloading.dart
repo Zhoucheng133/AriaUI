@@ -2,8 +2,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:aria_ui/conponents/menu_button.dart';
+import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart' as p;
 
 class Downloading extends StatefulWidget {
   const Downloading({super.key});
@@ -38,6 +42,8 @@ class _DownloadingState extends State<Downloading> {
     // TODO 移除
   }
 
+  final TaskVar t=Get.put(TaskVar());
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -66,6 +72,22 @@ class _DownloadingState extends State<Downloading> {
               color: const Color.fromARGB(255, 234, 234, 234),
               borderRadius: BorderRadius.circular(2),
             ),
+          ),
+          Expanded(
+            child: Obx(()=>
+              ListView.builder(
+                itemCount: t.active.length,
+                itemBuilder: (BuildContext context, int index){
+                  String name='';
+                  try {
+                    name=t.active[index]['bittorrent']['info']['name'];
+                  } catch (_) {
+                    name=p.basename(t.active[index]['files'][0]['path']);
+                  }
+                  return Text(name, style: GoogleFonts.notoSansSc(),);
+                }
+              )
+            )
           )
         ],
       ),
