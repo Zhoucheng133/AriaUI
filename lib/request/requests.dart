@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:aria_ui/variables/setting_var.dart';
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +25,7 @@ class Requests{
     }
   }
 
-  Future<List> getActive(BuildContext context) async {
+  Future<List> getActive() async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
@@ -37,6 +35,19 @@ class Requests{
       }))['result'];
     } catch (_) {
       return [];
+    }
+  }
+
+  Future<String?> getVersion() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.getVersion",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}"]
+      }))['result']['version'];
+    } catch (_) {
+      return null;
     }
   }
 }
