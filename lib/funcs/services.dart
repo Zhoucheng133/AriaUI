@@ -24,14 +24,14 @@ class Services{
   Future<void> tellWaiting() async {
     List lists=await Requests().tellWaiting();
     if(lists.isNotEmpty){
-      t.active.value=lists;
+      t.waiting.value=lists;
     }
   }
 
   Future<void> tellStopped() async {
     List lists=await Requests().tellStopped();
     if(lists.isNotEmpty){
-      t.active.value=lists;
+      t.stopped.value=lists;
     }
   }
 
