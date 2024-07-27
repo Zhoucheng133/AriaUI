@@ -2,11 +2,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:aria_ui/conponents/menu_button.dart';
+import 'package:aria_ui/conponents/task_item.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
 class ActiveView extends StatefulWidget {
@@ -79,12 +79,18 @@ class _ActiveViewState extends State<ActiveView> {
                 itemCount: t.active.length,
                 itemBuilder: (BuildContext context, int index){
                   String name='';
+                  String dir='';
+                  int completedLength=0;
+                  int totalLength=0;
+                  dir=t.active[index]['dir'];
+                  completedLength=int.parse(t.active[index]['completedLength']);
+                  totalLength=int.parse(t.active[index]['totalLength']);
                   try {
                     name=t.active[index]['bittorrent']['info']['name'];
                   } catch (_) {
                     name=p.basename(t.active[index]['files'][0]['path']);
                   }
-                  return Text(name, style: GoogleFonts.notoSansSc(),);
+                  return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir);
                 }
               )
             )
