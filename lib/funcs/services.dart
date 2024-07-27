@@ -52,6 +52,6 @@ class Services{
   }
 
   void destoryServive(){
-
+    interval.cancel();
   }
 }

@@ -50,6 +50,10 @@ class Prefs{
     }
   }
 
+  void destroyTimer(){
+    Services().destoryServive();
+  }
+
   Future<void> setPrefs(String rpc, String secret) async {
     s.rpc.value=rpc;
     s.secret.value=secret;

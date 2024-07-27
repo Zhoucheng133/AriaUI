@@ -38,6 +38,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     windowManager.removeListener(this);
     listener.dispose();
     wsOkListener.dispose();
+    Prefs().destroyTimer();
     super.dispose();
   }
 
