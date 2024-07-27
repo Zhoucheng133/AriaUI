@@ -13,6 +13,7 @@ Future<void> main() async {
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
+    title: 'AriaUI'
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
