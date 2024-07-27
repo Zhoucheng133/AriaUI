@@ -25,13 +25,39 @@ class Requests{
     }
   }
 
-  Future<List> getActive() async {
+  Future<List> tellActive() async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
         "method":"aria2.tellActive",
         "id":"ariaui",
         "params":["token:${s.secret.value}"]
+      }))['result'];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<List> tellWaiting() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.tellWaiting",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", 0, 1000]
+      }))['result'];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<List> tellStopped() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.tellStopped",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", 0, 1000]
       }))['result'];
     } catch (_) {
       return [];

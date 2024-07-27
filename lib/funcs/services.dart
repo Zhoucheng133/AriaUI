@@ -14,8 +14,22 @@ class Services{
   final PageVar p=Get.put(PageVar());
   late Timer interval;
 
-  Future<void> getActives() async {
-    List lists=await Requests().getActive();
+  Future<void> tellActive() async {
+    List lists=await Requests().tellActive();
+    if(lists.isNotEmpty){
+      t.active.value=lists;
+    }
+  }
+
+  Future<void> tellWaiting() async {
+    List lists=await Requests().tellWaiting();
+    if(lists.isNotEmpty){
+      t.active.value=lists;
+    }
+  }
+
+  Future<void> tellStopped() async {
+    List lists=await Requests().tellStopped();
     if(lists.isNotEmpty){
       t.active.value=lists;
     }
@@ -45,8 +59,12 @@ class Services{
     }
     // getActives();
     interval= Timer.periodic(const Duration(seconds: 1), (Timer time){
-      if(p.nowPage.value=='下载中'){
-        getActives();
+      if(p.nowPage.value=='活跃中'){
+        tellActive();
+      }else if(p.nowPage.value=='等待中'){
+        tellWaiting();
+      }else if(p.nowPage.value=='已完成'){
+        tellStopped();
       }
     });
   }
