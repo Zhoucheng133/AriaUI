@@ -44,6 +44,8 @@ class _ActiveViewState extends State<ActiveView> {
 
   final TaskVar t=Get.put(TaskVar());
 
+  ScrollController controller=ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,25 +76,34 @@ class _ActiveViewState extends State<ActiveView> {
             ),
           ),
           Expanded(
-            child: Obx(()=>
-              ListView.builder(
-                itemCount: t.active.length,
-                itemBuilder: (BuildContext context, int index){
-                  String name='';
-                  String dir='';
-                  int completedLength=0;
-                  int totalLength=0;
-                  dir=t.active[index]['dir'];
-                  completedLength=int.parse(t.active[index]['completedLength']);
-                  totalLength=int.parse(t.active[index]['totalLength']);
-                  try {
-                    name=t.active[index]['bittorrent']['info']['name'];
-                  } catch (_) {
-                    name=p.basename(t.active[index]['files'][0]['path']);
-                  }
-                  return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir);
-                }
-              )
+            child: Scrollbar(
+              controller: controller,
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                child: Obx(()=>
+                  ListView.builder(
+                    controller: controller,
+                    itemCount: t.active.length,
+                    itemBuilder: (BuildContext context, int index){
+                      String name='';
+                      String dir='';
+                      int completedLength=0;
+                      int totalLength=0;
+                      int downloadSpeed=0;
+                      dir=t.active[index]['dir'];
+                      completedLength=int.parse(t.active[index]['completedLength']);
+                      totalLength=int.parse(t.active[index]['totalLength']);
+                      downloadSpeed=int.parse(t.active[index]['downloadSpeed']);
+                      try {
+                        name=t.active[index]['bittorrent']['info']['name'];
+                      } catch (_) {
+                        name=p.basename(t.active[index]['files'][0]['path']);
+                      }
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed);
+                    }
+                  )
+                ),
+              ),
             )
           )
         ],
