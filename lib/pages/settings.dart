@@ -7,14 +7,14 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({super.key});
+class SettingsView extends StatefulWidget {
+  const SettingsView({super.key});
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<SettingsView> createState() => _SettingsViewState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsViewState extends State<SettingsView> {
 
   TextEditingController rpc=TextEditingController();
   TextEditingController secret=TextEditingController();

@@ -9,14 +9,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
-class Downloading extends StatefulWidget {
-  const Downloading({super.key});
+class ActiveView extends StatefulWidget {
+  const ActiveView({super.key});
 
   @override
-  State<Downloading> createState() => _DownloadingState();
+  State<ActiveView> createState() => _ActiveViewState();
 }
 
-class _DownloadingState extends State<Downloading> {
+class _ActiveViewState extends State<ActiveView> {
 
   void addTask(){
     // TODO 添加

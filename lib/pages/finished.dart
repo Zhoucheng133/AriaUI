@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 
-class Finished extends StatefulWidget {
-  const Finished({super.key});
+import 'package:fluent_ui/fluent_ui.dart';
+
+class FinishedView extends StatefulWidget {
+  const FinishedView({super.key});
 
   @override
-  State<Finished> createState() => _FinishedState();
+  State<FinishedView> createState() => _FinishedViewState();
 }
 
-class _FinishedState extends State<Finished> {
+class _FinishedViewState extends State<FinishedView> {
   @override
   Widget build(BuildContext context) {
     return const Center(

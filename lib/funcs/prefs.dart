@@ -20,7 +20,7 @@ class Prefs{
       s.rpc.value=rpc;
       s.secret.value=secret;
       if(context.mounted){
-        Services().getActives(context);
+        Services().startService(context);
       }
     }else{
       if(context.mounted){
