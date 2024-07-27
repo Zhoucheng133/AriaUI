@@ -120,10 +120,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: Obx(()=>
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 200),
-                          child: p.nowPage.value=='活跃中' ? const ActiveView() : p.nowPage.value=='已完成' ? const FinishedView() : p.nowPage.value=='等待中' ? const WaitView() : const SettingsView(),
-                        )
+                        p.nowPage.value=='活跃中' ? const ActiveView() : p.nowPage.value=='已完成' ? const FinishedView() : p.nowPage.value=='等待中' ? const WaitView() : const SettingsView()
                       )
                     ), 
                   )
