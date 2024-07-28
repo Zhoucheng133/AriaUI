@@ -3,7 +3,6 @@
 
 import 'package:aria_ui/conponents/task_button.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -39,6 +38,18 @@ class _TaskItemState extends State<TaskItem> {
     }
   }
 
+  void pauseItem(){
+    
+  }
+
+  void delItem(){
+
+  }
+
+  void activeItem(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,24 +64,22 @@ class _TaskItemState extends State<TaskItem> {
               flex: 3,
               child: SizedBox(
                 width: double.infinity,
-                child: Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 5,),
+                    Text(
+                      convertSize(widget.totalLength),
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 12
                       ),
-                      SizedBox(height: 5,),
-                      Text(
-                        convertSize(widget.totalLength),
-                        style: GoogleFonts.notoSansSc(
-                          fontSize: 12
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               )
             ),
@@ -106,7 +115,11 @@ class _TaskItemState extends State<TaskItem> {
               ),
             ),
             SizedBox(width: 10,),
-            TaskButton(gid: widget.gid, func: (){}, icon: FontAwesomeIcons.pause, hint: '暂停',),
+            widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
+            widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
+            TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
+            SizedBox(width: 10,),
+            TaskButton(gid: widget.gid, func: ()=>delItem, icon:FluentIcons.delete, hint: '删除', enabled: true,),
             SizedBox(width: 10,),
           ],
         ),

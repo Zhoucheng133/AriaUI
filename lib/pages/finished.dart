@@ -58,8 +58,8 @@ class _FinishedViewState extends State<FinishedView> {
                       completedLength=int.parse(t.stopped[index]['completedLength']);
                       totalLength=int.parse(t.stopped[index]['totalLength']);
                       downloadSpeed=int.parse(t.stopped[index]['downloadSpeed']);
-                      gid=t.active[index]['gid'];
-                      status=t.active[index]['status'];
+                      gid=t.stopped[index]['gid'];
+                      status=t.stopped[index]['status'];
                       try {
                         name=t.stopped[index]['bittorrent']['info']['name'];
                       } catch (_) {
