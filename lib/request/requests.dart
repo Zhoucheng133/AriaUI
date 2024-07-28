@@ -25,7 +25,7 @@ class Requests{
     }
   }
 
-  Future<List> tellActive() async {
+  Future<List?> tellActive() async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
@@ -34,11 +34,11 @@ class Requests{
         "params":["token:${s.secret.value}"]
       }))['result'];
     } catch (_) {
-      return [];
+      return null;
     }
   }
 
-  Future<List> tellWaiting() async {
+  Future<List?> tellWaiting() async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
@@ -47,11 +47,11 @@ class Requests{
         "params":["token:${s.secret.value}", 0, 1000]
       }))['result'];
     } catch (_) {
-      return [];
+      return null;
     }
   }
 
-  Future<List> tellStopped() async {
+  Future<List?> tellStopped() async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
@@ -60,7 +60,7 @@ class Requests{
         "params":["token:${s.secret.value}", 0, 1000]
       }))['result'];
     } catch (_) {
-      return [];
+      return null;
     }
   }
 

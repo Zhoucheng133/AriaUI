@@ -15,22 +15,22 @@ class Services{
   late Timer interval;
 
   Future<void> tellActive() async {
-    List lists=await Requests().tellActive();
-    if(lists.isNotEmpty){
+    List? lists=await Requests().tellActive();
+    if(lists!=null){
       t.active.value=lists;
     }
   }
 
   Future<void> tellWaiting() async {
-    List lists=await Requests().tellWaiting();
-    if(lists.isNotEmpty){
+    List? lists=await Requests().tellWaiting();
+    if(lists!=null){
       t.waiting.value=lists;
     }
   }
 
   Future<void> tellStopped() async {
-    List lists=await Requests().tellStopped();
-    if(lists.isNotEmpty){
+    List? lists=await Requests().tellStopped();
+    if(lists!=null){
       t.stopped.value=lists;
     }
   }
