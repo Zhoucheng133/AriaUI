@@ -52,16 +52,20 @@ class _FinishedViewState extends State<FinishedView> {
                       int completedLength=0;
                       int totalLength=0;
                       int downloadSpeed=0;
+                      String gid='';
                       dir=t.stopped[index]['dir'];
+                      String status='';
                       completedLength=int.parse(t.stopped[index]['completedLength']);
                       totalLength=int.parse(t.stopped[index]['totalLength']);
                       downloadSpeed=int.parse(t.stopped[index]['downloadSpeed']);
+                      gid=t.active[index]['gid'];
+                      status=t.active[index]['status'];
                       try {
                         name=t.stopped[index]['bittorrent']['info']['name'];
                       } catch (_) {
                         name=p.basename(t.stopped[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status,);
                     }
                   )
                 ),

@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 
+import 'package:aria_ui/conponents/task_button.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -13,8 +15,10 @@ class TaskItem extends StatefulWidget {
   final int completedLength; 
   final String dir;
   final int downloadSpeed;
+  final String gid;
+  final String status;
 
-  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed});
+  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status});
 
   @override
   State<TaskItem> createState() => _TaskItemState();
@@ -47,28 +51,27 @@ class _TaskItemState extends State<TaskItem> {
           children: [
             Flexible(
               flex: 3,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+              child: SizedBox(
+                width: double.infinity,
+                child: Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        convertSize(widget.totalLength),
+                        style: GoogleFonts.notoSansSc(
+                          fontSize: 12
                         ),
-                        SizedBox(height: 5,),
-                        Text(
-                          convertSize(widget.totalLength),
-                          style: GoogleFonts.notoSansSc(
-                            fontSize: 12
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                ],
+                ),
               )
             ),
             SizedBox(width: 10,),
@@ -102,6 +105,8 @@ class _TaskItemState extends State<TaskItem> {
                 ],
               ),
             ),
+            SizedBox(width: 10,),
+            TaskButton(gid: widget.gid, func: (){}, icon: FontAwesomeIcons.pause, hint: '暂停',),
             SizedBox(width: 10,),
           ],
         ),
