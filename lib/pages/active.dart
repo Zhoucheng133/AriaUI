@@ -3,10 +3,12 @@
 
 import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
+import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
 class ActiveView extends StatefulWidget {
@@ -19,7 +21,36 @@ class ActiveView extends StatefulWidget {
 class _ActiveViewState extends State<ActiveView> {
 
   void addTask(){
-    // TODO 添加
+    TextEditingController controller=TextEditingController();
+    showDialog(
+      context: context, 
+      builder: (content)=>ContentDialog(
+        title: Text('添加任务', style: GoogleFonts.notoSansSc(),),
+        content: SizedBox(
+          height: 100,
+          child: TextBox(
+            maxLines: null,
+            controller: controller,
+            placeholder: 'http(s)://\nmagnet:',
+            textAlignVertical: TextAlignVertical.top,
+          ),
+        ),
+        actions: [
+          Button(
+            child: Text('取消', style: GoogleFonts.notoSansSc(),), 
+            onPressed: (){
+              Navigator.pop(context);
+            }
+          ),
+          FilledButton(
+            child: Text('添加', style: GoogleFonts.notoSansSc(),), 
+            onPressed: (){
+              Services().addTask(controller.text);
+            }
+          )
+        ],
+      )
+    );
   }
 
   void selectMode(){

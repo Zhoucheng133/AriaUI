@@ -69,6 +69,10 @@ class Services{
     });
   }
 
+  void addTask(String url){
+    // TODO 添加任务执行内容
+  }
+
   void destoryServive(){
     interval.cancel();
   }

@@ -22,7 +22,7 @@ class _MenuButtonState extends State<MenuButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){},
+      onTap: widget.func,
       child: MouseRegion(
         cursor: widget.enable==false ? SystemMouseCursors.forbidden : SystemMouseCursors.click,
         onEnter: (_){
