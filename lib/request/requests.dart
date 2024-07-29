@@ -76,4 +76,17 @@ class Requests{
       return null;
     }
   }
+
+  Future<dynamic> addTask(String url) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.addUri",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", [url]]
+      }))['result']['version'];
+    } catch (_) {
+      return false;
+    }
+  }
 }

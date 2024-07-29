@@ -35,6 +35,16 @@ class Services{
     }
   }
 
+  void serviceMain(){
+    if(p.nowPage.value=='活跃中'){
+      tellActive();
+    }else if(p.nowPage.value=='等待中'){
+      tellWaiting();
+    }else if(p.nowPage.value=='已完成'){
+      tellStopped();
+    }
+  }
+
   Future<void> startService(BuildContext context) async {
     String? version=await Requests().getVersion();
     if(version==null){
@@ -59,18 +69,12 @@ class Services{
     }
     // getActives();
     interval= Timer.periodic(const Duration(seconds: 1), (Timer time){
-      if(p.nowPage.value=='活跃中'){
-        tellActive();
-      }else if(p.nowPage.value=='等待中'){
-        tellWaiting();
-      }else if(p.nowPage.value=='已完成'){
-        tellStopped();
-      }
+      serviceMain();
     });
   }
 
-  void addTask(String url){
-    // TODO 添加任务执行内容
+  Future<void> addTask(String url) async {
+    await Requests().addTask(url);
   }
 
   void destoryServive(){

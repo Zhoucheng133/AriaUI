@@ -46,6 +46,7 @@ class _ActiveViewState extends State<ActiveView> {
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 
             onPressed: (){
               Services().addTask(controller.text);
+              Navigator.pop(context);
             }
           )
         ],
