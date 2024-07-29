@@ -14,13 +14,20 @@ class Services{
   final PageVar p=Get.put(PageVar());
   late Timer interval;
 
+  // 移除任务
+  Future<void> remove(String gid) async {
+    await Requests().removeTask(gid);
+  }
+
+  // 请求活跃的任务
   Future<void> tellActive() async {
     List? lists=await Requests().tellActive();
     if(lists!=null){
       t.active.value=lists;
-    }
+    } 
   }
 
+  // 请求等待中的任务
   Future<void> tellWaiting() async {
     List? lists=await Requests().tellWaiting();
     if(lists!=null){
@@ -28,6 +35,8 @@ class Services{
     }
   }
 
+
+  // 请求停止的任务
   Future<void> tellStopped() async {
     List? lists=await Requests().tellStopped();
     if(lists!=null){
@@ -35,6 +44,7 @@ class Services{
     }
   }
 
+  // 主服务
   void serviceMain(){
     if(p.nowPage.value=='活跃中'){
       tellActive();
@@ -45,6 +55,7 @@ class Services{
     }
   }
 
+  // 开始服务
   Future<void> startService(BuildContext context) async {
     String? version=await Requests().getVersion();
     if(version==null){
@@ -73,10 +84,12 @@ class Services{
     });
   }
 
+  // 添加任务
   Future<void> addTask(String url) async {
     await Requests().addTask(url);
   }
 
+  // 销毁服务
   void destoryServive(){
     interval.cancel();
   }

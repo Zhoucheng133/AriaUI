@@ -2,6 +2,7 @@
 
 
 import 'package:aria_ui/conponents/task_button.dart';
+import 'package:aria_ui/funcs/services.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'dart:math';
 
@@ -43,7 +44,28 @@ class _TaskItemState extends State<TaskItem> {
   }
 
   void delItem(){
-
+    showDialog(
+      context: context, 
+      builder: (context)=>ContentDialog(
+        title: Text('移除任务', style: GoogleFonts.notoSansSc(),),
+        content: Text('确定要移除任务吗，移除的任务会放在已完成的任务中', style: GoogleFonts.notoSansSc(),),
+        actions: [
+          Button(
+            child: Text('取消', style: GoogleFonts.notoSansSc(),), 
+            onPressed: (){
+              Navigator.pop(context);
+            }
+          ),
+          FilledButton(
+            child: Text('确定', style: GoogleFonts.notoSansSc(),), 
+            onPressed: (){
+              Services().remove(widget.gid);
+              Navigator.pop(context);
+            }
+          )
+        ],
+      )
+    );
   }
 
   void activeItem(){
@@ -119,7 +141,7 @@ class _TaskItemState extends State<TaskItem> {
             widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
             TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
             SizedBox(width: 10,),
-            TaskButton(gid: widget.gid, func: ()=>delItem, icon:FluentIcons.delete, hint: '删除', enabled: true,),
+            TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
             SizedBox(width: 10,),
           ],
         ),

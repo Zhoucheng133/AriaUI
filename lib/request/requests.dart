@@ -77,16 +77,29 @@ class Requests{
     }
   }
 
-  Future<dynamic> addTask(String url) async {
+  Future<String?> addTask(String url) async {
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
         "method":"aria2.addUri",
         "id":"ariaui",
         "params":["token:${s.secret.value}", [url]]
-      }))['result']['version'];
+      }))['result'];
     } catch (_) {
-      return false;
+      return null;
+    }
+  }
+
+  Future<String?> removeTask(String gid) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.remove",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", gid]
+      }))['result'];
+    } catch (_) {
+      return null;
     }
   }
 }
