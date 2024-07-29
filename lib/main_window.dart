@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:aria_ui/conponents/side_bar.dart';
 import 'package:aria_ui/funcs/prefs.dart';
+import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/pages/active.dart';
 import 'package:aria_ui/pages/finished.dart';
 import 'package:aria_ui/pages/settings.dart';
@@ -20,24 +21,24 @@ class MainWindow extends StatefulWidget {
 
 class _MainWindowState extends State<MainWindow> with WindowListener {
 
-  late Worker listener;
-  late Worker wsOkListener;
+  late Worker pagelistener;
 
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
-    // Prefs().initPrefs();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Prefs().initPrefs(context);
+    });
+    pagelistener=ever(p.nowPage, (_){
+      Services().serviceMain();
     });
   }
 
   @override
   void dispose() {
     windowManager.removeListener(this);
-    listener.dispose();
-    wsOkListener.dispose();
+    pagelistener.dispose();
     Prefs().destroyTimer();
     super.dispose();
   }
