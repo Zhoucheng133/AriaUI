@@ -30,3 +30,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_launcher_icons:
+  windows:
+    generate: true
+    image_path: "assets/icon.png"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/icon.png"
