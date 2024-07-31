@@ -83,4 +83,14 @@ class Services{
   void destoryServive(){
     interval.cancel();
   }
+
+  // 暂停任务
+  Future<void> pauseTask(String gid) async {
+    await Requests().pauseTask(gid);
+  }
+
+  // 继续任务
+  Future<void> continueTask(String gid) async {
+    await Requests().continueTask(gid);
+  }
 }

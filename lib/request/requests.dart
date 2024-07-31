@@ -102,4 +102,30 @@ class Requests{
       return null;
     }
   }
+
+  Future<String?> pauseTask(String gid) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.pause",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", gid]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<String?> continueTask(String gid) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.unpause",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", gid]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
 }

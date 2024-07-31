@@ -41,8 +41,12 @@ class _TaskItemState extends State<TaskItem> {
 
   bool hover=false;
 
+  void activeItem(){
+    Services().continueTask(widget.gid);
+  }
+
   void pauseItem(){
-    
+    Services().pauseTask(widget.gid);
   }
 
   void delItem(){
@@ -70,10 +74,7 @@ class _TaskItemState extends State<TaskItem> {
     );
   }
 
-  void activeItem(){
-
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
