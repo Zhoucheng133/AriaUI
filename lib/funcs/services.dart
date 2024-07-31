@@ -21,20 +21,12 @@ class Services{
 
   // 请求活跃的任务
   Future<void> tellActive() async {
-    List? lists=await Requests().tellActive();
-    if(lists!=null){
-      t.active.value=lists;
+    List? alists=await Requests().tellActive();
+    List? wlists=await Requests().tellWaiting();
+    if(alists!=null && wlists!=null){
+      t.active.value=alists..addAll(wlists);
     } 
   }
-
-  // 请求等待中的任务
-  Future<void> tellWaiting() async {
-    List? lists=await Requests().tellWaiting();
-    if(lists!=null){
-      t.waiting.value=lists;
-    }
-  }
-
 
   // 请求停止的任务
   Future<void> tellStopped() async {
@@ -48,8 +40,6 @@ class Services{
   void serviceMain(){
     if(p.nowPage.value=='活跃中'){
       tellActive();
-    }else if(p.nowPage.value=='等待中'){
-      tellWaiting();
     }else if(p.nowPage.value=='已完成'){
       tellStopped();
     }
