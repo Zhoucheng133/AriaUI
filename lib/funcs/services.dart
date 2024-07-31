@@ -77,6 +77,7 @@ class Services{
   // 添加任务
   Future<void> addTask(String url) async {
     await Requests().addTask(url);
+    serviceMain();
   }
 
   // 销毁服务
@@ -87,10 +88,12 @@ class Services{
   // 暂停任务
   Future<void> pauseTask(String gid) async {
     await Requests().pauseTask(gid);
+    serviceMain();
   }
 
   // 继续任务
   Future<void> continueTask(String gid) async {
     await Requests().continueTask(gid);
+    serviceMain();
   }
 }
