@@ -58,10 +58,6 @@ class _ActiveViewState extends State<ActiveView> {
     // TODO 选择
   }
 
-  void selectAll(){
-    // TODO 全选
-  }
-
   void continueTask(){
     // TODO 继续
   }
@@ -90,13 +86,16 @@ class _ActiveViewState extends State<ActiveView> {
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.list, name: '全选', func: ()=>selectAll()),
-              SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: false,),
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: false,),
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
+              SizedBox(width: 10,),
+              MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueTask()),
+              SizedBox(width: 10,),
+              MenuButton(icon: FontAwesomeIcons.pause, name: '全部暂停', func: ()=>pauseTask()),
+              SizedBox(width: 10,),
             ],
           ),
           const SizedBox(height: 5,),
