@@ -96,4 +96,14 @@ class Services{
     await Requests().continueTask(gid);
     serviceMain();
   }
+
+  // 暂停所有任务
+  void pauseAll(){
+
+  }
+
+  // 继续所有任务
+  void continueAll(){
+    
+  }
 }
