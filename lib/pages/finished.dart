@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
+import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
 class FinishedView extends StatefulWidget {
@@ -21,7 +23,28 @@ class _FinishedViewState extends State<FinishedView> {
   ScrollController controller=ScrollController();
 
   void clear(){
-
+    showDialog(
+      context: context, 
+      builder: (context)=>ContentDialog(
+        title: Text('清空所有已完成任务', style: GoogleFonts.notoSansSc(),),
+        content: Text('确定要清空所有已完成的任务吗? 这个操作不可撤销!', style: GoogleFonts.notoSansSc(),),
+        actions: [
+          Button(
+            child: Text('取消', style: GoogleFonts.notoSansSc(),), 
+            onPressed: (){
+              Navigator.pop(context);
+            }
+          ),
+          FilledButton(
+            child: Text('继续', style: GoogleFonts.notoSansSc()), 
+            onPressed: (){
+              Services().clearFinished();
+              Navigator.pop(context);
+            }
+          )
+        ],
+      )
+    );
   }
   
   void selectMode(){

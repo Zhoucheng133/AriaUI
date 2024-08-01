@@ -128,4 +128,17 @@ class Requests{
       return null;
     }
   }
+
+  Future<String?> clearFinished() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.purgeDownloadResult",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}"]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
 }

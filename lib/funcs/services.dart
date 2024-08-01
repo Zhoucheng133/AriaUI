@@ -106,4 +106,10 @@ class Services{
   void continueAll(){
     
   }
+
+  // 清空所有已完成的任务
+  Future<void> clearFinished() async {
+    await Requests().clearFinished();
+    serviceMain();
+  }
 }
