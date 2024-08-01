@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 
@@ -17,6 +19,18 @@ class _FinishedViewState extends State<FinishedView> {
   final TaskVar t=Get.put(TaskVar());
 
   ScrollController controller=ScrollController();
+
+  void clear(){
+
+  }
+  
+  void selectMode(){
+
+  }
+
+  void removeTask(){
+    
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -26,7 +40,12 @@ class _FinishedViewState extends State<FinishedView> {
         children: [
           Row(
             children: [
-              
+              MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
+              SizedBox(width: 10,),
+              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
+              SizedBox(width: 10,),
+              MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
+              SizedBox(width: 10,),
             ],
           ),
           const SizedBox(height: 5,),
