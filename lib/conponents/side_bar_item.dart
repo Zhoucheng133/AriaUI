@@ -91,7 +91,7 @@ class _SideBarItemState extends State<SideBarItem> {
                       widget.icon,
                       size: 14,
                     ),
-                    const SizedBox(width: 17,),
+                    const SizedBox(width: 20,),
                     Text(widget.name=='折叠' ? '' : widget.name)
                   ],
                 ),
