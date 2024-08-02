@@ -3,7 +3,9 @@
 
 import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
+import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:get/get.dart';
 import 'dart:math';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +30,7 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
+  PageVar p=Get.put(PageVar());
 
   String convertSize(int bytes) {
     try {
@@ -68,7 +71,12 @@ class _TaskItemState extends State<TaskItem> {
           FilledButton(
             child: Text('确定', style: GoogleFonts.notoSansSc(),), 
             onPressed: (){
-              Services().remove(widget.gid);
+              if(p.nowPage.value=='已完成'){
+                Services().removeFinishedTask(widget.gid);
+              }else{
+                Services().remove(widget.gid);
+              }
+              
               Navigator.pop(context);
             }
           )

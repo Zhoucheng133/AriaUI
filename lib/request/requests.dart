@@ -109,6 +109,20 @@ class Requests{
     }
   }
 
+  // 移除任务（已完成的）
+  Future<String?> removeFinishedTask(String gid) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.removeDownloadResult",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", gid]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
+
   // 暂停任务
   Future<String?> pauseTask(String gid) async {
     try {

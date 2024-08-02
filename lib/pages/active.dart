@@ -66,15 +66,15 @@ class _ActiveViewState extends State<ActiveView> {
   }
 
   void continueTask(){
-    // TODO 继续
+    Services().multiContinue(selectList);
   }
 
   void pauseTask(){
-    // TODO 暂停
+    Services().multiPause(selectList);
   }
 
   void removeTask(){
-    // TODO 移除
+    Services().multiRemove(selectList);
   }
 
   void continueAll(){

@@ -97,6 +97,45 @@ class Services{
     serviceMain();
   }
 
+  // 多任务暂停
+  Future<void> multiPause(List ls) async {
+    for (var item in ls) {
+      await Requests().pauseTask(item);
+    }
+    serviceMain();
+  }
+
+  // 多任务继续
+  Future<void> multiContinue(List ls) async {
+    for (var item in ls) {
+      await Requests().continueTask(item);
+    }
+    serviceMain();
+  }
+
+  // 多任务移除
+  Future<void> multiRemove(List ls) async {
+    for (var item in ls) {
+      await Requests().removeTask(item);
+    }
+    serviceMain();
+  }
+
+  // 移除已完成的任务
+  Future<void> removeFinishedTask(String gid) async {
+    await Requests().removeFinishedTask(gid);
+    serviceMain();
+  }
+
+
+  // 多任务（已完成）移除
+  Future<void> multiRemoveFinishedTask(List ls) async {
+    for (var item in ls) {
+      await Requests().removeFinishedTask(item);
+    }
+    serviceMain();
+  }
+
   // 暂停所有任务
   Future<void> pauseAll() async {
     await Requests().pauseAll();

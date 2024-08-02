@@ -58,7 +58,7 @@ class _FinishedViewState extends State<FinishedView> {
   }
 
   void removeTask(){
-    
+    Services().multiRemoveFinishedTask(selectList);
   }
 
   void changeSelectStatus(String gid){
