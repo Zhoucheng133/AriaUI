@@ -25,6 +25,7 @@ class Requests{
     }
   }
 
+  // 获取活跃的任务
   Future<List?> tellActive() async {
     try {
       return (await httpRequest({
@@ -38,6 +39,7 @@ class Requests{
     }
   }
 
+  // 获取等待中的任务
   Future<List?> tellWaiting() async {
     try {
       return (await httpRequest({
@@ -50,7 +52,8 @@ class Requests{
       return null;
     }
   }
-
+  
+  // 获取已停止（完成）的任务
   Future<List?> tellStopped() async {
     try {
       return (await httpRequest({
@@ -64,6 +67,7 @@ class Requests{
     }
   }
 
+  // 获取版本
   Future<String?> getVersion() async {
     try {
       return (await httpRequest({
@@ -77,6 +81,7 @@ class Requests{
     }
   }
 
+  // 添加任务
   Future<String?> addTask(String url) async {
     try {
       return (await httpRequest({
@@ -90,6 +95,7 @@ class Requests{
     }
   }
 
+  // 移除任务
   Future<String?> removeTask(String gid) async {
     try {
       return (await httpRequest({
@@ -103,6 +109,7 @@ class Requests{
     }
   }
 
+  // 暂停任务
   Future<String?> pauseTask(String gid) async {
     try {
       return (await httpRequest({
@@ -116,6 +123,7 @@ class Requests{
     }
   }
 
+  // 继续任务
   Future<String?> continueTask(String gid) async {
     try {
       return (await httpRequest({
@@ -129,6 +137,7 @@ class Requests{
     }
   }
 
+  // 清除所有已完成的任务
   Future<String?> clearFinished() async {
     try {
       return (await httpRequest({
