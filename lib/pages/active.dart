@@ -20,6 +20,10 @@ class ActiveView extends StatefulWidget {
 
 class _ActiveViewState extends State<ActiveView> {
 
+  bool select=false;
+  
+  List selectList=[];
+
   void addTask(){
     TextEditingController controller=TextEditingController();
     showDialog(
@@ -55,7 +59,10 @@ class _ActiveViewState extends State<ActiveView> {
   }
 
   void selectMode(){
-    // TODO 选择
+    setState(() {
+      selectList=[];
+      select=!select;
+    });
   }
 
   void continueTask(){
@@ -76,6 +83,23 @@ class _ActiveViewState extends State<ActiveView> {
 
   void pauseAll(){
     Services().pauseAll();
+  }
+
+  
+  void changeSelectStatus(String gid){
+    if(selectList.contains(gid)){
+      setState(() {
+        selectList.remove(gid);
+      });
+    }else{
+      setState(() {
+        selectList.add(gid);
+      });
+    }
+  }
+
+  bool checked(String gid){
+    return selectList.contains(gid);
   }
 
   final TaskVar t=Get.put(TaskVar());
@@ -142,7 +166,7 @@ class _ActiveViewState extends State<ActiveView> {
                       } catch (_) {
                         name=p.basename(t.active[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status,);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid),);
                     }
                   )
                 ),

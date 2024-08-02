@@ -17,8 +17,11 @@ class TaskItem extends StatefulWidget {
   final int downloadSpeed;
   final String gid;
   final String status;
+  final bool selectMode;
+  final VoidCallback changeSelectStatus;
+  final bool checked;
 
-  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status});
+  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status, required this.selectMode, required this.changeSelectStatus, required this.checked});
 
   @override
   State<TaskItem> createState() => _TaskItemState();
@@ -97,6 +100,17 @@ class _TaskItemState extends State<TaskItem> {
           padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
           child: Row(
             children: [
+              widget.selectMode? SizedBox(
+                width: 40,
+                child: Center(
+                  child: Checkbox(
+                    checked: widget.checked, 
+                    onChanged: (_){
+                      widget.changeSelectStatus();
+                    }
+                  ),
+                ),
+              ):Container(),
               Flexible(
                 flex: 3,
                 child: SizedBox(

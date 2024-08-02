@@ -19,6 +19,9 @@ class FinishedView extends StatefulWidget {
 class _FinishedViewState extends State<FinishedView> {
 
   final TaskVar t=Get.put(TaskVar());
+  bool select=false;
+  
+  List selectList=[];
 
   ScrollController controller=ScrollController();
 
@@ -48,11 +51,30 @@ class _FinishedViewState extends State<FinishedView> {
   }
   
   void selectMode(){
-
+    setState(() {
+      selectList=[];
+      select=!select;
+    });
   }
 
   void removeTask(){
     
+  }
+
+  void changeSelectStatus(String gid){
+    if(selectList.contains(gid)){
+      setState(() {
+        selectList.remove(gid);
+      });
+    }else{
+      setState(() {
+        selectList.add(gid);
+      });
+    }
+  }
+
+  bool checked(String gid){
+    return selectList.contains(gid);
   }
   
   @override
@@ -107,7 +129,7 @@ class _FinishedViewState extends State<FinishedView> {
                       } catch (_) {
                         name=p.basename(t.stopped[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status,);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid),);
                     }
                   )
                 ),
