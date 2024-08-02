@@ -16,3 +16,14 @@
 ![window_manager](https://img.shields.io/badge/window_manager-0.3.9-pink)
 ![font_awesome_flutter](https://img.shields.io/badge/font_awesome_flutter-10.7.0-green)
 ![path](https://img.shields.io/badge/path-1.9.0-lightgreen)
+
+![License](https://img.shields.io/badge/License-MIT-dark_green)
+
+## 截图
+
+![截图](demo/demo.png)
+
+## 更新日志
+
+### 0.1.0 (2024/8/2)
+- 第一个版本
