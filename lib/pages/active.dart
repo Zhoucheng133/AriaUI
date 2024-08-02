@@ -70,6 +70,14 @@ class _ActiveViewState extends State<ActiveView> {
     // TODO 移除
   }
 
+  void continueAll(){
+    Services().continueAll();
+  }
+
+  void pauseAll(){
+    Services().pauseAll();
+  }
+
   final TaskVar t=Get.put(TaskVar());
 
   ScrollController controller=ScrollController();
@@ -92,9 +100,9 @@ class _ActiveViewState extends State<ActiveView> {
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueTask()),
+              MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueAll()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.pause, name: '全部暂停', func: ()=>pauseTask()),
+              MenuButton(icon: FontAwesomeIcons.pause, name: '全部暂停', func: ()=>pauseAll()),
               SizedBox(width: 10,),
             ],
           ),

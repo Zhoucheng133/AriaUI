@@ -98,13 +98,15 @@ class Services{
   }
 
   // 暂停所有任务
-  void pauseAll(){
-
+  Future<void> pauseAll() async {
+    await Requests().pauseAll();
+    serviceMain();
   }
 
   // 继续所有任务
-  void continueAll(){
-    
+  Future<void> continueAll() async {
+    await Requests().continueAll();
+    serviceMain();
   }
 
   // 清空所有已完成的任务

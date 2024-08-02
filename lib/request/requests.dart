@@ -150,4 +150,30 @@ class Requests{
       return null;
     }
   }
+
+  Future<String?> continueAll() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.unpauseAll",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}"]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<String?> pauseAll() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.pauseAll",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}"]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
 }
