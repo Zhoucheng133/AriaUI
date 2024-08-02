@@ -91,88 +91,95 @@ class _TaskItemState extends State<TaskItem> {
           hover=false;
         });
       },
-      child: AnimatedContainer(
-        decoration: BoxDecoration(
-          color: hover ? Color.fromARGB(255, 240, 240, 240) : Color.fromARGB(0, 240, 240, 240)
-        ),
-        duration: const Duration(milliseconds: 200),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
-          child: Row(
-            children: [
-              widget.selectMode? SizedBox(
-                width: 40,
-                child: Center(
-                  child: Checkbox(
-                    checked: widget.checked, 
-                    onChanged: (_){
-                      widget.changeSelectStatus();
-                    }
-                  ),
-                ),
-              ):Container(),
-              Flexible(
-                flex: 3,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 5,),
-                      Text(
-                        convertSize(widget.totalLength),
-                        style: GoogleFonts.notoSansSc(
-                          fontSize: 12
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ),
-              SizedBox(width: 10,),
-              Flexible(
-                flex: 2,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: ProgressBar(value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100)
+      child: GestureDetector(
+        onTap: (){
+          if(widget.selectMode){
+            widget.changeSelectStatus();
+          }
+        },
+        child: AnimatedContainer(
+          decoration: BoxDecoration(
+            color: hover ? Color.fromARGB(255, 240, 240, 240) : Color.fromARGB(0, 240, 240, 240)
+          ),
+          duration: const Duration(milliseconds: 200),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
+            child: Row(
+              children: [
+                widget.selectMode? SizedBox(
+                  width: 40,
+                  child: Center(
+                    child: Checkbox(
+                      checked: widget.checked, 
+                      onChanged: (_){
+                        widget.changeSelectStatus();
+                      }
                     ),
-                    SizedBox(height: 5,),
-                    Row(
+                  ),
+                ):Container(),
+                Flexible(
+                  flex: 3,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Text(
-                            '${ widget.totalLength==0 ? 0 : ((widget.completedLength/widget.totalLength)*100).toStringAsFixed(2)}%',
-                            style: GoogleFonts.notoSansSc(
-                              fontSize: 12
-                            ),
-                          ),
-                        ),
                         Text(
-                          widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
+                          widget.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 5,),
+                        Text(
+                          convertSize(widget.totalLength),
                           style: GoogleFonts.notoSansSc(
                             fontSize: 12
                           ),
                         )
                       ],
-                    )
-                  ],
+                    ),
+                  )
                 ),
-              ),
-              SizedBox(width: 10,),
-              widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
-              widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
-              TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
-              SizedBox(width: 10,),
-              TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
-              SizedBox(width: 10,),
-            ],
+                SizedBox(width: 10,),
+                Flexible(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ProgressBar(value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100)
+                      ),
+                      SizedBox(height: 5,),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${ widget.totalLength==0 ? 0 : ((widget.completedLength/widget.totalLength)*100).toStringAsFixed(2)}%',
+                              style: GoogleFonts.notoSansSc(
+                                fontSize: 12
+                              ),
+                            ),
+                          ),
+                          Text(
+                            widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
+                            style: GoogleFonts.notoSansSc(
+                              fontSize: 12
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10,),
+                widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
+                widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
+                TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
+                SizedBox(width: 10,),
+                TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
+                SizedBox(width: 10,),
+              ],
+            ),
           ),
         ),
       ),
