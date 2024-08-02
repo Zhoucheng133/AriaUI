@@ -106,6 +106,13 @@ class _ActiveViewState extends State<ActiveView> {
 
   ScrollController controller=ScrollController();
 
+  bool menuEnabled(){
+    if(select && selectList.isNotEmpty){
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -118,11 +125,11 @@ class _ActiveViewState extends State<ActiveView> {
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: false,),
+              MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: menuEnabled(),),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: false,),
+              MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: menuEnabled(),),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
+              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueAll()),
               SizedBox(width: 10,),

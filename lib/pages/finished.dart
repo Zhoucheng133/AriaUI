@@ -76,6 +76,13 @@ class _FinishedViewState extends State<FinishedView> {
   bool checked(String gid){
     return selectList.contains(gid);
   }
+
+  bool menuEnabled(){
+    if(select && selectList.isNotEmpty){
+      return true;
+    }
+    return false;
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -87,7 +94,7 @@ class _FinishedViewState extends State<FinishedView> {
             children: [
               MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
               SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: false,),
+              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
               SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
               SizedBox(width: 10,),
