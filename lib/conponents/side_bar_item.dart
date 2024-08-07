@@ -1,7 +1,9 @@
 import 'package:aria_ui/variables/page_var.dart';
-import 'package:flutter/material.dart';
+import 'package:aria_ui/variables/setting_var.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SideBarItem extends StatefulWidget {
 
@@ -17,6 +19,7 @@ class SideBarItem extends StatefulWidget {
 class _SideBarItemState extends State<SideBarItem> {
 
   PageVar p=Get.put(PageVar());
+  SettingVar s=Get.put(SettingVar());
   bool hover=false;
   
   @override
@@ -26,7 +29,34 @@ class _SideBarItemState extends State<SideBarItem> {
         if(widget.name=='折叠'){
           p.fold.value=!p.fold.value;
         }else{
-          p.nowPage.value=widget.name;
+          if(s.changed.value && p.nowPage.value=='设置'){
+            showDialog(
+              context: context, 
+              builder: (context)=>ContentDialog(
+                title: Text('放弃保存?', style: GoogleFonts.notoSansSc(),),
+                content: Text('你修改了Aria的设置, 你要放弃修改的设置吗?', style: GoogleFonts.notoSansSc(),),
+                actions: [
+                  Button(
+                    child: Text('取消', style: GoogleFonts.notoSansSc(),), 
+                    onPressed: (){
+                      Navigator.pop(context);
+                    }
+                  ),
+                  FilledButton(
+                    child: Text('取消保存', style: GoogleFonts.notoSansSc(),), 
+                    onPressed: (){
+                      Navigator.pop(context);
+                      s.changed.value=false;
+                      p.nowPage.value=widget.name;
+                    }
+                  )
+                ],
+              )
+            );
+          }else{
+            p.nowPage.value=widget.name;
+          }
+          
         }
       },
       child: MouseRegion(

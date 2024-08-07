@@ -5,4 +5,5 @@ class SettingVar extends GetxController{
   RxString secret=''.obs;
 
   var settings={}.obs;
+  RxBool changed=false.obs;
 }

@@ -2,6 +2,7 @@
 
 import 'package:aria_ui/conponents/setting_item.dart';
 import 'package:aria_ui/funcs/prefs.dart';
+import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class _SettingsViewState extends State<SettingsView> {
   TextEditingController rpc=TextEditingController();
   TextEditingController secret=TextEditingController();
   final SettingVar s=Get.put(SettingVar());
+  final PageVar p=Get.put(PageVar());
 
   void initRPC(){
     if(s.rpc.value.isNotEmpty){
@@ -72,21 +74,24 @@ class _SettingsViewState extends State<SettingsView> {
 
   late Worker rpcListener;
   late Worker settingsListener;
+  late Worker pageListener;
 
   @override
   void initState() {
     super.initState();
-    rpcListener=ever(s.settings, (_){
-      initRPC();
-    });
-    settingsListener=ever(s.settings, (_){
-      initSettings();
+    pageListener=ever(p.nowPage, (val){
+      if(val=='设置'){
+        initRPC();
+        initSettings();
+      }
     });
   }
 
   @override
   void dispose() {
     rpcListener.dispose();
+    settingsListener.dispose();
+    pageListener.dispose();
     super.dispose();
   }
 
@@ -109,6 +114,9 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
+                    onChanged: (_){
+                      s.changed.value=true;
+                    },
                   )
                 ),
               ),
@@ -123,6 +131,9 @@ class _SettingsViewState extends State<SettingsView> {
                     enableSuggestions: false,
                     obscureText: true,
                     style: GoogleFonts.notoSansSc(),
+                    onChanged: (_){
+                      s.changed.value=true;
+                    },
                   )
                 ),
               ),
@@ -139,6 +150,7 @@ class _SettingsViewState extends State<SettingsView> {
                           setState(() {
                             overwrite=val;
                           });
+                          s.changed.value=true;
                         }
                       ),
                     ],
@@ -155,6 +167,9 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
+                    onChanged: (_){
+                      s.changed.value=true;
+                    },
                   )
                 ),
               ),
@@ -170,6 +185,7 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           maxDownloads=val;
                         });
+                        s.changed.value=true;
                       }
                     }
                   )
@@ -187,6 +203,7 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           seedTime=val;
                         });
+                        s.changed.value=true;
                       }
                     }
                   )
@@ -204,6 +221,7 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           downloadLimit=val;
                         });
+                        s.changed.value=true;
                       }
                     }
                   )
@@ -221,6 +239,7 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           uploadLimit=val;
                         });
+                        s.changed.value=true;
                       }
                     }
                   )
@@ -236,6 +255,9 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
+                    onChanged: (_){
+                      s.changed.value=true;
+                    },
                   )
                 ),
               ),
@@ -248,6 +270,7 @@ class _SettingsViewState extends State<SettingsView> {
             Button(
               child: Text('放弃保存', style: GoogleFonts.notoSansSc(),),
               onPressed: (){
+                s.changed.value=false;
                 showDialog(
                   context: context, 
                   builder: (context)=>ContentDialog(
@@ -277,14 +300,17 @@ class _SettingsViewState extends State<SettingsView> {
             FilledButton(
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
-                Prefs().setPrefs(rpc.text, secret.text);
-                await displayInfoBar(
-                  context, 
-                  builder: (context, close) => InfoBar(
-                    title: Text('保存设置成功', style: GoogleFonts.notoSansSc(),),
-                    severity: InfoBarSeverity.success,
-                  )
-                );
+                await Prefs().setPrefs(rpc.text, secret.text);
+                s.changed.value=false;
+                if(context.mounted){
+                  await displayInfoBar(
+                    context, 
+                    builder: (context, close) => InfoBar(
+                      title: Text('保存设置成功', style: GoogleFonts.notoSansSc(),),
+                      severity: InfoBarSeverity.success,
+                    )
+                  );
+                }
                 // Navigator.pop(context);
               }
             )
