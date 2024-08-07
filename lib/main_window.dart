@@ -74,6 +74,19 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   }
 
   PageVar p=Get.put(PageVar());
+
+  int getPageIndex(String page) {
+    switch (page) {
+      case '活跃中':
+        return 0;
+      case '已完成':
+        return 1;
+      case '设置':
+        return 2;
+      default:
+        return 0;
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -120,7 +133,14 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                         borderRadius: BorderRadius.circular(10)
                       ),
                       child: Obx(()=>
-                        p.nowPage.value=='活跃中' ? const ActiveView() : p.nowPage.value=='已完成' ? const FinishedView() : const SettingsView()
+                        IndexedStack(
+                          index: getPageIndex(p.nowPage.value),
+                          children: const [
+                            ActiveView(),
+                            FinishedView(),
+                            SettingsView(),
+                          ],
+                        )
                       )
                     ), 
                   )

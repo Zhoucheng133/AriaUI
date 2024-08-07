@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';

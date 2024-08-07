@@ -1,6 +1,5 @@
 
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:aria_ui/request/requests.dart';
 import 'package:aria_ui/variables/page_var.dart';
@@ -161,7 +160,7 @@ class Services{
     Map? data=await Requests().getGlobalSettings();
     if(data!=null){
       s.settings.value=data;
-      print(data);
+      s.settings.refresh();
     }
   }
 }

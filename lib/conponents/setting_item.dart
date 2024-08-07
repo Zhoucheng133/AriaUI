@@ -21,7 +21,7 @@ class _SettingItemState extends State<SettingItem> {
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
-          width: 60,
+          width: 120,
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(
