@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
@@ -22,6 +24,7 @@ class Prefs{
       if(context.mounted){
         Services().startService(context);
       }
+      Services().getGlobalSettings();
     }else{
       if(context.mounted){
         showDialog(

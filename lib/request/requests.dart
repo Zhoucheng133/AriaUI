@@ -190,4 +190,17 @@ class Requests{
       return null;
     }
   }
+
+  Future<Map?> getGlobalSettings() async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.getGlobalOption",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}"]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
 }

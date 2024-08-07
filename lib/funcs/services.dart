@@ -1,8 +1,10 @@
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:aria_ui/request/requests.dart';
 import 'package:aria_ui/variables/page_var.dart';
+import 'package:aria_ui/variables/setting_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
@@ -12,6 +14,7 @@ class Services{
 
   final TaskVar t=Get.put(TaskVar());
   final PageVar p=Get.put(PageVar());
+  final SettingVar s=Get.put(SettingVar());
   late Timer interval;
 
   // 移除任务
@@ -127,7 +130,6 @@ class Services{
     serviceMain();
   }
 
-
   // 多任务（已完成）移除
   Future<void> multiRemoveFinishedTask(List ls) async {
     for (var item in ls) {
@@ -152,5 +154,14 @@ class Services{
   Future<void> clearFinished() async {
     await Requests().clearFinished();
     serviceMain();
+  }
+
+  // 获取全局设置
+  Future<void> getGlobalSettings() async {
+    Map? data=await Requests().getGlobalSettings();
+    if(data!=null){
+      s.settings.value=data;
+      print(data);
+    }
   }
 }
