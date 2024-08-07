@@ -163,4 +163,9 @@ class Services{
       s.settings.refresh();
     }
   }
+
+  // 保存设置
+  Future<void> savePrefs(Map settings) async{
+    await Requests().changeGlobalSettings(settings);
+  }
 }

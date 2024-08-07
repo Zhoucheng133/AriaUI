@@ -2,6 +2,7 @@
 
 import 'package:aria_ui/conponents/setting_item.dart';
 import 'package:aria_ui/funcs/prefs.dart';
+import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -46,11 +47,13 @@ class _SettingsViewState extends State<SettingsView> {
   // 用户代理【user-agent】
   TextEditingController userAgent=TextEditingController();
 
-  void initSettings(){
+  Future<void> initSettings() async {
+    await Services().getGlobalSettings();
     setState(() {
       try {
         overwrite=s.settings['allow-overwrite']=='true';
-      } catch (_) {}
+      } catch (_) {
+      }
       try {
         dir.text=s.settings['dir'];
       } catch (_) {}
@@ -301,6 +304,15 @@ class _SettingsViewState extends State<SettingsView> {
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
                 await Prefs().setPrefs(rpc.text, secret.text);
+                await Services().savePrefs({
+                  "allow-overwrite": overwrite.toString(),
+                  "dir": dir.text,
+                  "max-concurrent-downloads": maxDownloads.toString(),
+                  "seed-time": seedTime.toString(),
+                  "max-overall-download-limit": downloadLimit.toString(),
+                  "max-overall-upload-limit": uploadLimit.toString(),
+                  "user-agent": userAgent.text
+                });
                 s.changed.value=false;
                 if(context.mounted){
                   await displayInfoBar(

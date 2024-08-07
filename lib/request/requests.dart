@@ -203,4 +203,18 @@ class Requests{
       return null;
     }
   }
+
+  Future<String?> changeGlobalSettings(Map settings) async{
+    try {
+      var resp=(await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.changeGlobalOption",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", settings]
+      }))['result'];
+      return resp;
+    } catch (_) {
+      return null;
+    }
+  }
 }
