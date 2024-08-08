@@ -4,6 +4,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SideBarItem extends StatefulWidget {
 
@@ -49,7 +50,41 @@ class _SideBarItemState extends State<SideBarItem> {
                     'Aria UI', 
                     style: GoogleFonts.notoSansSc(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18
+                      fontSize: 20
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  Text(
+                    'v0.1.1',
+                    style: GoogleFonts.notoSansSc(
+                      color: Colors.grey[80],
+                    ),
+                  ),
+                  const SizedBox(height: 15,),
+                  GestureDetector(
+                    onTap: () async {
+                      final Uri url = Uri.parse('https://github.com/Zhoucheng133/AriaUI');
+                      await launchUrl(url);
+                    },
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const FaIcon(
+                            FontAwesomeIcons.github,
+                            size: 15,
+                          ),
+                          const SizedBox(width: 5,),
+                          Text(
+                            '本项目地址',
+                            style:  GoogleFonts.notoSansSc(
+                      
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
