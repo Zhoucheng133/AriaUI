@@ -258,6 +258,7 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
+                    maxLines: 5,
                     onChanged: (_){
                       s.changed.value=true;
                     },
