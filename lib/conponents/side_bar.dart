@@ -1,6 +1,7 @@
 import 'package:aria_ui/conponents/side_bar_item.dart';
 import 'package:aria_ui/variables/page_var.dart';
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+// import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +34,8 @@ class _SideBarState extends State<SideBar> {
                 const SizedBox(height: 5,),
                 const SideBarItem(name: '已完成', icon: FontAwesomeIcons.check),
                 Expanded(child: Container()),
+                const SideBarItem(name: '关于', icon: FluentIcons.info_solid),
+                const SizedBox(height: 5,),
                 const SideBarItem(name: '设置', icon: FontAwesomeIcons.gear),
                 const SizedBox(height: 20,),
               ],

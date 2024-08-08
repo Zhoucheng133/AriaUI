@@ -28,6 +28,42 @@ class _SideBarItemState extends State<SideBarItem> {
       onTap: (){
         if(widget.name=='折叠'){
           p.fold.value=!p.fold.value;
+        }else if(widget.name=='关于'){
+          showDialog(
+            context: context, 
+            builder: (context)=>ContentDialog(
+              title: Text('关于Aria UI', style: GoogleFonts.notoSansSc(),),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Image.asset('assets/icon.png')
+                    ),
+                  ),
+                  Text(
+                    'Aria UI', 
+                    style: GoogleFonts.notoSansSc(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                    ),
+                  )
+                ],
+              ),
+              actions: [
+                FilledButton(
+                  child: Text('好的', style: GoogleFonts.notoSansSc(),), 
+                  onPressed: (){
+                    Navigator.pop(context);
+                  }
+                )
+              ],
+            )
+          );
         }else{
           if(s.changed.value && p.nowPage.value=='设置'){
             showDialog(
