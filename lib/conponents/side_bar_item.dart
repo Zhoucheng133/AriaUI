@@ -55,7 +55,7 @@ class _SideBarItemState extends State<SideBarItem> {
                   ),
                   const SizedBox(height: 10,),
                   Text(
-                    'v0.1.1',
+                    s.version,
                     style: GoogleFonts.notoSansSc(
                       color: Colors.grey[80],
                     ),

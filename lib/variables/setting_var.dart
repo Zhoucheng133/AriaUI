@@ -6,4 +6,6 @@ class SettingVar extends GetxController{
 
   var settings={}.obs;
   RxBool changed=false.obs;
+
+  String version='v0.1.2';
 }
