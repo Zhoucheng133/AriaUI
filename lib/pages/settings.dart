@@ -118,7 +118,11 @@ class _SettingsViewState extends State<SettingsView> {
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
                     onChanged: (_){
-                      s.changed.value=true;
+                      if(s.rpc.value!=rpc.text){
+                        s.changed.value=true;
+                      }else{
+                        s.changed.value=false;
+                      }
                     },
                   )
                 ),
@@ -135,7 +139,11 @@ class _SettingsViewState extends State<SettingsView> {
                     obscureText: true,
                     style: GoogleFonts.notoSansSc(),
                     onChanged: (_){
-                      s.changed.value=true;
+                      if(s.secret.value!=secret.text){
+                        s.changed.value=true;
+                      }else{
+                        s.changed.value=false;
+                      }
                     },
                   )
                 ),
@@ -153,7 +161,11 @@ class _SettingsViewState extends State<SettingsView> {
                           setState(() {
                             overwrite=val;
                           });
-                          s.changed.value=true;
+                          if(s.settings['allow-overwrite'] == val.toString()){
+                            s.changed.value=true;
+                          }else{
+                            s.changed.value=false;
+                          }
                         }
                       ),
                     ],
@@ -171,7 +183,11 @@ class _SettingsViewState extends State<SettingsView> {
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
                     onChanged: (_){
-                      s.changed.value=true;
+                      if(s.settings['dir']!=dir.text){
+                        s.changed.value=true;
+                      }else{
+                        s.changed.value=false;
+                      }
                     },
                   )
                 ),
@@ -188,7 +204,11 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           maxDownloads=val;
                         });
-                        s.changed.value=true;
+                        if(int.parse(s.settings['max-concurrent-downloads'])!=val){
+                          s.changed.value=true;
+                        }else{
+                          s.changed.value=false;
+                        }
                       }
                     }
                   )
@@ -206,7 +226,11 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           seedTime=val;
                         });
-                        s.changed.value=true;
+                        if(int.parse(s.settings['seed-time'])!=val){
+                          s.changed.value=true;
+                        }else{
+                          s.changed.value=false;
+                        }
                       }
                     }
                   )
@@ -224,7 +248,11 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           downloadLimit=val;
                         });
-                        s.changed.value=true;
+                        if(int.parse(s.settings['max-overall-download-limit'])!=val){
+                          s.changed.value=true;
+                        }else{
+                          s.changed.value=false;
+                        }
                       }
                     }
                   )
@@ -242,7 +270,11 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           uploadLimit=val;
                         });
-                        s.changed.value=true;
+                        if(int.parse(s.settings['max-overall-upload-limit'])!=val){
+                          s.changed.value=true;
+                        }else{
+                          s.changed.value=false;
+                        }
                       }
                     }
                   )
@@ -260,7 +292,11 @@ class _SettingsViewState extends State<SettingsView> {
                     style: GoogleFonts.notoSansSc(),
                     maxLines: 5,
                     onChanged: (_){
-                      s.changed.value=true;
+                      if(s.settings['user-agent']!=userAgent.text){
+                        s.changed.value=true;
+                      }else{
+                        s.changed.value=false;
+                      }
                     },
                   )
                 ),
