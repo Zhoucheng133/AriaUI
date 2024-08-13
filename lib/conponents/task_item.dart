@@ -1,6 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-
 import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
@@ -107,7 +104,7 @@ class _TaskItemState extends State<TaskItem> {
         },
         child: AnimatedContainer(
           decoration: BoxDecoration(
-            color: hover ? Color.fromARGB(255, 240, 240, 240) : Color.fromARGB(0, 240, 240, 240)
+            color: hover ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 240, 240, 240)
           ),
           duration: const Duration(milliseconds: 200),
           child: Padding(
@@ -137,7 +134,7 @@ class _TaskItemState extends State<TaskItem> {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(height: 5,),
+                        const SizedBox(height: 5,),
                         Text(
                           convertSize(widget.totalLength),
                           style: GoogleFonts.notoSansSc(
@@ -148,7 +145,7 @@ class _TaskItemState extends State<TaskItem> {
                     ),
                   )
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Flexible(
                   flex: 2,
                   child: Column(
@@ -157,7 +154,7 @@ class _TaskItemState extends State<TaskItem> {
                         width: double.infinity,
                         child: ProgressBar(value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100)
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Row(
                         children: [
                           Expanded(
@@ -179,13 +176,13 @@ class _TaskItemState extends State<TaskItem> {
                     ],
                   ),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
                 widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
                 TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
               ],
             ),
           ),

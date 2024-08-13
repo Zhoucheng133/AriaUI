@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
 import 'package:aria_ui/funcs/services.dart';
@@ -87,17 +86,17 @@ class _FinishedViewState extends State<FinishedView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: [
           Row(
             children: [
               MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
             ],
           ),
           const SizedBox(height: 5,),

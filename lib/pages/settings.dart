@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:aria_ui/conponents/setting_item.dart';
 import 'package:aria_ui/funcs/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';
@@ -106,7 +104,7 @@ class _SettingsViewState extends State<SettingsView> {
         Expanded(
           child: ListView(
             children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -127,7 +125,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -148,7 +146,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -172,7 +170,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -192,7 +190,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -214,7 +212,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -236,7 +234,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -258,7 +256,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -280,7 +278,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -336,7 +334,7 @@ class _SettingsViewState extends State<SettingsView> {
                 );
               }
             ),
-            SizedBox(width: 10,),
+            const SizedBox(width: 10,),
             FilledButton(
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
@@ -365,7 +363,7 @@ class _SettingsViewState extends State<SettingsView> {
             )
           ],
         ),
-        SizedBox(height: 30,)
+        const SizedBox(height: 30,)
       ],
     );
   }
