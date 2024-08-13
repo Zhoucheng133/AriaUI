@@ -110,6 +110,14 @@ class _ActiveViewState extends State<ActiveView> {
     return false;
   }
 
+  void selectAll(){
+    for (var element in t.active) {
+      setState(() {
+        selectList.add(element['gid']);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -121,6 +129,8 @@ class _ActiveViewState extends State<ActiveView> {
               MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask()),
               const SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
+              const SizedBox(width: 10,),
+              MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
               const SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: menuEnabled(),),
               const SizedBox(width: 10,),
