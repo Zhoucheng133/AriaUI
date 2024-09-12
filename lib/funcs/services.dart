@@ -25,7 +25,7 @@ class Services{
     List? alists=await Requests().tellActive();
     List? wlists=await Requests().tellWaiting();
     if(alists!=null && wlists!=null){
-      t.active.value=alists..addAll(wlists);
+      t.active.value=(alists..addAll(wlists)).reversed.toList();
     } 
   }
 
@@ -33,7 +33,7 @@ class Services{
   Future<void> tellStopped() async {
     List? lists=await Requests().tellStopped();
     if(lists!=null){
-      t.stopped.value=lists;
+      t.stopped.value=lists.reversed.toList();
     }
   }
 
