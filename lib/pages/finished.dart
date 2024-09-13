@@ -1,6 +1,7 @@
 import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
 import 'package:aria_ui/funcs/services.dart';
+import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -82,6 +83,7 @@ class _FinishedViewState extends State<FinishedView> {
     }
     return false;
   }
+  final page=Get.put(PageVar());
   
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,60 @@ class _FinishedViewState extends State<FinishedView> {
               const SizedBox(width: 10,),
               MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
               const SizedBox(width: 10,),
+              Obx(()=>
+                ComboBox(
+                  value: page.activeOrder.value,
+                  items: const [
+                    ComboBoxItem(
+                      value: 'oldTime',
+                      child:Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FaIcon(FontAwesomeIcons.arrowUpWideShort),
+                          SizedBox(width: 10,),
+                          Text('时间顺序')
+                        ],
+                      ),
+                    ),
+                    ComboBoxItem(
+                      value: 'newTime',
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FaIcon(FontAwesomeIcons.arrowUpShortWide),
+                          SizedBox(width: 10,),
+                          Text('时间倒序')
+                        ],
+                      ),
+                    ),
+                    ComboBoxItem(
+                      value: 'titleA',
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FaIcon(FontAwesomeIcons.arrowDownAZ),
+                          SizedBox(width: 10,),
+                          Text('标题顺序')
+                        ],
+                      ),
+                    ),
+                    ComboBoxItem(
+                      value: 'titleZ',
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          FaIcon(FontAwesomeIcons.arrowDownZA),
+                          SizedBox(width: 10,),
+                          Text('标题倒序')
+                        ],
+                      ),
+                    ),
+                  ],
+                  onChanged: (val){
+                    page.activeOrder.value=val??"newTime";
+                  },
+                )
+              )
             ],
           ),
           const SizedBox(height: 5,),
