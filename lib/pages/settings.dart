@@ -44,6 +44,8 @@ class _SettingsViewState extends State<SettingsView> {
   int uploadLimit=0;
   // 用户代理【user-agent】
   TextEditingController userAgent=TextEditingController();
+  // 做种比率【seed-ratio】
+  double seedRatio=0.0;
 
   Future<void> initSettings() async {
     await Services().getGlobalSettings();
@@ -69,6 +71,9 @@ class _SettingsViewState extends State<SettingsView> {
       } catch (_) {}
       try {
         userAgent.text=s.settings['user-agent'];
+      } catch (_) {}
+      try {
+        seedRatio=s.settings['seed-ratio'];
       } catch (_) {}
     });
   }
@@ -225,6 +230,28 @@ class _SettingsViewState extends State<SettingsView> {
                           seedTime=val;
                         });
                         if(int.parse(s.settings['seed-time'])!=val){
+                          s.changed.value=true;
+                        }else{
+                          s.changed.value=false;
+                        }
+                      }
+                    }
+                  )
+                ),
+              ),
+              const SizedBox(height: 10,),
+              Align(
+                alignment: Alignment.topCenter,
+                child: SettingItem(
+                  label: '做种比率',
+                  item: NumberBox(
+                    value: seedRatio, 
+                    onChanged: (val){
+                      if(val!=null){
+                        setState(() {
+                          seedRatio=val;
+                        });
+                        if(double.parse(s.settings['seed-ratio'])!=val){
                           s.changed.value=true;
                         }else{
                           s.changed.value=false;
