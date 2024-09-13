@@ -22,7 +22,8 @@ class Prefs{
       if(context.mounted){
         Services().startService(context);
       }
-      Services().getGlobalSettings();
+      await Services().getGlobalSettings();
+      // print(s.settings);
     }else{
       if(context.mounted){
         showDialog(

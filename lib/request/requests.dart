@@ -83,12 +83,13 @@ class Requests{
 
   // 添加任务
   Future<String?> addTask(String url) async {
+    final bool useSettings=s.settings.isNotEmpty;
     try {
       return (await httpRequest({
         "jsonrpc":"2.0",
         "method":"aria2.addUri",
         "id":"ariaui",
-        "params":["token:${s.secret.value}", [url]]
+        "params":["token:${s.secret.value}", [url], useSettings ? s.settings : {}]
       }))['result'];
     } catch (_) {
       return null;
