@@ -157,7 +157,7 @@ class _ActiveViewState extends State<ActiveView> {
                       child:Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          FaIcon(FontAwesomeIcons.arrowUpWideShort),
+                          FaIcon(FontAwesomeIcons.arrowDownWideShort),
                           SizedBox(width: 10,),
                           Text('时间顺序')
                         ],
@@ -168,7 +168,7 @@ class _ActiveViewState extends State<ActiveView> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          FaIcon(FontAwesomeIcons.arrowUpShortWide),
+                          FaIcon(FontAwesomeIcons.arrowDownShortWide),
                           SizedBox(width: 10,),
                           Text('时间倒序')
                         ],
