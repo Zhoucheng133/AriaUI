@@ -101,7 +101,7 @@ class _FinishedViewState extends State<FinishedView> {
               const SizedBox(width: 10,),
               Obx(()=>
                 ComboBox(
-                  value: page.activeOrder.value,
+                  value: page.finishedOrder.value,
                   items: const [
                     ComboBoxItem(
                       value: 'oldTime',
@@ -149,7 +149,7 @@ class _FinishedViewState extends State<FinishedView> {
                     ),
                   ],
                   onChanged: (val){
-                    page.activeOrder.value=val??"newTime";
+                    page.finishedOrder.value=val??"newTime";
                   },
                 )
               )
