@@ -7,6 +7,7 @@ import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart' as path;
 
 class Services{
 
@@ -25,7 +26,51 @@ class Services{
     List? alists=await Requests().tellActive();
     List? wlists=await Requests().tellWaiting();
     if(alists!=null && wlists!=null){
-      t.active.value=(alists..addAll(wlists)).reversed.toList();
+      switch (p.activeOrder.value) {
+        case "newTime":
+          t.active.value=(alists..addAll(wlists)).reversed.toList();
+          break;
+        case "oldTime":
+          t.active.value=alists..addAll(wlists);
+          break;
+        case "titleA":
+          List tempList=alists..addAll(wlists);
+          tempList.sort((a, b){
+            String nameA="";
+            String nameB="";
+            try {
+              nameA=a['bittorrent']['info']['name'];
+            } catch (_) {
+              nameA=path.basename(a['files'][0]['path']);
+            }
+            try {
+              nameB=b['bittorrent']['info']['name'];
+            } catch (_) {
+              nameB=path.basename(b['files'][0]['path']);
+            }
+            return nameA.compareTo(nameB);
+          });
+          t.active.value=tempList;
+        case "titleZ":
+          List tempList=alists..addAll(wlists);
+          tempList.sort((a, b){
+            String nameA="";
+            String nameB="";
+            try {
+              nameA=a['bittorrent']['info']['name'];
+            } catch (_) {
+              nameA=path.basename(a['files'][0]['path']);
+            }
+            try {
+              nameB=b['bittorrent']['info']['name'];
+            } catch (_) {
+              nameB=path.basename(b['files'][0]['path']);
+            }
+            return nameB.compareTo(nameA);
+          });
+          t.active.value=tempList;
+      }
+      
     } 
   }
 
@@ -33,7 +78,48 @@ class Services{
   Future<void> tellStopped() async {
     List? lists=await Requests().tellStopped();
     if(lists!=null){
-      t.stopped.value=lists.reversed.toList();
+      switch (p.finishedOrder.value){
+        case "newTime":
+          t.stopped.value=lists.reversed.toList();
+          break;
+        case "oldTime":
+          t.stopped.value=lists;
+          break;
+        case "titleA":
+          lists.sort((a, b){
+            String nameA="";
+            String nameB="";
+            try {
+              nameA=a['bittorrent']['info']['name'];
+            } catch (_) {
+              nameA=path.basename(a['files'][0]['path']);
+            }
+            try {
+              nameB=b['bittorrent']['info']['name'];
+            } catch (_) {
+              nameB=path.basename(b['files'][0]['path']);
+            }
+            return nameA.compareTo(nameB);
+          });
+          t.stopped.value=lists;
+        case "titleZ":
+          lists.sort((a, b){
+            String nameA="";
+            String nameB="";
+            try {
+              nameA=a['bittorrent']['info']['name'];
+            } catch (_) {
+              nameA=path.basename(a['files'][0]['path']);
+            }
+            try {
+              nameB=b['bittorrent']['info']['name'];
+            } catch (_) {
+              nameB=path.basename(b['files'][0]['path']);
+            }
+            return nameB.compareTo(nameA);
+          });
+          t.stopped.value=lists;
+      }
     }
   }
 

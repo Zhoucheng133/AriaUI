@@ -84,6 +84,10 @@ class _FinishedViewState extends State<FinishedView> {
     return false;
   }
   final page=Get.put(PageVar());
+
+  void order(String type){
+    Services().tellStopped();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -150,6 +154,7 @@ class _FinishedViewState extends State<FinishedView> {
                   ],
                   onChanged: (val){
                     page.finishedOrder.value=val??"newTime";
+                    order(val??"newTime");
                   },
                 )
               )

@@ -120,6 +120,10 @@ class _ActiveViewState extends State<ActiveView> {
     }
   }
 
+  void order(String type){
+    Services().tellActive();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -195,6 +199,7 @@ class _ActiveViewState extends State<ActiveView> {
                   ],
                   onChanged: (val){
                     page.activeOrder.value=val??"newTime";
+                    order(val??"newTime");
                   },
                 )
               )
