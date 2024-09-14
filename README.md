@@ -34,6 +34,7 @@
 ### 0.1.4
 - 添加ratio设置
 - 添加排序功能
+- 修复操作栏越界的问题
 
 <details>
 <summary>过去的版本</summary>
