@@ -326,6 +326,18 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
+              const SizedBox(height: 10,),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  "注意，设置仅对当前会话有效\n若要永久修改请修改Aria的conf文件",
+                  style: GoogleFonts.notoSansSc(
+                    fontSize: 12,
+                    color: Colors.grey[50],
+                  ),
+                  textAlign: TextAlign.center,
+                )
+              )
             ],
           ),
         ),
