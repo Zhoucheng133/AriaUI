@@ -130,80 +130,85 @@ class _ActiveViewState extends State<ActiveView> {
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Column(
         children: [
-          Row(
-            children: [
-              MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask()),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: menuEnabled(),),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: menuEnabled(),),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueAll()),
-              const SizedBox(width: 10,),
-              MenuButton(icon: FontAwesomeIcons.pause, name: '全部暂停', func: ()=>pauseAll()),
-              const SizedBox(width: 10,),
-              Obx(()=>
-                ComboBox(
-                  value: page.activeOrder.value,
-                  items: const [
-                    ComboBoxItem(
-                      value: 'oldTime',
-                      child:Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FaIcon(FontAwesomeIcons.arrowDownWideShort),
-                          SizedBox(width: 10,),
-                          Text('时间顺序')
-                        ],
+          SizedBox(
+            width: double.infinity,
+            height: 35,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask()),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: menuEnabled(),),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.pause, name: '暂停', func: ()=>pauseTask(), enable: menuEnabled(),),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.play, name: '全部继续', func: ()=>continueAll()),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.pause, name: '全部暂停', func: ()=>pauseAll()),
+                const SizedBox(width: 10,),
+                Obx(()=>
+                  ComboBox(
+                    value: page.activeOrder.value,
+                    items: const [
+                      ComboBoxItem(
+                        value: 'oldTime',
+                        child:Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(FontAwesomeIcons.arrowDownWideShort),
+                            SizedBox(width: 10,),
+                            Text('时间顺序')
+                          ],
+                        ),
                       ),
-                    ),
-                    ComboBoxItem(
-                      value: 'newTime',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FaIcon(FontAwesomeIcons.arrowDownShortWide),
-                          SizedBox(width: 10,),
-                          Text('时间倒序')
-                        ],
+                      ComboBoxItem(
+                        value: 'newTime',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(FontAwesomeIcons.arrowDownShortWide),
+                            SizedBox(width: 10,),
+                            Text('时间倒序')
+                          ],
+                        ),
                       ),
-                    ),
-                    ComboBoxItem(
-                      value: 'titleA',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FaIcon(FontAwesomeIcons.arrowDownAZ),
-                          SizedBox(width: 10,),
-                          Text('标题顺序')
-                        ],
+                      ComboBoxItem(
+                        value: 'titleA',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(FontAwesomeIcons.arrowDownAZ),
+                            SizedBox(width: 10,),
+                            Text('标题顺序')
+                          ],
+                        ),
                       ),
-                    ),
-                    ComboBoxItem(
-                      value: 'titleZ',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FaIcon(FontAwesomeIcons.arrowDownZA),
-                          SizedBox(width: 10,),
-                          Text('标题倒序')
-                        ],
+                      ComboBoxItem(
+                        value: 'titleZ',
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            FaIcon(FontAwesomeIcons.arrowDownZA),
+                            SizedBox(width: 10,),
+                            Text('标题倒序')
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                  onChanged: (val){
-                    page.activeOrder.value=val??"newTime";
-                    order(val??"newTime");
-                  },
+                    ],
+                    onChanged: (val){
+                      page.activeOrder.value=val??"newTime";
+                      order(val??"newTime");
+                    },
+                  )
                 )
-              )
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 5,),
           Container(
