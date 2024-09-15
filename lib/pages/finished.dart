@@ -99,6 +99,7 @@ class _FinishedViewState extends State<FinishedView> {
             width: double.infinity,
             height: 35,
             child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
