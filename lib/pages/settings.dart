@@ -120,13 +120,6 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
-                    onChanged: (_){
-                      if(s.rpc.value!=rpc.text){
-                        s.changed.value=true;
-                      }else{
-                        s.changed.value=false;
-                      }
-                    },
                   )
                 ),
               ),
@@ -141,13 +134,6 @@ class _SettingsViewState extends State<SettingsView> {
                     enableSuggestions: false,
                     obscureText: true,
                     style: GoogleFonts.notoSansSc(),
-                    onChanged: (_){
-                      if(s.secret.value!=secret.text){
-                        s.changed.value=true;
-                      }else{
-                        s.changed.value=false;
-                      }
-                    },
                   )
                 ),
               ),
@@ -164,11 +150,6 @@ class _SettingsViewState extends State<SettingsView> {
                           setState(() {
                             overwrite=val;
                           });
-                          if(s.settings['allow-overwrite'] == val.toString()){
-                            s.changed.value=true;
-                          }else{
-                            s.changed.value=false;
-                          }
                         }
                       ),
                     ],
@@ -185,13 +166,6 @@ class _SettingsViewState extends State<SettingsView> {
                     autocorrect: false,
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
-                    onChanged: (_){
-                      if(s.settings['dir']!=dir.text){
-                        s.changed.value=true;
-                      }else{
-                        s.changed.value=false;
-                      }
-                    },
                   )
                 ),
               ),
@@ -207,11 +181,6 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           maxDownloads=val;
                         });
-                        if(int.parse(s.settings['max-concurrent-downloads'])!=val){
-                          s.changed.value=true;
-                        }else{
-                          s.changed.value=false;
-                        }
                       }
                     }
                   )
@@ -229,11 +198,6 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           seedTime=val;
                         });
-                        if(int.parse(s.settings['seed-time'])!=val){
-                          s.changed.value=true;
-                        }else{
-                          s.changed.value=false;
-                        }
                       }
                     }
                   )
@@ -251,11 +215,6 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           seedRatio=val;
                         });
-                        if(double.parse(s.settings['seed-ratio'])!=val){
-                          s.changed.value=true;
-                        }else{
-                          s.changed.value=false;
-                        }
                       }
                     }
                   )
@@ -273,11 +232,6 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           downloadLimit=val;
                         });
-                        if(int.parse(s.settings['max-overall-download-limit'])!=val){
-                          s.changed.value=true;
-                        }else{
-                          s.changed.value=false;
-                        }
                       }
                     }
                   )
@@ -295,11 +249,6 @@ class _SettingsViewState extends State<SettingsView> {
                         setState(() {
                           uploadLimit=val;
                         });
-                        if(int.parse(s.settings['max-overall-upload-limit'])!=val){
-                          s.changed.value=true;
-                        }else{
-                          s.changed.value=false;
-                        }
                       }
                     }
                   )
@@ -316,13 +265,6 @@ class _SettingsViewState extends State<SettingsView> {
                     enableSuggestions: false,
                     style: GoogleFonts.notoSansSc(),
                     maxLines: 5,
-                    onChanged: (_){
-                      if(s.settings['user-agent']!=userAgent.text){
-                        s.changed.value=true;
-                      }else{
-                        s.changed.value=false;
-                      }
-                    },
                   )
                 ),
               ),
@@ -347,7 +289,6 @@ class _SettingsViewState extends State<SettingsView> {
             Button(
               child: Text('放弃保存', style: GoogleFonts.notoSansSc(),),
               onPressed: (){
-                s.changed.value=false;
                 showDialog(
                   context: context, 
                   builder: (context)=>ContentDialog(
@@ -377,6 +318,7 @@ class _SettingsViewState extends State<SettingsView> {
             FilledButton(
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
+                FocusScope.of(context).unfocus();
                 await Prefs().setPrefs(rpc.text, secret.text);
                 await Services().savePrefs({
                   "allow-overwrite": overwrite.toString(),
@@ -387,7 +329,6 @@ class _SettingsViewState extends State<SettingsView> {
                   "max-overall-upload-limit": uploadLimit.toString(),
                   "user-agent": userAgent.text
                 });
-                s.changed.value=false;
                 if(context.mounted){
                   await displayInfoBar(
                     context, 

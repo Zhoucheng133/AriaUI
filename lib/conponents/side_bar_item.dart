@@ -100,34 +100,7 @@ class _SideBarItemState extends State<SideBarItem> {
             )
           );
         }else{
-          if(s.changed.value && p.nowPage.value=='设置'){
-            showDialog(
-              context: context, 
-              builder: (context)=>ContentDialog(
-                title: Text('放弃保存?', style: GoogleFonts.notoSansSc(),),
-                content: Text('你修改了Aria的设置, 你要放弃修改的设置吗?', style: GoogleFonts.notoSansSc(),),
-                actions: [
-                  Button(
-                    child: Text('取消', style: GoogleFonts.notoSansSc(),), 
-                    onPressed: (){
-                      Navigator.pop(context);
-                    }
-                  ),
-                  FilledButton(
-                    child: Text('取消保存', style: GoogleFonts.notoSansSc(),), 
-                    onPressed: (){
-                      Navigator.pop(context);
-                      s.changed.value=false;
-                      p.nowPage.value=widget.name;
-                    }
-                  )
-                ],
-              )
-            );
-          }else{
-            p.nowPage.value=widget.name;
-          }
-          
+          p.nowPage.value=widget.name;
         }
       },
       child: MouseRegion(
