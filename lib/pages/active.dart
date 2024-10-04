@@ -235,18 +235,20 @@ class _ActiveViewState extends State<ActiveView> {
                       int downloadSpeed=0;
                       String gid='';
                       String status='';
+                      int uploadSpeed=0;
                       dir=t.active[index]['dir'];
                       completedLength=int.parse(t.active[index]['completedLength']);
                       totalLength=int.parse(t.active[index]['totalLength']);
                       downloadSpeed=int.parse(t.active[index]['downloadSpeed']);
                       gid=t.active[index]['gid'];
                       status=t.active[index]['status'];
+                      uploadSpeed=int.parse(t.active[index]['uploadSpeed']);
                       try {
                         name=t.active[index]['bittorrent']['info']['name'];
                       } catch (_) {
                         name=p.basename(t.active[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid),);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid), uploadSpeed: uploadSpeed,);
                     }
                   )
                 ),

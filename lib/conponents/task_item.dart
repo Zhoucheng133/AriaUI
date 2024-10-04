@@ -2,6 +2,7 @@ import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'dart:math';
 
@@ -14,13 +15,14 @@ class TaskItem extends StatefulWidget {
   final int completedLength; 
   final String dir;
   final int downloadSpeed;
+  final dynamic uploadSpeed;
   final String gid;
   final String status;
   final bool selectMode;
   final VoidCallback changeSelectStatus;
   final bool checked;
 
-  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status, required this.selectMode, required this.changeSelectStatus, required this.checked});
+  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status, required this.selectMode, required this.changeSelectStatus, required this.checked, this.uploadSpeed});
 
   @override
   State<TaskItem> createState() => _TaskItemState();
@@ -152,7 +154,10 @@ class _TaskItemState extends State<TaskItem> {
                     children: [
                       SizedBox(
                         width: double.infinity,
-                        child: ProgressBar(value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100)
+                        child: ProgressBar(
+                          activeColor: (widget.completedLength/widget.totalLength)==1 ? Colors.green.lighter : Colors.teal,
+                          value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100
+                        )
                       ),
                       const SizedBox(height: 5,),
                       Row(
@@ -165,12 +170,39 @@ class _TaskItemState extends State<TaskItem> {
                               ),
                             ),
                           ),
-                          Text(
-                            widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
-                            style: GoogleFonts.notoSansSc(
-                              fontSize: 12
-                            ),
-                          )
+                          widget.uploadSpeed!=null && p.nowPage.value=='活跃中' ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              widget.uploadSpeed!=0 ? const FaIcon(
+                                size: 12,
+                                FontAwesomeIcons.arrowUp
+                              ) : Container(),
+                              const SizedBox(width: 3,),
+                              Text(
+                                widget.uploadSpeed==0 ? '' : '${convertSize(widget.uploadSpeed)}/s',
+                                style: GoogleFonts.notoSansSc(
+                                  fontSize: 12
+                                ),
+                              ),
+                            ],
+                          ):Container(),
+                          const SizedBox(width: 10,),
+                          p.nowPage.value=='活跃中' ? Row(
+                            children: [
+                              const FaIcon(
+                                FontAwesomeIcons.arrowDown,
+                                size: 12,
+                              ),
+                              const SizedBox(width: 3,),
+                              Text(
+                                widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
+                                style: GoogleFonts.notoSansSc(
+                                  fontSize: 12
+                                ),
+                              ),
+                            ],
+                          ) : Container()
                         ],
                       )
                     ],
