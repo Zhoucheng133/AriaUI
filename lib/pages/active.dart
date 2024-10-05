@@ -1,3 +1,4 @@
+import 'package:aria_ui/conponents/add_task.dart';
 import 'package:aria_ui/conponents/menu_button.dart';
 import 'package:aria_ui/conponents/task_item.dart';
 import 'package:aria_ui/funcs/services.dart';
@@ -6,7 +7,6 @@ import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 
 class ActiveView extends StatefulWidget {
@@ -23,39 +23,7 @@ class _ActiveViewState extends State<ActiveView> {
   List selectList=[];
   final page=Get.put(PageVar());
 
-  void addTask(){
-    TextEditingController controller=TextEditingController();
-    showDialog(
-      context: context, 
-      builder: (content)=>ContentDialog(
-        title: Text('添加任务', style: GoogleFonts.notoSansSc(),),
-        content: SizedBox(
-          height: 100,
-          child: TextBox(
-            maxLines: null,
-            controller: controller,
-            placeholder: 'http(s)://\nmagnet:',
-            textAlignVertical: TextAlignVertical.top,
-          ),
-        ),
-        actions: [
-          Button(
-            child: Text('取消', style: GoogleFonts.notoSansSc(),), 
-            onPressed: (){
-              Navigator.pop(context);
-            }
-          ),
-          FilledButton(
-            child: Text('添加', style: GoogleFonts.notoSansSc(),), 
-            onPressed: (){
-              Services().addTask(controller.text);
-              Navigator.pop(context);
-            }
-          )
-        ],
-      )
-    );
-  }
+  
 
   void selectMode(){
     setState(() {
@@ -136,7 +104,7 @@ class _ActiveViewState extends State<ActiveView> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask()),
+                MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>addTask(context)),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
