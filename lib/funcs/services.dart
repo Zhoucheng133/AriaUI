@@ -161,6 +161,12 @@ class Services{
     });
   }
 
+  // 添加自定义任务
+  Future<void> addManualTask(String url, String path, String agent, int limit) async {
+    await Requests().addManualTask(url, path, agent, limit);
+    serviceMain();
+  }
+
   // 添加任务
   Future<void> addTask(String url) async {
     await Requests().addTask(url);

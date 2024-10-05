@@ -81,6 +81,24 @@ class Requests{
     }
   }
 
+  // 添加手动任务
+  Future<String?> addManualTask(String url, String path, String agent, int limit) async {
+    try {
+      return (await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.addUri",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", [url], {
+          "user-agent": agent,
+          "max-overall-download-limit": limit,
+          "dir": path,
+        }]
+      }))['result'];
+    } catch (_) {
+      return null;
+    }
+  }
+
   // 添加任务
   Future<String?> addTask(String url) async {
     try {

@@ -103,7 +103,7 @@ class AddTask{
           FilledButton(
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 
             onPressed: (){
-              Services().addTask(controller.text);
+              manual ? Services().addManualTask(controller.text, dir.text, userAgent.text, downloadLimit) : Services().addTask(controller.text);
               Navigator.pop(context);
             }
           )
