@@ -2,7 +2,8 @@
 
 ## 简介
 
-**注意这是一个测试&监听用的桌面app，如果你需要功能更全面的GUI，你可以使用[AriaNG](https://github.com/mayswind/AriaNg)**
+> [!NOTE]
+> 注意这是一个测试&监听用的桌面app，如果你需要功能更全面的GUI，你可以使用[AriaNG](https://github.com/mayswind/AriaNg)
 
 <img src="assets/icon.png" width="100px">
 
