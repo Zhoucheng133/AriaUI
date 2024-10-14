@@ -86,7 +86,7 @@ class _SettingsViewState extends State<SettingsView> {
   void initState() {
     super.initState();
     pageListener=ever(p.nowPage, (val){
-      if(val=='设置'){
+      if(val==Pages.settings){
         initRPC();
         initSettings();
       }

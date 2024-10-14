@@ -27,13 +27,13 @@ class Services{
     List? wlists=await Requests().tellWaiting();
     if(alists!=null && wlists!=null){
       switch (p.activeOrder.value) {
-        case "newTime":
+        case Order.newTime:
           t.active.value=(alists..addAll(wlists)).reversed.toList();
           break;
-        case "oldTime":
+        case Order.oldTime:
           t.active.value=alists..addAll(wlists);
           break;
-        case "titleA":
+        case Order.titleA:
           List tempList=alists..addAll(wlists);
           tempList.sort((a, b){
             String nameA="";
@@ -51,7 +51,7 @@ class Services{
             return nameA.compareTo(nameB);
           });
           t.active.value=tempList;
-        case "titleZ":
+        case Order.titleZ:
           List tempList=alists..addAll(wlists);
           tempList.sort((a, b){
             String nameA="";
@@ -79,13 +79,13 @@ class Services{
     List? lists=await Requests().tellStopped();
     if(lists!=null){
       switch (p.finishedOrder.value){
-        case "newTime":
+        case Order.newTime:
           t.stopped.value=lists.reversed.toList();
           break;
-        case "oldTime":
+        case Order.oldTime:
           t.stopped.value=lists;
           break;
-        case "titleA":
+        case Order.titleA:
           lists.sort((a, b){
             String nameA="";
             String nameB="";
@@ -102,7 +102,7 @@ class Services{
             return nameA.compareTo(nameB);
           });
           t.stopped.value=lists;
-        case "titleZ":
+        case Order.titleZ:
           lists.sort((a, b){
             String nameA="";
             String nameB="";
@@ -125,9 +125,9 @@ class Services{
 
   // 主服务
   void serviceMain(){
-    if(p.nowPage.value=='活跃中'){
+    if(p.nowPage.value==Pages.active){
       tellActive();
-    }else if(p.nowPage.value=='已完成'){
+    }else if(p.nowPage.value==Pages.finished){
       tellStopped();
     }
   }

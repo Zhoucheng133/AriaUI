@@ -85,7 +85,7 @@ class _FinishedViewState extends State<FinishedView> {
   }
   final page=Get.put(PageVar());
 
-  void order(String type){
+  void order(){
     Services().tellStopped();
   }
   
@@ -112,7 +112,7 @@ class _FinishedViewState extends State<FinishedView> {
                     value: page.finishedOrder.value,
                     items: const [
                       ComboBoxItem(
-                        value: 'oldTime',
+                        value: Order.oldTime,
                         child:Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -123,7 +123,7 @@ class _FinishedViewState extends State<FinishedView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'newTime',
+                        value: Order.newTime,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -134,7 +134,7 @@ class _FinishedViewState extends State<FinishedView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'titleA',
+                        value: Order.titleA,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -145,7 +145,7 @@ class _FinishedViewState extends State<FinishedView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'titleZ',
+                        value: Order.titleZ,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -157,8 +157,8 @@ class _FinishedViewState extends State<FinishedView> {
                       ),
                     ],
                     onChanged: (val){
-                      page.finishedOrder.value=val??"newTime";
-                      order(val??"newTime");
+                      page.finishedOrder.value=val??Order.newTime;
+                      order();
                     },
                   )
                 )

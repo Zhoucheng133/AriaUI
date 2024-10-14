@@ -75,13 +75,13 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
 
   PageVar p=Get.put(PageVar());
 
-  int getPageIndex(String page) {
+  int getPageIndex(Pages page) {
     switch (page) {
-      case '活跃中':
+      case Pages.active:
         return 0;
-      case '已完成':
+      case Pages.finished:
         return 1;
-      case '设置':
+      case Pages.settings:
         return 2;
       default:
         return 0;

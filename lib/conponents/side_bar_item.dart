@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SideBarItem extends StatefulWidget {
 
-  final String name;
+  final Pages name;
   final IconData icon;
 
   const SideBarItem({super.key, required this.name, required this.icon});
@@ -22,14 +22,29 @@ class _SideBarItemState extends State<SideBarItem> {
   PageVar p=Get.put(PageVar());
   SettingVar s=Get.put(SettingVar());
   bool hover=false;
+
+  String toLabel(){
+    switch(widget.name){
+      case Pages.about:
+        return '关于';
+      case Pages.fold:
+        return '';
+      case Pages.active:
+        return '活跃中';
+      case Pages.finished:
+        return '已完成';
+      case Pages.settings:
+        return '设置';
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        if(widget.name=='折叠'){
+        if(widget.name==Pages.fold){
           p.fold.value=!p.fold.value;
-        }else if(widget.name=='关于'){
+        }else if(widget.name==Pages.about){
           showDialog(
             context: context, 
             builder: (context)=>ContentDialog(
@@ -122,7 +137,7 @@ class _SideBarItemState extends State<SideBarItem> {
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
                 left: 0,
-                right: widget.name=='折叠' ? 95 : p.fold.value ? 95 : 0,
+                right: widget.name==Pages.fold ? 95 : p.fold.value ? 95 : 0,
                 top: 0,
                 bottom: 0,
                 child: AnimatedContainer(
@@ -166,7 +181,7 @@ class _SideBarItemState extends State<SideBarItem> {
                       size: 14,
                     ),
                     const SizedBox(width: 20,),
-                    Text(widget.name=='折叠' ? '' : widget.name)
+                    Text(toLabel())
                   ],
                 ),
               ),

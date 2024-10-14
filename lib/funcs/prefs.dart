@@ -41,7 +41,7 @@ class Prefs{
               FilledButton(
                 child: Text('前往设置', style: GoogleFonts.notoSansSc(),), 
                 onPressed: (){
-                  p.nowPage.value='设置';
+                  p.nowPage.value=Pages.settings;
                   Navigator.pop(context);
                 }
               )

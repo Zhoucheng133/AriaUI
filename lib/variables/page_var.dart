@@ -1,10 +1,24 @@
 import 'package:get/get.dart';
 
+enum Order{
+  newTime,
+  oldTime,
+  titleA,
+  titleZ,
+}
+
+enum Pages{
+  about,
+  fold,
+  active,
+  finished,
+  settings,
+}
+
 class PageVar extends GetxController{
   RxBool fold=true.obs;
-  RxString nowPage='活跃中'.obs;
+  var nowPage=Pages.active.obs;
 
-  // newTime, oldTime, titleA, titleZ
-  RxString activeOrder='newTime'.obs;
-  RxString finishedOrder='newTime'.obs;
+  var activeOrder=Order.newTime.obs;
+  var finishedOrder=Order.newTime.obs;
 }

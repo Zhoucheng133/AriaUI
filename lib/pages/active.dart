@@ -88,7 +88,7 @@ class _ActiveViewState extends State<ActiveView> {
     }
   }
 
-  void order(String type){
+  void order(){
     Services().tellActive();
   }
 
@@ -125,7 +125,8 @@ class _ActiveViewState extends State<ActiveView> {
                     value: page.activeOrder.value,
                     items: const [
                       ComboBoxItem(
-                        value: 'oldTime',
+                        // value: 'oldTime',
+                        value: Order.oldTime,
                         child:Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -136,7 +137,7 @@ class _ActiveViewState extends State<ActiveView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'newTime',
+                        value: Order.newTime,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -147,7 +148,7 @@ class _ActiveViewState extends State<ActiveView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'titleA',
+                        value: Order.titleA,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -158,7 +159,7 @@ class _ActiveViewState extends State<ActiveView> {
                         ),
                       ),
                       ComboBoxItem(
-                        value: 'titleZ',
+                        value: Order.titleZ,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -170,8 +171,8 @@ class _ActiveViewState extends State<ActiveView> {
                       ),
                     ],
                     onChanged: (val){
-                      page.activeOrder.value=val??"newTime";
-                      order(val??"newTime");
+                      page.activeOrder.value=val??Order.newTime;
+                      order();
                     },
                   )
                 )

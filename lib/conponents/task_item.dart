@@ -70,7 +70,7 @@ class _TaskItemState extends State<TaskItem> {
           FilledButton(
             child: Text('确定', style: GoogleFonts.notoSansSc(),), 
             onPressed: (){
-              if(p.nowPage.value=='已完成'){
+              if(p.nowPage.value==Pages.finished){
                 Services().removeFinishedTask(widget.gid);
               }else{
                 Services().remove(widget.gid);
@@ -186,7 +186,7 @@ class _TaskItemState extends State<TaskItem> {
                               ),
                             ),
                           ),
-                          widget.uploadSpeed!=null && p.nowPage.value=='活跃中' ? Row(
+                          widget.uploadSpeed!=null && p.nowPage.value==Pages.active ? Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -204,7 +204,7 @@ class _TaskItemState extends State<TaskItem> {
                             ],
                           ):Container(),
                           const SizedBox(width: 10,),
-                          p.nowPage.value=='活跃中' ? Row(
+                          p.nowPage.value==Pages.active ? Row(
                             children: [
                               const FaIcon(
                                 FontAwesomeIcons.arrowDown,
