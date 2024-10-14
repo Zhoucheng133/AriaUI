@@ -84,6 +84,22 @@ class _TaskItemState extends State<TaskItem> {
     );
   }
 
+  String formatDuration(int seconds) {
+    int hours = seconds ~/ 3600;
+    int minutes = (seconds % 3600) ~/ 60;
+    int remainingSeconds = seconds % 60;
+
+    String formattedMinutes = minutes.toString().padLeft(2, '0');
+    String formattedSeconds = remainingSeconds.toString().padLeft(2, '0');
+
+    // 如果有小时数，则显示小时部分
+    if (hours > 0) {
+      String formattedHours = hours.toString();
+      return '$formattedHours:$formattedMinutes:$formattedSeconds';
+    } else {
+      return '$formattedMinutes:$formattedSeconds';
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -201,6 +217,15 @@ class _TaskItemState extends State<TaskItem> {
                                   fontSize: 12
                                 ),
                               ),
+                              (widget.completedLength/widget.totalLength)!=1.0 ? Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  formatDuration(widget.totalLength~/widget.downloadSpeed),
+                                  style: GoogleFonts.notoSansSc(
+                                    fontSize: 12
+                                  ),
+                                ),
+                              ):Container()
                             ],
                           ) : Container()
                         ],
