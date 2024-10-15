@@ -220,7 +220,7 @@ class _TaskItemState extends State<TaskItem> {
                               (widget.completedLength/widget.totalLength)!=1.0 ? Padding(
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text(
-                                  widget.downloadSpeed==0 ? '--:--' : formatDuration(widget.totalLength~/widget.downloadSpeed),
+                                  widget.downloadSpeed==0 ? '--:--' : formatDuration(widget.completedLength~/widget.downloadSpeed),
                                   style: GoogleFonts.notoSansSc(
                                     fontSize: 12
                                   ),
