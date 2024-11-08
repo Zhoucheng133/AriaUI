@@ -175,7 +175,8 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '最大同时下载个数',
                   item: NumberBox(
-                    value: maxDownloads, 
+                    value: maxDownloads,
+                    mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
                         setState(() {
@@ -192,7 +193,8 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '做种时间',
                   item: NumberBox(
-                    value: seedTime, 
+                    value: seedTime,
+                    mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
                         setState(() {
@@ -209,7 +211,8 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '做种比率',
                   item: NumberBox(
-                    value: seedRatio, 
+                    value: seedRatio,
+                    mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
                         setState(() {
@@ -226,7 +229,8 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '下载速度限制',
                   item: NumberBox(
-                    value: downloadLimit, 
+                    value: downloadLimit,
+                    mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
                         setState(() {
@@ -243,7 +247,8 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '上传速度限制',
                   item: NumberBox(
-                    value: uploadLimit, 
+                    value: uploadLimit,
+                    mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
                         setState(() {

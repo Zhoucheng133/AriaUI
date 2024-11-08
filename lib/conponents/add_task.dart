@@ -78,6 +78,7 @@ class AddTask{
                       const SizedBox(height: 5,),
                       NumberBox(
                         value: downloadLimit,
+                        mode: SpinButtonPlacementMode.inline,
                         onChanged: (val){
                           if(val!=null){
                             setState(() {
