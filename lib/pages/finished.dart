@@ -201,7 +201,7 @@ class _FinishedViewState extends State<FinishedView> {
                       } catch (_) {
                         name=p.basename(t.stopped[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid),);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid), active: false, index: index,);
                     }
                   )
                 ),

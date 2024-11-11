@@ -217,7 +217,7 @@ class _ActiveViewState extends State<ActiveView> {
                       } catch (_) {
                         name=p.basename(t.active[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid), uploadSpeed: uploadSpeed,);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid), uploadSpeed: uploadSpeed, active: true, index: index,);
                     }
                   )
                 ),
