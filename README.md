@@ -2,9 +2,6 @@
 
 ## 简介
 
-> [!NOTE]
-> 注意这是一个测试&监听用的桌面app，如果你需要功能更全面的GUI，你可以使用[AriaNG](https://github.com/mayswind/AriaNg)
-
 <img src="assets/icon.png" width="100px">
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
