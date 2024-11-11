@@ -1,6 +1,7 @@
 import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
+import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -21,8 +22,10 @@ class TaskItem extends StatefulWidget {
   final bool selectMode;
   final VoidCallback changeSelectStatus;
   final bool checked;
+  final bool active;
+  final int index;
 
-  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status, required this.selectMode, required this.changeSelectStatus, required this.checked, this.uploadSpeed});
+  const TaskItem({super.key, required this.name, required this.totalLength, required this.completedLength, required this.dir, required this.downloadSpeed, required this.gid, required this.status, required this.selectMode, required this.changeSelectStatus, required this.checked, this.uploadSpeed, required this.active, required this.index});
 
   @override
   State<TaskItem> createState() => _TaskItemState();
@@ -40,7 +43,7 @@ class _TaskItemState extends State<TaskItem> {
       String formattedValue = value % 1 == 0 ? '$value' : value.toStringAsFixed(2);
       return '$formattedValue ${units[unitIndex]}';
     } catch (_) {
-      return '';
+      return '0 B';
     }
   }
 
@@ -100,6 +103,155 @@ class _TaskItemState extends State<TaskItem> {
       return '$formattedMinutes:$formattedSeconds';
     }
   }
+
+  final TaskVar t=Get.put(TaskVar());
+  
+  void showDetail(BuildContext context){
+    showDialog(
+      context: context, 
+      builder: (context)=>ContentDialog(
+        title: Text('任务详情', style: GoogleFonts.notoSansSc(),),
+        content: Obx(()=>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('任务名称', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.name, 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('下载路径', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? t.active[widget.index]['dir']??'' : t.stopped[widget.index]['dir']??'', 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('任务状态', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? t.active[widget.index]['status']??'' : t.stopped[widget.index]['status']??'', 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('总大小', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? convertSize(int.parse(t.active[widget.index]['totalLength']??'0')) : convertSize(int.parse(t.stopped[widget.index]['totalLength']??'0')), 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('已完成大小', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? convertSize(int.parse(t.active[widget.index]['completedLength']??'0')) : convertSize(int.parse(t.stopped[widget.index]['completedLength']??'0')), 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('已上传大小', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? convertSize(int.parse(t.active[widget.index]['uploadLength']??'0')) : convertSize(int.parse(t.stopped[widget.index]['uploadLength']??'0')), 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: Text('正在做种', style: GoogleFonts.notoSansSc(),),
+                  ),
+                  Expanded(
+                    child: Text(
+                      widget.active ? t.active[widget.index]['seeder']??'false' : 'false', 
+                      style: GoogleFonts.notoSansSc(),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          FilledButton(
+            onPressed: ()=>Navigator.pop(context),
+            child: Text('完成', style: GoogleFonts.notoSansSc(),)
+          )
+        ],
+      )
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -118,6 +270,8 @@ class _TaskItemState extends State<TaskItem> {
         onTap: (){
           if(widget.selectMode){
             widget.changeSelectStatus();
+          }else{
+            showDetail(context);
           }
         },
         child: AnimatedContainer(
