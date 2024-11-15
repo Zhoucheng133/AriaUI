@@ -62,7 +62,7 @@ class _TaskItemState extends State<TaskItem> {
       context: context, 
       builder: (context)=>ContentDialog(
         title: Text('移除任务', style: GoogleFonts.notoSansSc(),),
-        content: Text('确定要移除任务吗，移除的任务会放在已完成的任务中', style: GoogleFonts.notoSansSc(),),
+        content: Text('确定要移除任务吗', style: GoogleFonts.notoSansSc(),),
         actions: [
           Button(
             child: Text('取消', style: GoogleFonts.notoSansSc(),), 
