@@ -302,26 +302,20 @@ class _TaskItemState extends State<TaskItem> {
                         showDetail(context);
                       },
                     ),
-                    widget.status=='active' ? MenuFlyoutItem(
+                    if(widget.status=='active') MenuFlyoutItem(
                       leading: const Icon(FluentIcons.pause),
                       text: Text('暂停', style: GoogleFonts.notoSansSc(),),
                       onPressed: (){
                         Flyout.of(context).close();
                         pauseItem();
                       },
-                    ) : widget.status=='paused' ? MenuFlyoutItem(
+                    ),
+                    if(widget.status=='paused') MenuFlyoutItem(
                       leading: const Icon(FluentIcons.play),
                       text: Text('继续', style: GoogleFonts.notoSansSc()),
                       onPressed: (){
                         Flyout.of(context).close();
                         activeItem();
-                      },
-                    ) : MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.pause),
-                      text: Text('暂停', style: GoogleFonts.notoSansSc()),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        pauseItem();
                       },
                     ),
                     MenuFlyoutItem(
@@ -453,7 +447,6 @@ class _TaskItemState extends State<TaskItem> {
                   const SizedBox(width: 10,),
                   widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
                   widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
-                  TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: false,),
                   const SizedBox(width: 10,),
                   TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
                   const SizedBox(width: 10,),
