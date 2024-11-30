@@ -19,6 +19,6 @@ class PageVar extends GetxController{
   RxBool fold=true.obs;
   var nowPage=Pages.active.obs;
 
-  var activeOrder=Order.newTime.obs;
-  var finishedOrder=Order.newTime.obs;
+  var activeOrder=Order.oldTime.obs;
+  var finishedOrder=Order.oldTime.obs;
 }
