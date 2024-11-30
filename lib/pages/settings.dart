@@ -176,6 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
                   label: '最大同时下载个数',
                   item: NumberBox(
                     value: maxDownloads,
+                    clearButton: false,
                     mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
                       if(val!=null){
@@ -193,6 +194,7 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '做种时间',
                   item: NumberBox(
+                    clearButton: false,
                     value: seedTime,
                     mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
@@ -211,6 +213,7 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '做种比率',
                   item: NumberBox(
+                    clearButton: false,
                     value: seedRatio,
                     mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
@@ -229,6 +232,7 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '下载速度限制',
                   item: NumberBox(
+                    clearButton: false,
                     value: downloadLimit,
                     mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
@@ -247,6 +251,7 @@ class _SettingsViewState extends State<SettingsView> {
                 child: SettingItem(
                   label: '上传速度限制',
                   item: NumberBox(
+                    clearButton: false,
                     value: uploadLimit,
                     mode: SpinButtonPlacementMode.inline,
                     onChanged: (val){
