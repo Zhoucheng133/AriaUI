@@ -10,12 +10,22 @@ class Prefs{
   late SharedPreferences prefs;
   final SettingVar s=Get.put(SettingVar());
   final PageVar p=Get.put(PageVar());
-  
+
+  Future<void> saveAppPrefs() async {
+    prefs=await SharedPreferences.getInstance();
+    prefs.setInt('defaultOrder', s.defaultOrder.value.index);
+  }
 
   Future<void> initPrefs(BuildContext context) async {
     prefs=await SharedPreferences.getInstance();
     String? rpc=prefs.getString('rpc');
     String? secret=prefs.getString('secret');
+    int? defaultOrder=prefs.getInt('defaultOrder');
+    if(defaultOrder!=null){
+      s.defaultOrder.value=Order.values[defaultOrder];
+      p.activeOrder.value=Order.values[defaultOrder];
+      p.finishedOrder.value=Order.values[defaultOrder];
+    }
     if(rpc!=null && secret!=null){
       s.rpc.value=rpc;
       s.secret.value=secret;
@@ -23,7 +33,6 @@ class Prefs{
         Services().startService(context);
       }
       await Services().getGlobalSettings();
-      // print(s.settings);
     }else{
       if(context.mounted){
         showDialog(

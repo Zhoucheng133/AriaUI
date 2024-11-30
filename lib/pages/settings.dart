@@ -3,6 +3,7 @@ import 'package:aria_ui/funcs/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
+import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -102,6 +103,8 @@ class _SettingsViewState extends State<SettingsView> {
     super.dispose();
   }
 
+  TaskVar t=Get.put(TaskVar());
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -173,6 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
                         ],
                         onChanged: (val){
                           if(val!=null){
+                            Prefs().saveAppPrefs();
                             setState(() {
                               s.defaultOrder.value=val;
                             });
