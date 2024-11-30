@@ -110,15 +110,15 @@ class _FinishedViewState extends State<FinishedView> {
                 Obx(()=>
                   ComboBox(
                     value: page.finishedOrder.value,
-                    items: const [
+                    items: [
                       ComboBoxItem(
                         value: Order.oldTime,
                         child:Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            FaIcon(FontAwesomeIcons.arrowDownWideShort),
-                            SizedBox(width: 10,),
-                            Text('时间顺序')
+                            const FaIcon(FontAwesomeIcons.arrowDownWideShort),
+                            const SizedBox(width: 10,),
+                            Text('时间顺序', style: GoogleFonts.notoSansSc())
                           ],
                         ),
                       ),
@@ -127,9 +127,9 @@ class _FinishedViewState extends State<FinishedView> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            FaIcon(FontAwesomeIcons.arrowDownShortWide),
-                            SizedBox(width: 10,),
-                            Text('时间倒序')
+                            const FaIcon(FontAwesomeIcons.arrowDownShortWide),
+                            const SizedBox(width: 10,),
+                            Text('时间倒序', style: GoogleFonts.notoSansSc())
                           ],
                         ),
                       ),
@@ -138,9 +138,9 @@ class _FinishedViewState extends State<FinishedView> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            FaIcon(FontAwesomeIcons.arrowDownAZ),
-                            SizedBox(width: 10,),
-                            Text('标题顺序')
+                            const FaIcon(FontAwesomeIcons.arrowDownAZ),
+                            const SizedBox(width: 10,),
+                            Text('标题顺序', style: GoogleFonts.notoSansSc())
                           ],
                         ),
                       ),
@@ -149,9 +149,9 @@ class _FinishedViewState extends State<FinishedView> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            FaIcon(FontAwesomeIcons.arrowDownZA),
-                            SizedBox(width: 10,),
-                            Text('标题倒序')
+                            const FaIcon(FontAwesomeIcons.arrowDownZA),
+                            const SizedBox(width: 10,),
+                            Text('标题倒序', style: GoogleFonts.notoSansSc())
                           ],
                         ),
                       ),
