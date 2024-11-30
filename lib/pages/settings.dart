@@ -4,6 +4,7 @@ import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -110,6 +111,88 @@ class _SettingsViewState extends State<SettingsView> {
           child: ListView(
             children: [
               const SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text('程序设置', style: GoogleFonts.notoSansSc(
+                  fontSize: 25
+                ),),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: SettingItem(
+                  label: '默认排序方式',
+                  item: Row(
+                    children: [
+                      ComboBox(
+                        value: s.defaultOrder.value,
+                        items: [
+                          ComboBoxItem(
+                            value: Order.oldTime,
+                            child:Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const FaIcon(FontAwesomeIcons.arrowDownWideShort),
+                                const SizedBox(width: 10,),
+                                Text('时间顺序', style: GoogleFonts.notoSansSc())
+                              ],
+                            ),
+                          ),
+                          ComboBoxItem(
+                            value: Order.newTime,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const FaIcon(FontAwesomeIcons.arrowDownShortWide),
+                                const SizedBox(width: 10,),
+                                Text('时间倒序', style: GoogleFonts.notoSansSc())
+                              ],
+                            ),
+                          ),
+                          ComboBoxItem(
+                            value: Order.titleA,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const FaIcon(FontAwesomeIcons.arrowDownAZ),
+                                const SizedBox(width: 10,),
+                                Text('标题顺序', style: GoogleFonts.notoSansSc())
+                              ],
+                            ),
+                          ),
+                          ComboBoxItem(
+                            value: Order.titleZ,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const FaIcon(FontAwesomeIcons.arrowDownZA),
+                                const SizedBox(width: 10,),
+                                Text('标题倒序', style: GoogleFonts.notoSansSc())
+                              ],
+                            ),
+                          ),
+                        ],
+                        onChanged: (val){
+                          if(val!=null){
+                            setState(() {
+                              s.defaultOrder.value=val;
+                            });
+                          }
+                        },
+                      ),
+                    ],
+                  )
+                ),
+              ),
+              const SizedBox(height: 20,),
+              const Divider(),
+              const SizedBox(height: 10,),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: Text('Aria 设置', style: GoogleFonts.notoSansSc(
+                  fontSize: 25
+                ),),
+              ),
+              const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
@@ -278,18 +361,7 @@ class _SettingsViewState extends State<SettingsView> {
                   )
                 ),
               ),
-              const SizedBox(height: 10,),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Text(
-                  "注意，设置仅对当前会话有效\n若要永久修改请修改Aria的conf文件",
-                  style: GoogleFonts.notoSansSc(
-                    fontSize: 12,
-                    color: Colors.grey[50],
-                  ),
-                  textAlign: TextAlign.center,
-                )
-              )
+              const SizedBox(height: 20,)
             ],
           ),
         ),

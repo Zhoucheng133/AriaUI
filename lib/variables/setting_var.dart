@@ -1,3 +1,4 @@
+import 'package:aria_ui/variables/page_var.dart';
 import 'package:get/get.dart';
 
 class SettingVar extends GetxController{
@@ -5,7 +6,8 @@ class SettingVar extends GetxController{
   RxString secret=''.obs;
 
   var settings={}.obs;
-  // RxBool changed=false.obs;
+
+  var defaultOrder=Order.oldTime.obs;
 
   String version='v0.1.13';
 }
