@@ -369,6 +369,7 @@ class _SettingsViewState extends State<SettingsView> {
             ],
           ),
         ),
+        const SizedBox(height: 10,),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
