@@ -125,7 +125,6 @@ class _TaskItemState extends State<TaskItem> {
         'size': size,
       });
     }
-    
 
     showDialog(
       context: context, 
@@ -136,27 +135,31 @@ class _TaskItemState extends State<TaskItem> {
           child: ListView.builder(
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index){
-              return SizedBox(
-                height: 30,
-                child: Center(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          list[index]['name'],
-                          style: GoogleFonts.notoSansSc(),
-                          overflow: TextOverflow.ellipsis,
+              return Tooltip(
+                message: list[index]['name'],
+                useMousePosition: false,
+                child: SizedBox(
+                  height: 30,
+                  child: Center(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            list[index]['name'],
+                            style: GoogleFonts.notoSansSc(),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 100,
-                        child: Text(
-                          list[index]['size'],
-                          style: GoogleFonts.notoSansSc(),
-                          textAlign: TextAlign.end,
-                        ),
-                      )
-                    ],
+                        SizedBox(
+                          width: 100,
+                          child: Text(
+                            list[index]['size'],
+                            style: GoogleFonts.notoSansSc(),
+                            textAlign: TextAlign.end,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               );
