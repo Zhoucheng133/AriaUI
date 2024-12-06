@@ -380,6 +380,14 @@ class _TaskItemState extends State<TaskItem> {
                         showDetail(context);
                       },
                     ),
+                    MenuFlyoutItem(
+                      leading: const Icon(FluentIcons.bulleted_list),
+                      text: Text('文件列表', style: GoogleFonts.notoSansSc()),
+                      onPressed: (){
+                        Flyout.of(context).close();
+                        showFiles(context);
+                      }
+                    ),
                     if(widget.status=='active') MenuFlyoutItem(
                       leading: const Icon(FluentIcons.pause),
                       text: Text('暂停', style: GoogleFonts.notoSansSc(),),
