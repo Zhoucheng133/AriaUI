@@ -18,12 +18,12 @@
 支持的Windows系统: Windows10~
 
 ## 更新日志
-<details>
 
 ### 0.1.15 (2024/12/6)
 - 添加查看任务的文件列表功能
 - 添加任务的tooltip功能
 
+<details>
 <summary>过去的版本</summary>
 
 ### 0.1.14 (2024/11/30)
