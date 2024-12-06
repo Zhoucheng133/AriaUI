@@ -6,6 +6,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'dart:math';
+import 'package:path/path.dart' as path;
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -105,6 +106,76 @@ class _TaskItemState extends State<TaskItem> {
   }
 
   final TaskVar t=Get.put(TaskVar());
+
+  void showFiles(BuildContext context){
+
+    List list=[];
+    for (var item in widget.active ? t.active[widget.index]['files']??[] : t.stopped[widget.index]['files']??[]) {
+      String name="";
+      try {
+        name=item['path']==null ? "" : path.basename(item['path']);
+      } catch (_) {}
+      String size='0 B';
+      try {
+        int length=int.parse(item['length']);
+        size=convertSize(length);
+      } catch (_) {}
+      list.add({
+        'name': name,
+        'size': size,
+      });
+    }
+    
+
+    showDialog(
+      context: context, 
+      builder: (context)=>ContentDialog(
+        title: Text('文件列表', style: GoogleFonts.notoSansSc(),),
+        content: SizedBox(
+          height: 400,
+          child: ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (BuildContext context, int index){
+              return SizedBox(
+                height: 30,
+                child: Center(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          list[index]['name'],
+                          style: GoogleFonts.notoSansSc(),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          list[index]['size'],
+                          style: GoogleFonts.notoSansSc(),
+                          textAlign: TextAlign.end,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }
+          ),
+        ),
+        actions: [
+          FilledButton(
+            onPressed: ()=>Navigator.pop(context),
+            child: Text('完成', style: GoogleFonts.notoSansSc(),)
+          )
+        ],
+        constraints: const BoxConstraints(
+          minWidth: 600,
+          maxWidth: 600
+        ),
+      ),
+    );
+  }
   
   void showDetail(BuildContext context){
     showDialog(
@@ -244,6 +315,13 @@ class _TaskItemState extends State<TaskItem> {
           ),
         ),
         actions: [
+          Button(
+            onPressed: (){
+              Navigator.pop(context);
+              showFiles(context);
+            },
+            child: Text('文件信息', style: GoogleFonts.notoSansSc(),)
+          ),
           FilledButton(
             onPressed: ()=>Navigator.pop(context),
             child: Text('完成', style: GoogleFonts.notoSansSc(),)
