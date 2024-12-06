@@ -350,196 +350,200 @@ class _TaskItemState extends State<TaskItem> {
           hover=false;
         });
       },
-      child: FlyoutTarget(
-        key: contextAttachKey,
-        controller: contextController,
-        child: GestureDetector(
-          onTap: (){
-            if(widget.selectMode){
-              widget.changeSelectStatus();
-            }else{
-              showDetail(context);
-            }
-          },
-          onSecondaryTapDown: (d){
-            final targetContext = contextAttachKey.currentContext;
-            if (targetContext == null) return;
-            final box = targetContext.findRenderObject() as RenderBox;
-            final position = box.localToGlobal(
-              d.localPosition,
-              ancestor: Navigator.of(context).context.findRenderObject(),
-            );
-            contextController.showFlyout(
-              barrierColor: Colors.black.withOpacity(0.1),
-              position: position,
-              builder: (context) {
-                return MenuFlyout(
-                  items: [
-                    MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.info),
-                      text: Text('任务详情', style: GoogleFonts.notoSansSc()),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        showDetail(context);
-                      },
-                    ),
-                    MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.bulleted_list),
-                      text: Text('文件列表', style: GoogleFonts.notoSansSc()),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        showFiles(context);
-                      }
-                    ),
-                    if(widget.status=='active') MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.pause),
-                      text: Text('暂停', style: GoogleFonts.notoSansSc(),),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        pauseItem();
-                      },
-                    ),
-                    if(widget.status=='paused') MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.play),
-                      text: Text('继续', style: GoogleFonts.notoSansSc()),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        activeItem();
-                      },
-                    ),
-                    MenuFlyoutItem(
-                      leading: const Icon(FluentIcons.delete),
-                      text: Text('删除', style: GoogleFonts.notoSansSc()),
-                      onPressed: (){
-                        Flyout.of(context).close();
-                        delItem();
-                      }
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          child: AnimatedContainer(
-            decoration: BoxDecoration(
-              color: hover ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 240, 240, 240)
-            ),
-            duration: const Duration(milliseconds: 200),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
-              child: Row(
-                children: [
-                  widget.selectMode? SizedBox(
-                    width: 40,
-                    child: Center(
-                      child: Checkbox(
-                        checked: widget.checked, 
-                        onChanged: (_){
-                          widget.changeSelectStatus();
+      child: Tooltip(
+        message: widget.name,
+        useMousePosition: true,
+        child: FlyoutTarget(
+          key: contextAttachKey,
+          controller: contextController,
+          child: GestureDetector(
+            onTap: (){
+              if(widget.selectMode){
+                widget.changeSelectStatus();
+              }else{
+                showDetail(context);
+              }
+            },
+            onSecondaryTapDown: (d){
+              final targetContext = contextAttachKey.currentContext;
+              if (targetContext == null) return;
+              final box = targetContext.findRenderObject() as RenderBox;
+              final position = box.localToGlobal(
+                d.localPosition,
+                ancestor: Navigator.of(context).context.findRenderObject(),
+              );
+              contextController.showFlyout(
+                barrierColor: Colors.black.withOpacity(0.1),
+                position: position,
+                builder: (context) {
+                  return MenuFlyout(
+                    items: [
+                      MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.info),
+                        text: Text('任务详情', style: GoogleFonts.notoSansSc()),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          showDetail(context);
+                        },
+                      ),
+                      MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.bulleted_list),
+                        text: Text('文件列表', style: GoogleFonts.notoSansSc()),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          showFiles(context);
                         }
                       ),
+                      if(widget.status=='active') MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.pause),
+                        text: Text('暂停', style: GoogleFonts.notoSansSc(),),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          pauseItem();
+                        },
+                      ),
+                      if(widget.status=='paused') MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.play),
+                        text: Text('继续', style: GoogleFonts.notoSansSc()),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          activeItem();
+                        },
+                      ),
+                      MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.delete),
+                        text: Text('删除', style: GoogleFonts.notoSansSc()),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          delItem();
+                        }
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: AnimatedContainer(
+              decoration: BoxDecoration(
+                color: hover ? const Color.fromARGB(255, 240, 240, 240) : const Color.fromARGB(0, 240, 240, 240)
+              ),
+              duration: const Duration(milliseconds: 200),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
+                child: Row(
+                  children: [
+                    widget.selectMode? SizedBox(
+                      width: 40,
+                      child: Center(
+                        child: Checkbox(
+                          checked: widget.checked, 
+                          onChanged: (_){
+                            widget.changeSelectStatus();
+                          }
+                        ),
+                      ),
+                    ):Container(),
+                    Flexible(
+                      flex: 3,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 5,),
+                            Text(
+                              convertSize(widget.totalLength),
+                              style: GoogleFonts.notoSansSc(
+                                fontSize: 12
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ),
-                  ):Container(),
-                  Flexible(
-                    flex: 3,
-                    child: SizedBox(
-                      width: double.infinity,
+                    const SizedBox(width: 10,),
+                    Flexible(
+                      flex: 2,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          SizedBox(
+                            width: double.infinity,
+                            child: ProgressBar(
+                              activeColor: (widget.completedLength/widget.totalLength)==1 ? Colors.green.lighter : Colors.teal,
+                              value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100
+                            )
                           ),
                           const SizedBox(height: 5,),
-                          Text(
-                            convertSize(widget.totalLength),
-                            style: GoogleFonts.notoSansSc(
-                              fontSize: 12
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ),
-                  const SizedBox(width: 10,),
-                  Flexible(
-                    flex: 2,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: ProgressBar(
-                            activeColor: (widget.completedLength/widget.totalLength)==1 ? Colors.green.lighter : Colors.teal,
-                            value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100
-                          )
-                        ),
-                        const SizedBox(height: 5,),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                '${ widget.totalLength==0 ? 0 : ((widget.completedLength/widget.totalLength)*100).toStringAsFixed(2)}%',
-                                style: GoogleFonts.notoSansSc(
-                                  fontSize: 12
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  '${ widget.totalLength==0 ? 0 : ((widget.completedLength/widget.totalLength)*100).toStringAsFixed(2)}%',
+                                  style: GoogleFonts.notoSansSc(
+                                    fontSize: 12
+                                  ),
                                 ),
                               ),
-                            ),
-                            widget.uploadSpeed!=null && p.nowPage.value==Pages.active ? Row(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                widget.uploadSpeed!=0 ? const FaIcon(
-                                  size: 12,
-                                  FontAwesomeIcons.arrowUp
-                                ) : Container(),
-                                const SizedBox(width: 3,),
-                                Text(
-                                  widget.uploadSpeed==0 ? '' : '${convertSize(widget.uploadSpeed)}/s',
-                                  style: GoogleFonts.notoSansSc(
-                                    fontSize: 12
-                                  ),
-                                ),
-                              ],
-                            ):Container(),
-                            const SizedBox(width: 10,),
-                            p.nowPage.value==Pages.active ? Row(
-                              children: [
-                                const FaIcon(
-                                  FontAwesomeIcons.arrowDown,
-                                  size: 12,
-                                ),
-                                const SizedBox(width: 3,),
-                                Text(
-                                  widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
-                                  style: GoogleFonts.notoSansSc(
-                                    fontSize: 12
-                                  ),
-                                ),
-                                (widget.completedLength/widget.totalLength)!=1.0 ? Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Text(
-                                    widget.downloadSpeed==0 ? '--:--' : formatDuration(((widget.totalLength - widget.completedLength) > 0 ? widget.totalLength - widget.completedLength : 0)~/widget.downloadSpeed),
+                              widget.uploadSpeed!=null && p.nowPage.value==Pages.active ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  widget.uploadSpeed!=0 ? const FaIcon(
+                                    size: 12,
+                                    FontAwesomeIcons.arrowUp
+                                  ) : Container(),
+                                  const SizedBox(width: 3,),
+                                  Text(
+                                    widget.uploadSpeed==0 ? '' : '${convertSize(widget.uploadSpeed)}/s',
                                     style: GoogleFonts.notoSansSc(
                                       fontSize: 12
                                     ),
                                   ),
-                                ):Container()
-                              ],
-                            ) : Container()
-                          ],
-                        )
-                      ],
+                                ],
+                              ):Container(),
+                              const SizedBox(width: 10,),
+                              p.nowPage.value==Pages.active ? Row(
+                                children: [
+                                  const FaIcon(
+                                    FontAwesomeIcons.arrowDown,
+                                    size: 12,
+                                  ),
+                                  const SizedBox(width: 3,),
+                                  Text(
+                                    widget.downloadSpeed==0 ? '0 B/s' : '${convertSize(widget.downloadSpeed)}/s',
+                                    style: GoogleFonts.notoSansSc(
+                                      fontSize: 12
+                                    ),
+                                  ),
+                                  (widget.completedLength/widget.totalLength)!=1.0 ? Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      widget.downloadSpeed==0 ? '--:--' : formatDuration(((widget.totalLength - widget.completedLength) > 0 ? widget.totalLength - widget.completedLength : 0)~/widget.downloadSpeed),
+                                      style: GoogleFonts.notoSansSc(
+                                        fontSize: 12
+                                      ),
+                                    ),
+                                  ):Container()
+                                ],
+                              ) : Container()
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10,),
-                  widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
-                  widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
-                  const SizedBox(width: 10,),
-                  TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
-                  const SizedBox(width: 10,),
-                ],
+                    const SizedBox(width: 10,),
+                    widget.status=='active' ? TaskButton(gid: widget.gid, func: ()=>pauseItem(), icon: FluentIcons.pause, hint: '暂停', enabled: true,) :
+                    widget.status=='paused' ? TaskButton(gid: widget.gid, func: ()=>activeItem(), icon: FluentIcons.play, hint: '继续', enabled: true,) :
+                    const SizedBox(width: 10,),
+                    TaskButton(gid: widget.gid, func: ()=>delItem(), icon:FluentIcons.delete, hint: '删除', enabled: true,),
+                    const SizedBox(width: 10,),
+                  ],
+                ),
               ),
             ),
           ),
