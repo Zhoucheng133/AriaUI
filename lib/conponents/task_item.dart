@@ -2,6 +2,7 @@ import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -334,6 +335,17 @@ class _TaskItemState extends State<TaskItem> {
     );
   }
 
+  void copyLink(){
+    final item=widget.active ? t.active[widget.index] : t.stopped[widget.index];
+    final uris=item['files'][0]['uris'];
+    final infoHash=item['infoHash'];
+    if(uris.length==0){
+      FlutterClipboard.copy('magnet:?xt=urn:btih:$infoHash');
+    }else{
+      FlutterClipboard.copy(uris[0]['uri']);
+    }
+  }
+
   final contextController = FlyoutController();
   final contextAttachKey = GlobalKey();
   
@@ -393,6 +405,11 @@ class _TaskItemState extends State<TaskItem> {
                           Flyout.of(context).close();
                           showFiles(context);
                         }
+                      ),
+                      MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.paste),
+                        text: Text('复制链接', style: GoogleFonts.notoSansSc()),
+                        onPressed: ()=>copyLink()
                       ),
                       if(widget.status=='active') MenuFlyoutItem(
                         leading: const Icon(FluentIcons.pause),
