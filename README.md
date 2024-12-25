@@ -21,6 +21,7 @@
 
 ### 0.1.17
 - 添加macOS系统的菜单
+- 修复在macOS系统下图标显示问题
 
 <details>
 <summary>过去的版本</summary>
