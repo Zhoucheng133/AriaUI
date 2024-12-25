@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:aria_ui/conponents/side_bar.dart';
+import 'package:aria_ui/funcs/funcs.dart';
 import 'package:aria_ui/funcs/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/pages/active.dart';
@@ -8,6 +9,7 @@ import 'package:aria_ui/pages/finished.dart';
 import 'package:aria_ui/pages/settings.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -21,6 +23,7 @@ class MainWindow extends StatefulWidget {
 class _MainWindowState extends State<MainWindow> with WindowListener {
 
   late Worker pagelistener;
+  Funcs funcs=Funcs();
 
   @override
   void initState() {
@@ -148,6 +151,126 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
               ],
             ),
           ),
+          Platform.isMacOS ? PlatformMenuBar(
+            menus: [
+              PlatformMenu(
+                label: "AriaUI",
+                menus: [
+                  PlatformMenuItemGroup(
+                    members: [
+                      PlatformMenuItem(
+                        label: "关于 netPlayer",
+                        onSelected: (){
+                          funcs.showAbout(context);
+                        }
+                      )
+                    ]
+                  ),
+                  PlatformMenuItemGroup(
+                    members: [
+                      PlatformMenuItem(
+                        label: "设置...",
+                        shortcut: const SingleActivator(
+                          LogicalKeyboardKey.comma,
+                          meta: true,
+                        ),
+                        onSelected: (){
+                          p.nowPage.value=Pages.settings;
+                        }
+                      ),
+                    ]
+                  ),
+                  const PlatformMenuItemGroup(
+                    members: [
+                      PlatformProvidedMenuItem(
+                        enabled: true,
+                        type: PlatformProvidedMenuItemType.hide,
+                      ),
+                      PlatformProvidedMenuItem(
+                        enabled: true,
+                        type: PlatformProvidedMenuItemType.quit,
+                      ),
+                    ]
+                  ),
+                ]
+              ),
+              PlatformMenu(
+                label: "编辑",
+                menus: [
+                  PlatformMenuItem(
+                    label: "拷贝",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyC,
+                      meta: true
+                    ),
+                    onSelected: (){}
+                  ),
+                  PlatformMenuItem(
+                    label: "粘贴",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyV,
+                      meta: true
+                    ),
+                    onSelected: (){}
+                  ),
+                  PlatformMenuItem(
+                    label: "全选",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyA,
+                      meta: true
+                    ),
+                    onSelected: (){}
+                  )
+                ]
+              ),
+              PlatformMenu(
+                label: '页面', 
+                menus: [
+                  PlatformMenuItemGroup(
+                    members: [
+                      PlatformMenuItem(
+                        label: "活跃中",
+                        shortcut: const SingleActivator(
+                          LogicalKeyboardKey.digit1,
+                          meta: true,
+                        ),
+                        onSelected: (){
+                          p.nowPage.value=Pages.active;
+                        },
+                      ),
+                      PlatformMenuItem(
+                        label: "已完成",
+                        shortcut: const SingleActivator(
+                          LogicalKeyboardKey.digit2,
+                          meta: true,
+                        ),
+                        onSelected: (){
+                          p.nowPage.value=Pages.finished;
+                        },
+                      ),
+                    ]
+                  )
+                ]
+              ),
+              const PlatformMenu(
+                label: "窗口", 
+                menus: [
+                  PlatformMenuItemGroup(
+                    members: [
+                      PlatformProvidedMenuItem(
+                        enabled: true,
+                        type: PlatformProvidedMenuItemType.minimizeWindow,
+                      ),
+                      PlatformProvidedMenuItem(
+                        enabled: true,
+                        type: PlatformProvidedMenuItemType.toggleFullScreen,
+                      )
+                    ]
+                  )
+                ]
+              )
+            ],
+          ):Container()
         ],
       ),
     );
