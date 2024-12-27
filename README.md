@@ -15,7 +15,7 @@
 
 ## 注意事项
 
-支持的Windows系统: Windows10~
+支持的Windows系统: Windows10~ & macOS
 
 ## 更新日志
 
