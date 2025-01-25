@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:aria_ui/conponents/add_task.dart';
 import 'package:aria_ui/conponents/side_bar.dart';
 import 'package:aria_ui/funcs/funcs.dart';
 import 'package:aria_ui/funcs/prefs.dart';
@@ -192,6 +193,19 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                       ),
                     ]
                   ),
+                ]
+              ),
+              PlatformMenu(
+                label: "任务",
+                menus: [
+                  PlatformMenuItem(
+                    label: "新建",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyN,
+                      meta: true
+                    ),
+                    onSelected: ()=>AddTask().addTask(context)
+                  )
                 ]
               ),
               PlatformMenu(
