@@ -1,11 +1,13 @@
 import 'package:aria_ui/main_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
+  await hotKeyManager.unregisterAll();
   WindowOptions windowOptions = const WindowOptions(
     size: Size(920, 670),
     minimumSize: Size(920, 670),

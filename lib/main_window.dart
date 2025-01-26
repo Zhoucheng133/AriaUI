@@ -12,6 +12,7 @@ import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hotkey_manager/hotkey_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainWindow extends StatefulWidget {
@@ -26,12 +27,27 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   late Worker pagelistener;
   Funcs funcs=Funcs();
 
+  Future<void> initHotKeys(BuildContext context) async {
+    HotKey hotKey = HotKey(
+      key: PhysicalKeyboardKey.keyN,
+      modifiers: [ Platform.isMacOS ? HotKeyModifier.meta : HotKeyModifier.control],
+      scope: HotKeyScope.inapp,
+    );
+    await hotKeyManager.register(
+      hotKey,
+      keyDownHandler: (hotKey) {
+        AddTask().addTask(context);
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Prefs().initPrefs(context);
+      initHotKeys(context);
     });
     pagelistener=ever(p.nowPage, (_){
       Services().serviceMain();
@@ -195,16 +211,15 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                   ),
                 ]
               ),
-              PlatformMenu(
+              const PlatformMenu(
                 label: "任务",
                 menus: [
                   PlatformMenuItem(
                     label: "新建",
-                    shortcut: const SingleActivator(
+                    shortcut: SingleActivator(
                       LogicalKeyboardKey.keyN,
                       meta: true
                     ),
-                    onSelected: ()=>AddTask().addTask(context)
                   )
                 ]
               ),
