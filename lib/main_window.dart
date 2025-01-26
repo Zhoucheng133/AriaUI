@@ -28,17 +28,19 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   Funcs funcs=Funcs();
 
   Future<void> initHotKeys(BuildContext context) async {
-    HotKey hotKey = HotKey(
-      key: PhysicalKeyboardKey.keyN,
-      modifiers: [ Platform.isMacOS ? HotKeyModifier.meta : HotKeyModifier.control],
-      scope: HotKeyScope.inapp,
-    );
-    await hotKeyManager.register(
-      hotKey,
-      keyDownHandler: (hotKey) {
-        AddTask().addTask(context);
-      },
-    );
+    if(!Platform.isMacOS){
+      HotKey hotKey = HotKey(
+        key: PhysicalKeyboardKey.keyN,
+        modifiers: [ HotKeyModifier.control],
+        scope: HotKeyScope.inapp,
+      );
+      await hotKeyManager.register(
+        hotKey,
+        keyDownHandler: (hotKey) {
+          AddTask().addTask(context);
+        },
+      );
+    }
   }
 
   @override
@@ -211,15 +213,16 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                   ),
                 ]
               ),
-              const PlatformMenu(
+              PlatformMenu(
                 label: "任务",
                 menus: [
                   PlatformMenuItem(
                     label: "新建",
-                    shortcut: SingleActivator(
+                    shortcut: const SingleActivator(
                       LogicalKeyboardKey.keyN,
                       meta: true
                     ),
+                    onSelected: () => AddTask().addTask(context),
                   )
                 ]
               ),
