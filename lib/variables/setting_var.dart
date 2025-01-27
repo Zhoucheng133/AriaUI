@@ -9,5 +9,5 @@ class SettingVar extends GetxController{
 
   var defaultOrder=Order.oldTime.obs;
 
-  String version='v0.1.17';
+  String version='v0.1.18';
 }
