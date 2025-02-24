@@ -8,6 +8,4 @@ class SettingVar extends GetxController{
   var settings={}.obs;
 
   var defaultOrder=Order.oldTime.obs;
-
-  String version='v0.1.18';
 }
