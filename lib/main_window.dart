@@ -37,7 +37,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
       await hotKeyManager.register(
         hotKey,
         keyDownHandler: (hotKey) {
-          AddTask().addTask(context);
+          AddTask().addTask(context, setState);
         },
       );
     }
@@ -222,7 +222,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                       LogicalKeyboardKey.keyN,
                       meta: true
                     ),
-                    onSelected: () => AddTask().addTask(context),
+                    onSelected: () => AddTask().addTask(context, setState),
                   )
                 ]
               ),

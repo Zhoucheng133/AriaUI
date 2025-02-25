@@ -1,5 +1,6 @@
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/setting_var.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,14 @@ class AddTask{
   TextEditingController userAgent=TextEditingController();
   int downloadLimit=0;
 
-  void addTask(BuildContext context){
+  void addTask(BuildContext context, dynamic setState){
+    FlutterClipboard.paste().then((value) {
+      if(value.startsWith("http://") || value.startsWith("https://") || value.startsWith("magnet:?xt=urn:btih:")){
+        setState((){
+          controller.text=value;
+        });
+      }
+    });
     bool manual=false;
     try {
       dir.text=s.settings['dir'];
