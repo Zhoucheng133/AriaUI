@@ -38,7 +38,7 @@ class Funcs {
               ),
               const SizedBox(height: 10,),
               Text(
-                s.version,
+                'v${s.version}',
                 style: GoogleFonts.notoSansSc(
                   color: Colors.grey[80],
                 ),
