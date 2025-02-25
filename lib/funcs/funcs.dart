@@ -3,7 +3,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart' show showLicensePage;
 
@@ -13,7 +12,6 @@ class Funcs {
   
 
   void showAbout(BuildContext context) async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if(context.mounted){
       showDialog(
         context: context, 
@@ -40,7 +38,7 @@ class Funcs {
               ),
               const SizedBox(height: 10,),
               Text(
-                packageInfo.version,
+                s.version,
                 style: GoogleFonts.notoSansSc(
                   color: Colors.grey[80],
                 ),
