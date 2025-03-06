@@ -223,6 +223,13 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                       meta: true
                     ),
                     onSelected: () => AddTask().addTask(context, setState),
+                  ),
+                  PlatformMenuItem(
+                    label: "完成",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.enter,
+                    ),
+                    onSelected: (){},
                   )
                 ]
               ),

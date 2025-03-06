@@ -2,6 +2,7 @@ import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,7 +20,31 @@ class AddTask{
     return false;
   }
 
+  void addHandler(BuildContext context, bool manual){
+    if(!validLink(controller.text)){
+      showDialog(
+        context: context, 
+        builder: (context)=>ContentDialog(
+          title: const Text('添加失败'),
+          content: const Text('任务链接不合法'),
+          actions: [
+            FilledButton(
+              child: const Text("好的"), 
+              onPressed: ()=>Navigator.pop(context)
+            )
+          ],
+        )
+      );
+      return;
+    }
+    manual ? Services().addManualTask(controller.text, dir.text, userAgent.text, downloadLimit) : Services().addTask(controller.text);
+    Navigator.pop(context);
+  }
+
   void addTask(BuildContext context, dynamic setState){
+
+    FocusNode node=FocusNode();
+
     FlutterClipboard.paste().then((value) {
       if(validLink(value)){
         setState((){
@@ -43,66 +68,78 @@ class AddTask{
         title: Text('添加任务', style: GoogleFonts.notoSansSc(),),
         content: StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: 100,
-                  child: TextBox(
-                    maxLines: null,
-                    controller: controller,
-                    placeholder: 'http(s)://\nmagnet:',
-                    textAlignVertical: TextAlignVertical.top,
+
+            // ignore: use_build_context_synchronously
+            Future.microtask(() => FocusScope.of(context).requestFocus(node));
+
+            return KeyboardListener(
+              focusNode: node,
+              onKeyEvent: (event){
+                if(event is KeyDownEvent && event.logicalKey==LogicalKeyboardKey.enter){
+                  addHandler(context, manual);
+                }
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 100,
+                    child: TextBox(
+                      maxLines: null,
+                      controller: controller,
+                      placeholder: 'http(s)://\nmagnet:',
+                      textAlignVertical: TextAlignVertical.top,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10,),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Checkbox(
-                    checked: manual, 
-                    onChanged: (val){
-                      setState((){
-                        manual=val??false;
-                      });
-                    },
-                    content: Text('使用自定义配置', style: GoogleFonts.notoSansSc(),),
+                  const SizedBox(height: 10,),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Checkbox(
+                      checked: manual, 
+                      onChanged: (val){
+                        setState((){
+                          manual=val??false;
+                        });
+                      },
+                      content: Text('使用自定义配置', style: GoogleFonts.notoSansSc(),),
+                    ),
                   ),
-                ),
-                manual ? SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 5,),
-                      Text('下载地址', style: GoogleFonts.notoSansSc(),),
-                      const SizedBox(height: 5,),
-                      TextBox(
-                        controller: dir,
-                      ),
-                      const SizedBox(height: 10,),
-                      Text('用户代理', style: GoogleFonts.notoSansSc(),),
-                      const SizedBox(height: 5,),
-                      TextBox(
-                        controller: userAgent,
-                      ),
-                      const SizedBox(height: 10,),
-                      Text('下载速度限制', style: GoogleFonts.notoSansSc(),),
-                      const SizedBox(height: 5,),
-                      NumberBox(
-                        value: downloadLimit,
-                        mode: SpinButtonPlacementMode.inline,
-                        onChanged: (val){
-                          if(val!=null){
-                            setState(() {
-                              downloadLimit=val;
-                            });
+                  manual ? SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 5,),
+                        Text('下载地址', style: GoogleFonts.notoSansSc(),),
+                        const SizedBox(height: 5,),
+                        TextBox(
+                          controller: dir,
+                        ),
+                        const SizedBox(height: 10,),
+                        Text('用户代理', style: GoogleFonts.notoSansSc(),),
+                        const SizedBox(height: 5,),
+                        TextBox(
+                          controller: userAgent,
+                        ),
+                        const SizedBox(height: 10,),
+                        Text('下载速度限制', style: GoogleFonts.notoSansSc(),),
+                        const SizedBox(height: 5,),
+                        NumberBox(
+                          value: downloadLimit,
+                          mode: SpinButtonPlacementMode.inline,
+                          onChanged: (val){
+                            if(val!=null){
+                              setState(() {
+                                downloadLimit=val;
+                              });
+                            }
                           }
-                        }
-                      )
-                    ],
-                  ),
-                ) : Container()
-              ],
+                        )
+                      ],
+                    ),
+                  ) : Container()
+                ],
+              ),
             );
           }
         ),
@@ -115,28 +152,7 @@ class AddTask{
           ),
           FilledButton(
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 
-            onPressed: (){
-
-              if(!validLink(controller.text)){
-                showDialog(
-                  context: context, 
-                  builder: (context)=>ContentDialog(
-                    title: const Text('添加失败'),
-                    content: const Text('任务链接不合法'),
-                    actions: [
-                      FilledButton(
-                        child: const Text("好的"), 
-                        onPressed: ()=>Navigator.pop(context)
-                      )
-                    ],
-                  )
-                );
-                return;
-              }
-
-              manual ? Services().addManualTask(controller.text, dir.text, userAgent.text, downloadLimit) : Services().addTask(controller.text);
-              Navigator.pop(context);
-            }
+            onPressed: ()=>addHandler(context, manual)
           )
         ],
       )
