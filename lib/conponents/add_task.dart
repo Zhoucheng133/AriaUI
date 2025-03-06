@@ -12,9 +12,16 @@ class AddTask{
   TextEditingController userAgent=TextEditingController();
   int downloadLimit=0;
 
+  bool validLink(String url){
+    if(url.startsWith("http://") || url.startsWith("https://") || url.startsWith("magnet:?xt=urn:btih:")){
+      return true;
+    }
+    return false;
+  }
+
   void addTask(BuildContext context, dynamic setState){
     FlutterClipboard.paste().then((value) {
-      if(value.startsWith("http://") || value.startsWith("https://") || value.startsWith("magnet:?xt=urn:btih:")){
+      if(validLink(value)){
         setState((){
           controller.text=value;
         });
@@ -61,9 +68,6 @@ class AddTask{
                     content: Text('使用自定义配置', style: GoogleFonts.notoSansSc(),),
                   ),
                 ),
-                // manual ? const Text(
-                //   '下载地址'
-                // ) : Container()
                 manual ? SizedBox(
                   width: double.infinity,
                   child: Column(
@@ -112,6 +116,24 @@ class AddTask{
           FilledButton(
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 
             onPressed: (){
+
+              if(!validLink(controller.text)){
+                showDialog(
+                  context: context, 
+                  builder: (context)=>ContentDialog(
+                    title: const Text('添加失败'),
+                    content: const Text('任务链接不合法'),
+                    actions: [
+                      FilledButton(
+                        child: const Text("好的"), 
+                        onPressed: ()=>Navigator.pop(context)
+                      )
+                    ],
+                  )
+                );
+                return;
+              }
+
               manual ? Services().addManualTask(controller.text, dir.text, userAgent.text, downloadLimit) : Services().addTask(controller.text);
               Navigator.pop(context);
             }
