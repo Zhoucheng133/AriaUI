@@ -8,5 +8,6 @@ class SettingVar extends GetxController{
 
   var settings={}.obs;
 
-  var defaultOrder=Order.oldTime.obs;
+  var defaultActiveOrder=Order.oldTime.obs;
+  var defaultFinishedOrder=Order.oldTime.obs;
 }

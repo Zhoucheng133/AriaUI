@@ -13,18 +13,23 @@ class Prefs{
 
   Future<void> saveAppPrefs() async {
     prefs=await SharedPreferences.getInstance();
-    prefs.setInt('defaultOrder', s.defaultOrder.value.index);
+    prefs.setInt('defaultActiveOrder', s.defaultActiveOrder.value.index);
+    prefs.setInt('defaultFinishedOrder', s.defaultFinishedOrder.value.index);
   }
 
   Future<void> initPrefs(BuildContext context) async {
     prefs=await SharedPreferences.getInstance();
     String? rpc=prefs.getString('rpc');
     String? secret=prefs.getString('secret');
-    int? defaultOrder=prefs.getInt('defaultOrder');
-    if(defaultOrder!=null){
-      s.defaultOrder.value=Order.values[defaultOrder];
-      p.activeOrder.value=Order.values[defaultOrder];
-      p.finishedOrder.value=Order.values[defaultOrder];
+    int? defaultActiveOrder=prefs.getInt('defaultActiveOrder');
+    int? defaultFinishedOrder=prefs.getInt('defaultFinishedOrder');
+    if(defaultActiveOrder!=null){
+      s.defaultActiveOrder.value=Order.values[defaultActiveOrder];
+      p.activeOrder.value=Order.values[defaultActiveOrder];
+    }
+    if(defaultFinishedOrder!=null){
+      s.defaultFinishedOrder.value=Order.values[defaultFinishedOrder];
+      p.finishedOrder.value=Order.values[defaultFinishedOrder];
     }
     if(rpc!=null && secret!=null){
       s.rpc.value=rpc;

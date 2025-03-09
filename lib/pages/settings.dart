@@ -120,71 +120,139 @@ class _SettingsViewState extends State<SettingsView> {
                   fontSize: 25
                 ),),
               ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: SettingItem(
-                  label: '默认排序方式',
-                  item: Row(
-                    children: [
-                      ComboBox(
-                        value: s.defaultOrder.value,
-                        items: [
-                          ComboBoxItem(
-                            value: Order.oldTime,
-                            child:Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const FaIcon(FontAwesomeIcons.arrowDownWideShort),
-                                const SizedBox(width: 10,),
-                                Text('时间顺序', style: GoogleFonts.notoSansSc())
-                              ],
+              Obx(()=>
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SettingItem(
+                    label: '活跃任务排序方式',
+                    item: Row(
+                      children: [
+                        ComboBox(
+                          value: s.defaultActiveOrder.value,
+                          items: [
+                            ComboBoxItem(
+                              value: Order.oldTime,
+                              child:Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownWideShort),
+                                  const SizedBox(width: 10,),
+                                  Text('时间顺序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
                             ),
-                          ),
-                          ComboBoxItem(
-                            value: Order.newTime,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const FaIcon(FontAwesomeIcons.arrowDownShortWide),
-                                const SizedBox(width: 10,),
-                                Text('时间倒序', style: GoogleFonts.notoSansSc())
-                              ],
+                            ComboBoxItem(
+                              value: Order.newTime,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownShortWide),
+                                  const SizedBox(width: 10,),
+                                  Text('时间倒序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
                             ),
-                          ),
-                          ComboBoxItem(
-                            value: Order.titleA,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const FaIcon(FontAwesomeIcons.arrowDownAZ),
-                                const SizedBox(width: 10,),
-                                Text('标题顺序', style: GoogleFonts.notoSansSc())
-                              ],
+                            ComboBoxItem(
+                              value: Order.titleA,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownAZ),
+                                  const SizedBox(width: 10,),
+                                  Text('标题顺序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
                             ),
-                          ),
-                          ComboBoxItem(
-                            value: Order.titleZ,
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const FaIcon(FontAwesomeIcons.arrowDownZA),
-                                const SizedBox(width: 10,),
-                                Text('标题倒序', style: GoogleFonts.notoSansSc())
-                              ],
+                            ComboBoxItem(
+                              value: Order.titleZ,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownZA),
+                                  const SizedBox(width: 10,),
+                                  Text('标题倒序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                        onChanged: (val){
-                          if(val!=null){
-                            Prefs().saveAppPrefs();
-                            setState(() {
-                              s.defaultOrder.value=val;
-                            });
-                          }
-                        },
-                      ),
-                    ],
-                  )
+                          ],
+                          onChanged: (val){
+                            if(val!=null){
+                              s.defaultActiveOrder.value=val;
+                              Prefs().saveAppPrefs();
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10,),
+              Obx(()=>
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SettingItem(
+                    label: '完成任务排序方式',
+                    item: Row(
+                      children: [
+                        ComboBox(
+                          value: s.defaultFinishedOrder.value,
+                          items: [
+                            ComboBoxItem(
+                              value: Order.oldTime,
+                              child:Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownWideShort),
+                                  const SizedBox(width: 10,),
+                                  Text('时间顺序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
+                            ),
+                            ComboBoxItem(
+                              value: Order.newTime,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownShortWide),
+                                  const SizedBox(width: 10,),
+                                  Text('时间倒序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
+                            ),
+                            ComboBoxItem(
+                              value: Order.titleA,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownAZ),
+                                  const SizedBox(width: 10,),
+                                  Text('标题顺序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
+                            ),
+                            ComboBoxItem(
+                              value: Order.titleZ,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const FaIcon(FontAwesomeIcons.arrowDownZA),
+                                  const SizedBox(width: 10,),
+                                  Text('标题倒序', style: GoogleFonts.notoSansSc())
+                                ],
+                              ),
+                            ),
+                          ],
+                          onChanged: (val){
+                            if(val!=null){
+                              s.defaultFinishedOrder.value=val;
+                              Prefs().saveAppPrefs();
+                            }
+                          },
+                        ),
+                      ],
+                    )
+                  ),
                 ),
               ),
               const SizedBox(height: 20,),
