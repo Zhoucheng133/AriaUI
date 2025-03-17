@@ -60,6 +60,7 @@ class _FinishedViewState extends State<FinishedView> {
 
   void removeTask(){
     Services().multiRemoveFinishedTask(selectList);
+    selectMode();
   }
 
   void reDownloadTask(){
@@ -67,6 +68,7 @@ class _FinishedViewState extends State<FinishedView> {
       Services().addTask(item);
     }
     Services().multiRemoveFinishedTask(selectList);
+    selectMode();
   }
 
   void changeSelectStatus(String gid, int index){

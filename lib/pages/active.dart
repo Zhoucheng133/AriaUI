@@ -35,14 +35,17 @@ class _ActiveViewState extends State<ActiveView> {
 
   void continueTask(){
     Services().multiContinue(selectList);
+    selectMode();
   }
 
   void pauseTask(){
     Services().multiPause(selectList);
+    selectMode();
   }
 
   void removeTask(){
     Services().multiRemove(selectList);
+    selectMode();
   }
 
   void continueAll(){
