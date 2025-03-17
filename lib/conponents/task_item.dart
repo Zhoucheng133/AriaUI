@@ -1,5 +1,6 @@
 import 'package:aria_ui/conponents/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
+import 'package:aria_ui/request/requests.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:clipboard/clipboard.dart';
@@ -346,6 +347,22 @@ class _TaskItemState extends State<TaskItem> {
     }
   }
 
+  void reAddTask(){
+    final item=widget.active ? t.active[widget.index] : t.stopped[widget.index];
+    final uris=item['files'][0]['uris'];
+    final infoHash=item['infoHash'];
+    if(uris.length==0){
+      Requests().addTask('magnet:?xt=urn:btih:$infoHash');
+    }else{
+      Requests().addTask(uris[0]['uri']);
+    }
+    if(p.nowPage.value==Pages.finished){
+      Services().removeFinishedTask(widget.gid);
+    }else{
+      Services().remove(widget.gid);
+    }
+  }
+
   final contextController = FlyoutController();
   final contextAttachKey = GlobalKey();
   
@@ -427,6 +444,14 @@ class _TaskItemState extends State<TaskItem> {
                           activeItem();
                         },
                       ),
+                      if(!widget.active) MenuFlyoutItem(
+                        leading: const Icon(FluentIcons.refresh),
+                        text: Text('重新下载', style: GoogleFonts.notoSansSc()),
+                        onPressed: (){
+                          Flyout.of(context).close();
+                          reAddTask();
+                        }
+                      ),
                       MenuFlyoutItem(
                         leading: const Icon(FluentIcons.delete),
                         text: Text('删除', style: GoogleFonts.notoSansSc()),
@@ -491,7 +516,7 @@ class _TaskItemState extends State<TaskItem> {
                           SizedBox(
                             width: double.infinity,
                             child: ProgressBar(
-                              activeColor: (widget.completedLength/widget.totalLength)==1 ? Colors.green.lighter : Colors.teal,
+                              activeColor: widget.completedLength==widget.totalLength ? Colors.green.lighter : widget.active ? Colors.teal : Colors.orange,
                               value: widget.totalLength==0 ? 0 : (widget.completedLength/widget.totalLength)*100
                             )
                           ),
