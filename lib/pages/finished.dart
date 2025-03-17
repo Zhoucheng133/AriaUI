@@ -118,7 +118,7 @@ class _FinishedViewState extends State<FinishedView> {
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),
-                MenuButton(icon: FontAwesomeIcons.arrowRotateRight, name: '重新加载任务', func: ()=>reDownloadTask(), enable: menuEnabled(),),
+                MenuButton(icon: FontAwesomeIcons.arrowRotateRight, name: '重试', func: ()=>reDownloadTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
                 const SizedBox(width: 10,),
