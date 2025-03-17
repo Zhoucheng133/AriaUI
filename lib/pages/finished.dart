@@ -22,6 +22,7 @@ class _FinishedViewState extends State<FinishedView> {
   bool select=false;
   
   List selectList=[];
+  List selectUrl=[];
 
   ScrollController controller=ScrollController();
 
@@ -61,14 +62,26 @@ class _FinishedViewState extends State<FinishedView> {
     Services().multiRemoveFinishedTask(selectList);
   }
 
-  void changeSelectStatus(String gid){
+  void reDownloadTask(){
+    for (var item in selectUrl) {
+      Services().addTask(item);
+    }
+    Services().multiRemoveFinishedTask(selectList);
+  }
+
+  void changeSelectStatus(String gid, int index){
+    final item=t.stopped[index];
+    final uris=item['files'][0]['uris'];
+    final infoHash=item['infoHash'];
     if(selectList.contains(gid)){
       setState(() {
         selectList.remove(gid);
+        selectUrl.remove(uris.length==0 ? 'magnet:?xt=urn:btih:$infoHash' : uris[0]['uri']);
       });
     }else{
       setState(() {
         selectList.add(gid);
+        selectUrl.add(uris.length==0 ? 'magnet:?xt=urn:btih:$infoHash' : uris[0]['uri']);
       });
     }
   }
@@ -104,6 +117,8 @@ class _FinishedViewState extends State<FinishedView> {
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.arrowRotateRight, name: '重新加载任务', func: ()=>reDownloadTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '清空列表', func: ()=>clear()),
                 const SizedBox(width: 10,),
@@ -201,7 +216,7 @@ class _FinishedViewState extends State<FinishedView> {
                       } catch (_) {
                         name=p.basename(t.stopped[index]['files'][0]['path']);
                       }
-                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid), checked: checked(gid), active: false, index: index,);
+                      return TaskItem(name: name, totalLength: totalLength, completedLength: completedLength, dir: dir, downloadSpeed: downloadSpeed, gid: gid, status: status, selectMode: select, changeSelectStatus: ()=>changeSelectStatus(gid, index), checked: checked(gid), active: false, index: index,);
                     }
                   )
                 ),
