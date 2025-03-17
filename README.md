@@ -16,16 +16,3 @@
 ## 注意事项
 
 支持的Windows系统: Windows10~ & macOS
-
-## 更新日志
-
-### 1.0.0 (2025.3.10)
-- 拆分默认排序的设置
-- 从这个版本开始作为正式版
-
-<details>
-<summary>过去的版本</summary>
-
-### v1.0.0以前的版本见Release页
-
-</details>
