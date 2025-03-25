@@ -103,6 +103,14 @@ class _FinishedViewState extends State<FinishedView> {
   void order(){
     Services().tellStopped();
   }
+
+  void selectAll(){
+    for (var element in t.stopped) {
+      setState(() {
+        selectList.add(element['gid']);
+      });
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -117,6 +125,8 @@ class _FinishedViewState extends State<FinishedView> {
               scrollDirection: Axis.horizontal,
               children: [
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
+                const SizedBox(width: 10,),
+                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),
