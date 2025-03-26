@@ -70,12 +70,14 @@ class AddTask{
       context: context, 
       builder: (content)=>ContentDialog(
         title: Text('添加任务', style: GoogleFonts.notoSansSc(),),
+        constraints: const BoxConstraints(
+          minWidth: 500,
+          maxWidth: 500,
+        ),
         content: StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-
+          builder: (BuildContext context, StateSetter setState) {              
             // ignore: use_build_context_synchronously
             Future.microtask(() => FocusScope.of(context).requestFocus(node));
-
             return KeyboardListener(
               focusNode: node,
               onKeyEvent: (event){
