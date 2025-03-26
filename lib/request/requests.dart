@@ -82,49 +82,47 @@ class Requests{
   }
 
   // 添加手动任务
-  Future<String?> addManualTask(String url, String path, String agent, int limit) async {
-    try {
-      return (await httpRequest({
-        "jsonrpc":"2.0",
-        "method":"aria2.addUri",
-        "id":"ariaui",
-        "params":["token:${s.secret.value}", [url], {
-          "user-agent": agent,
-          "max-overall-download-limit": limit,
-          "dir": path,
-        }]
-      }))['result'];
-    } catch (_) {
-      return null;
+  Future<void> addManualTask(List<String> urls, String path, String agent, int limit) async {
+    for (var url in urls) {
+      try {
+        await httpRequest({
+          "jsonrpc":"2.0",
+          "method":"aria2.addUri",
+          "id":"ariaui",
+          "params":["token:${s.secret.value}", [url], {
+            "user-agent": agent,
+            "max-overall-download-limit": limit,
+            "dir": path,
+          }]
+        });
+      } catch (_) {}
     }
   }
 
   // 添加任务
-  Future<String?> addTask(String url) async {
-    try {
-      return (await httpRequest({
-        "jsonrpc":"2.0",
-        "method":"aria2.addUri",
-        "id":"ariaui",
-        "params":["token:${s.secret.value}", [url], {}]
-      }))['result'];
-    } catch (_) {
-      return null;
+  Future<void> addTask(List<String> urls) async {
+    for (var url in urls) {
+      try {
+        await httpRequest({
+          "jsonrpc":"2.0",
+          "method":"aria2.addUri",
+          "id":"ariaui",
+          "params":["token:${s.secret.value}", [url], {}]
+        });
+      } catch (_) {}
     }
   }
 
   // 移除任务
-  Future<String?> removeTask(String gid) async {
+  Future<void> removeTask(String gid) async {
     try {
-      return (await httpRequest({
+      await httpRequest({
         "jsonrpc":"2.0",
         "method":"aria2.remove",
         "id":"ariaui",
         "params":["token:${s.secret.value}", gid]
-      }))['result'];
-    } catch (_) {
-      return null;
-    }
+      });
+    } catch (_) {}
   }
 
   // 移除任务（已完成的）

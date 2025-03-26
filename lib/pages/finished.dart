@@ -22,7 +22,7 @@ class _FinishedViewState extends State<FinishedView> {
   bool select=false;
   
   List selectList=[];
-  List selectUrl=[];
+  List<String> selectUrl=[];
 
   ScrollController controller=ScrollController();
 

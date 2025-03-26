@@ -352,9 +352,9 @@ class _TaskItemState extends State<TaskItem> {
     final uris=item['files'][0]['uris'];
     final infoHash=item['infoHash'];
     if(uris.length==0){
-      Requests().addTask('magnet:?xt=urn:btih:$infoHash');
+      Requests().addTask(['magnet:?xt=urn:btih:$infoHash']);
     }else{
-      Requests().addTask(uris[0]['uri']);
+      Requests().addTask([uris[0]['uri']]);
     }
     if(p.nowPage.value==Pages.finished){
       Services().removeFinishedTask(widget.gid);
