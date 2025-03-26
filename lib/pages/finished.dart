@@ -105,6 +105,18 @@ class _FinishedViewState extends State<FinishedView> {
   }
 
   void selectAll(){
+    if(select){
+      setState(() {
+        select=false;
+        selectList=[];
+      });
+      return;
+    }
+
+    setState(() {
+      select=true;
+      selectList=[];
+    });
     for (var element in t.stopped) {
       setState(() {
         selectList.add(element['gid']);
@@ -126,7 +138,7 @@ class _FinishedViewState extends State<FinishedView> {
               children: [
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
-                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
+                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll()),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.trash, name: '移除', func: ()=>removeTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),

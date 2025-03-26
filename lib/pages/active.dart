@@ -85,6 +85,18 @@ class _ActiveViewState extends State<ActiveView> {
   }
 
   void selectAll(){
+    if(select){
+      setState(() {
+        select=false;
+        selectList=[];
+      });
+      return;
+    }
+
+    setState(() {
+      select=true;
+      selectList=[];
+    });
     for (var element in t.active) {
       setState(() {
         selectList.add(element['gid']);
@@ -112,7 +124,7 @@ class _ActiveViewState extends State<ActiveView> {
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
-                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(), enable: select,),
+                MenuButton(icon: FontAwesomeIcons.listCheck, name: '全选', func: ()=>selectAll(),),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.play, name: '继续', func: ()=>continueTask(), enable: menuEnabled(),),
                 const SizedBox(width: 10,),
