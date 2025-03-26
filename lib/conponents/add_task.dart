@@ -44,6 +44,7 @@ class AddTask{
   void addTask(BuildContext context, dynamic setState){
 
     FocusNode node=FocusNode();
+    FocusNode inputNode=FocusNode();
 
     FlutterClipboard.paste().then((value) {
       if(validLink(value)){
@@ -75,19 +76,26 @@ class AddTask{
             return KeyboardListener(
               focusNode: node,
               onKeyEvent: (event){
-                if(event is KeyDownEvent && event.logicalKey==LogicalKeyboardKey.enter){
+                if(event is KeyDownEvent && event.logicalKey==LogicalKeyboardKey.enter && !inputNode.hasFocus){
                   addHandler(context, manual);
                 }
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text("若要添加多个任务，用回车拆分", style: GoogleFonts.notoSansSc(),),
+                  const SizedBox(height: 10,),
                   SizedBox(
                     height: 100,
                     child: TextBox(
+                      focusNode: inputNode,
                       maxLines: null,
                       controller: controller,
-                      placeholder: 'http(s)://\nmagnet:',
+                      placeholder: 'http(s)://\nmagnet:?xt=urn:btih:',
+                      placeholderStyle: GoogleFonts.notoSansSc(
+                        color: Colors.grey[50]
+                      ),
                       textAlignVertical: TextAlignVertical.top,
                     ),
                   ),
