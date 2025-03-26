@@ -13,9 +13,12 @@ class AddTask{
   TextEditingController userAgent=TextEditingController();
   int downloadLimit=0;
 
-  bool validLink(String url){
-    if(url.startsWith("http://") || url.startsWith("https://") || url.startsWith("magnet:?xt=urn:btih:")){
-      return true;
+  bool validLink(String input){
+    List urls=input.split("\n");
+    for (var url in urls) {
+      if(url.startsWith("http://") || url.startsWith("https://") || url.startsWith("magnet:?xt=urn:btih:")){
+        return true;
+      }
     }
     return false;
   }
