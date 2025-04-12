@@ -1,11 +1,13 @@
 import 'package:aria_ui/main_window.dart';
 import 'package:aria_ui/variables/page_var.dart';
+import 'package:aria_ui/variables/prefs.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hotkey_manager/hotkey_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
@@ -24,6 +26,7 @@ Future<void> main() async {
   Get.put(PageVar());
   Get.put(SettingVar());
   Get.put(TaskVar());
+  Get.put(PrefsVar());
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();

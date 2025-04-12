@@ -1,7 +1,7 @@
 import 'package:aria_ui/conponents/setting_item.dart';
-import 'package:aria_ui/funcs/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
+import 'package:aria_ui/variables/prefs.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
@@ -22,6 +22,7 @@ class _SettingsViewState extends State<SettingsView> {
   TextEditingController secret=TextEditingController();
   final SettingVar s=Get.find();
   final PageVar p=Get.find();
+  final PrefsVar prefs=Get.find();
 
   void initRPC(){
     if(s.rpc.value.isNotEmpty){
@@ -178,7 +179,7 @@ class _SettingsViewState extends State<SettingsView> {
                           onChanged: (val){
                             if(val!=null){
                               s.defaultActiveOrder.value=val;
-                              Prefs().saveAppPrefs();
+                              prefs.saveAppPrefs();
                             }
                           },
                         ),
@@ -246,7 +247,7 @@ class _SettingsViewState extends State<SettingsView> {
                           onChanged: (val){
                             if(val!=null){
                               s.defaultFinishedOrder.value=val;
-                              Prefs().saveAppPrefs();
+                              prefs.saveAppPrefs();
                             }
                           },
                         ),
@@ -474,7 +475,7 @@ class _SettingsViewState extends State<SettingsView> {
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
                 FocusScope.of(context).unfocus();
-                await Prefs().setPrefs(rpc.text, secret.text);
+                await prefs.setPrefs(rpc.text, secret.text);
                 await Services().savePrefs({
                   "allow-overwrite": overwrite.toString(),
                   "dir": dir.text,

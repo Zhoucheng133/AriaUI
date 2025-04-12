@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:aria_ui/conponents/add_task.dart';
 import 'package:aria_ui/conponents/side_bar.dart';
 import 'package:aria_ui/funcs/funcs.dart';
-import 'package:aria_ui/funcs/prefs.dart';
+import 'package:aria_ui/variables/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/pages/active.dart';
 import 'package:aria_ui/pages/finished.dart';
@@ -26,6 +26,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
 
   late Worker pagelistener;
   Funcs funcs=Funcs();
+  final PrefsVar prefs=Get.find();
 
   Future<void> initHotKeys(BuildContext context) async {
     if(!Platform.isMacOS){
@@ -48,7 +49,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     super.initState();
     windowManager.addListener(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Prefs().initPrefs(context);
+      prefs.initPrefs(context);
       initHotKeys(context);
     });
     pagelistener=ever(p.nowPage, (_){
@@ -60,7 +61,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   void dispose() {
     windowManager.removeListener(this);
     pagelistener.dispose();
-    Prefs().destroyTimer();
+    prefs.destroyTimer();
     super.dispose();
   }
 

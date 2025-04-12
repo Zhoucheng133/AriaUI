@@ -98,7 +98,7 @@ class _FinishedViewState extends State<FinishedView> {
     }
     return false;
   }
-  final page=Get.find();
+  final PageVar page=Get.find();
 
   void order(){
     Services().tellStopped();

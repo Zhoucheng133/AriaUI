@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Prefs{
+class PrefsVar extends GetxController{
   late SharedPreferences prefs;
   final SettingVar s=Get.find();
   final PageVar p=Get.find();
