@@ -18,7 +18,7 @@ class FinishedView extends StatefulWidget {
 
 class _FinishedViewState extends State<FinishedView> {
 
-  final TaskVar t=Get.put(TaskVar());
+  final TaskVar t=Get.find();
   bool select=false;
   
   List selectList=[];
@@ -98,7 +98,7 @@ class _FinishedViewState extends State<FinishedView> {
     }
     return false;
   }
-  final page=Get.put(PageVar());
+  final page=Get.find();
 
   void order(){
     Services().tellStopped();

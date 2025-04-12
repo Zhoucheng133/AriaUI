@@ -35,7 +35,7 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
-  PageVar p=Get.put(PageVar());
+  PageVar p=Get.find();
 
   String convertSize(int bytes) {
     try {
@@ -107,7 +107,7 @@ class _TaskItemState extends State<TaskItem> {
     }
   }
 
-  final TaskVar t=Get.put(TaskVar());
+  final TaskVar t=Get.find();
 
   void showFiles(BuildContext context){
 

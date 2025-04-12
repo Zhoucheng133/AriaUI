@@ -17,7 +17,7 @@ class SideBarItem extends StatefulWidget {
 
 class _SideBarItemState extends State<SideBarItem> {
 
-  PageVar p=Get.put(PageVar());
+  PageVar p=Get.find();
   bool hover=false;
   Funcs funcs=Funcs();
 

@@ -22,7 +22,7 @@ class _ActiveViewState extends State<ActiveView> {
   bool select=false;
   
   List selectList=[];
-  final page=Get.put(PageVar());
+  final PageVar page=Get.find();
 
   
 
@@ -73,8 +73,7 @@ class _ActiveViewState extends State<ActiveView> {
     return selectList.contains(gid);
   }
 
-  final TaskVar t=Get.put(TaskVar());
-
+  final TaskVar t=Get.find();
   ScrollController controller=ScrollController();
 
   bool menuEnabled(){

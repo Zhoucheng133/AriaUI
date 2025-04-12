@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class Requests{
 
-  final SettingVar s=Get.put(SettingVar());
+  final SettingVar s=Get.find();
 
   Future<Map> httpRequest(Map data) async {
     final url = Uri.parse(s.rpc.value);

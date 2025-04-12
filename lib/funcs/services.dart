@@ -11,9 +11,9 @@ import 'package:path/path.dart' as path;
 
 class Services{
 
-  final TaskVar t=Get.put(TaskVar());
-  final PageVar p=Get.put(PageVar());
-  final SettingVar s=Get.put(SettingVar());
+  final TaskVar t=Get.find();
+  final PageVar p=Get.find();
+  final SettingVar s=Get.find();
   late Timer interval;
 
   // 移除任务

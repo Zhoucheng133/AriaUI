@@ -95,7 +95,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
     windowManager.unmaximize();
   }
 
-  PageVar p=Get.put(PageVar());
+  PageVar p=Get.find();
 
   int getPageIndex(Pages page) {
     switch (page) {

@@ -13,7 +13,7 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
 
-  PageVar p=Get.put(PageVar());
+  PageVar p=Get.find();
 
   @override
   Widget build(BuildContext context) {

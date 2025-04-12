@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddTask{
-  final SettingVar s=Get.put(SettingVar());
+  SettingVar s=Get.find();
   TextEditingController controller=TextEditingController();
   TextEditingController dir=TextEditingController();
   TextEditingController userAgent=TextEditingController();

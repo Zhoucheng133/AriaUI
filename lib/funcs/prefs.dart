@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Prefs{
   late SharedPreferences prefs;
-  final SettingVar s=Get.put(SettingVar());
-  final PageVar p=Get.put(PageVar());
+  final SettingVar s=Get.find();
+  final PageVar p=Get.find();
 
   Future<void> saveAppPrefs() async {
     prefs=await SharedPreferences.getInstance();

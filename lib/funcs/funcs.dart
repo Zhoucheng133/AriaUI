@@ -9,7 +9,7 @@ import 'package:flutter/material.dart' show showLicensePage;
 
 class Funcs {
 
-  SettingVar s=Get.put(SettingVar());
+  SettingVar s=Get.find();
   
 
   void showAbout(BuildContext context) async {

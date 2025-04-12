@@ -20,8 +20,8 @@ class _SettingsViewState extends State<SettingsView> {
 
   TextEditingController rpc=TextEditingController();
   TextEditingController secret=TextEditingController();
-  final SettingVar s=Get.put(SettingVar());
-  final PageVar p=Get.put(PageVar());
+  final SettingVar s=Get.find();
+  final PageVar p=Get.find();
 
   void initRPC(){
     if(s.rpc.value.isNotEmpty){
@@ -103,7 +103,7 @@ class _SettingsViewState extends State<SettingsView> {
     super.dispose();
   }
 
-  TaskVar t=Get.put(TaskVar());
+  TaskVar t=Get.find();
 
   @override
   Widget build(BuildContext context) {
