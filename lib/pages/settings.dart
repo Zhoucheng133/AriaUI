@@ -4,7 +4,8 @@ import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/prefs.dart';
 import 'package:aria_ui/variables/setting_var.dart';
 import 'package:aria_ui/variables/task_var.dart';
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide Tooltip;
+import 'package:flutter/material.dart' show Tooltip;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -261,9 +262,24 @@ class _SettingsViewState extends State<SettingsView> {
               const SizedBox(height: 10,),
               Padding(
                 padding: const EdgeInsets.only(left: 30),
-                child: Text('Aria 设置', style: GoogleFonts.notoSansSc(
-                  fontSize: 25
-                ),),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Aria 设置', 
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 25
+                      ),
+                    ),
+                    const SizedBox(width: 15,),
+                    const Tooltip(
+                      message: '建议通过修改aria2.conf文件而不是下面的设置',
+                      child: Icon(
+                        FluentIcons.warning
+                      ),
+                    )
+                  ],
+                ),
               ),
               const SizedBox(height: 10,),
               Align(
