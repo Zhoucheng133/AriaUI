@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:aria_ui/conponents/add_task.dart';
-import 'package:aria_ui/conponents/side_bar.dart';
+import 'package:aria_ui/components/add_task.dart';
+import 'package:aria_ui/components/side_bar.dart';
 import 'package:aria_ui/funcs/funcs.dart';
 import 'package:aria_ui/variables/prefs.dart';
 import 'package:aria_ui/funcs/services.dart';

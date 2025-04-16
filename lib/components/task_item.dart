@@ -1,4 +1,4 @@
-import 'package:aria_ui/conponents/task_button.dart';
+import 'package:aria_ui/components/task_button.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/request/requests.dart';
 import 'package:aria_ui/variables/page_var.dart';

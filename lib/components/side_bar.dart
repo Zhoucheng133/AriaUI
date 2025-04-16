@@ -1,4 +1,4 @@
-import 'package:aria_ui/conponents/side_bar_item.dart';
+import 'package:aria_ui/components/side_bar_item.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

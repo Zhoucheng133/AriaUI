@@ -1,5 +1,5 @@
-import 'package:aria_ui/conponents/menu_button.dart';
-import 'package:aria_ui/conponents/task_item.dart';
+import 'package:aria_ui/components/menu_button.dart';
+import 'package:aria_ui/components/task_item.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/task_var.dart';

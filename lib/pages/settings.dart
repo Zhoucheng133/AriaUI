@@ -1,4 +1,4 @@
-import 'package:aria_ui/conponents/setting_item.dart';
+import 'package:aria_ui/components/setting_item.dart';
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/prefs.dart';
