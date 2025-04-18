@@ -148,7 +148,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                         color: const Color.fromARGB(255, 250, 250, 250),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.08),
+                            color: Colors.grey.withAlpha(2),
                             spreadRadius: 1,
                             blurRadius: 1,
                           ),
