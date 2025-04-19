@@ -402,10 +402,11 @@ class _TaskItemState extends State<TaskItem> {
                 ancestor: Navigator.of(context).context.findRenderObject(),
               );
               contextController.showFlyout(
-                barrierColor: Colors.black.withAlpha(2),
+                barrierColor: Colors.transparent,
                 position: position,
                 builder: (context) {
                   return MenuFlyout(
+                    shadowColor: Colors.transparent,
                     items: [
                       MenuFlyoutItem(
                         leading: const Icon(FluentIcons.info),
