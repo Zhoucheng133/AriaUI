@@ -74,7 +74,11 @@ class Funcs {
               ),
               const SizedBox(height: 10),
               GestureDetector(
-                onTap: ()=>showLicensePage(context: context),
+                onTap: ()=>showLicensePage(
+                  context: context,
+                  applicationName: 'AriaUI',
+                  applicationVersion: 'v${packageInfo.version}'
+                ),
                 child: MouseRegion(
                   cursor: SystemMouseCursors.click,
                   child: Row(
