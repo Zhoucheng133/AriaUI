@@ -71,6 +71,9 @@ class Services{
           t.active.value=tempList;
       }
       
+      if(t.activeInit.value){
+        t.activeInit.value=false;
+      }
     } 
   }
 
@@ -120,6 +123,10 @@ class Services{
           });
           t.stopped.value=lists;
       }
+    }
+
+    if(t.stoppedInit.value){
+      t.stoppedInit.value=false;
     }
   }
 
