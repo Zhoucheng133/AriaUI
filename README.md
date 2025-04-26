@@ -3,9 +3,9 @@
 ## 简介
 
 > [!NOTE]
-> 注意这是一个Aria2的桌面app，包含常用的一些设置和功能，如果你需要完整功能的Aria GUI，你可以使用[AriaNG](https://github.com/mayswind/AriaNg)
+> 这是一个Aria的桌面客户端，如果你需要移动端版本可以使用[Aria Remote](https://github.com/Zhoucheng133/Aria-Remote)
 
-<img src="assets/icon.png" width="100px">
+<img src="demo/icon.png" width="100px">
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
