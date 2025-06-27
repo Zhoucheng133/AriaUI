@@ -19,20 +19,20 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
 
-  TextEditingController rpc=TextEditingController();
-  TextEditingController secret=TextEditingController();
+  // TextEditingController rpc=TextEditingController();
+  // TextEditingController secret=TextEditingController();
   final SettingVar s=Get.find();
   final PageVar p=Get.find();
   final PrefsVar prefs=Get.find();
 
-  void initRPC(){
-    if(s.rpc.value.isNotEmpty){
-      rpc.text=s.rpc.value;
-    }
-    if(s.secret.value.isNotEmpty){
-      secret.text=s.secret.value;
-    }
-  }
+  // void initRPC(){
+  //   if(s.rpc.value.isNotEmpty){
+  //     rpc.text=s.rpc.value;
+  //   }
+  //   if(s.secret.value.isNotEmpty){
+  //     secret.text=s.secret.value;
+  //   }
+  // }
 
   // 允许覆盖【allow-overwrite】
   bool overwrite=false;
@@ -91,7 +91,6 @@ class _SettingsViewState extends State<SettingsView> {
     super.initState();
     pageListener=ever(p.nowPage, (val){
       if(val==Pages.settings){
-        initRPC();
         initSettings();
       }
     });
@@ -282,33 +281,22 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
               ),
               const SizedBox(height: 10,),
+              
               Align(
                 alignment: Alignment.topCenter,
                 child: SettingItem(
                   label: 'RPC地址', 
-                  item: TextBox(
-                    controller: rpc,
-                    placeholder: 'http(s)://',
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    style: GoogleFonts.notoSansSc(),
+                  item: Row(
+                    children: [
+                      Button(
+                        child: const Text("设置RPC"), 
+                        onPressed: ()=> s.setRPC(context)
+                      ),
+                    ],
                   )
                 ),
               ),
               const SizedBox(height: 10,),
-              Align(
-                alignment: Alignment.topCenter,
-                child: SettingItem(
-                  label: 'RPC密钥',
-                  item: TextBox(
-                    controller: secret,
-                    autocorrect: false,
-                    enableSuggestions: false,
-                    obscureText: true,
-                    style: GoogleFonts.notoSansSc(),
-                  )
-                ),
-              ),
               const SizedBox(height: 10,),
               Align(
                 alignment: Alignment.topCenter,
@@ -476,8 +464,6 @@ class _SettingsViewState extends State<SettingsView> {
                       FilledButton(
                         child: Text('放弃', style: GoogleFonts.notoSansSc(),),
                         onPressed: (){
-                          rpc.text=s.rpc.value;
-                          secret.text=s.secret.value;
                           Navigator.pop(context);
                         }
                       )
@@ -491,7 +477,6 @@ class _SettingsViewState extends State<SettingsView> {
               child: Text('保存', style: GoogleFonts.notoSansSc(),), 
               onPressed: () async {
                 FocusScope.of(context).unfocus();
-                await prefs.setPrefs(rpc.text, secret.text);
                 await Services().savePrefs({
                   "allow-overwrite": overwrite.toString(),
                   "dir": dir.text,

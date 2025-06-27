@@ -1,6 +1,7 @@
 import 'package:aria_ui/funcs/services.dart';
 import 'package:aria_ui/variables/page_var.dart';
 import 'package:aria_ui/variables/setting_var.dart';
+import 'package:aria_ui/variables/task_var.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +11,7 @@ class PrefsVar extends GetxController{
   late SharedPreferences prefs;
   final SettingVar s=Get.find();
   final PageVar p=Get.find();
+  final TaskVar t=Get.find();
 
   Future<void> saveAppPrefs() async {
     prefs=await SharedPreferences.getInstance();
@@ -48,15 +50,17 @@ class PrefsVar extends GetxController{
             actions: [
               Button(
                 onPressed: (){
+                  t.activeInit.value=false;
+                  t.stoppedInit.value=false;
                   Navigator.pop(context);
                 },
                 child: Text('好的', style: GoogleFonts.notoSansSc(),)
               ),
               FilledButton(
-                child: Text('前往设置', style: GoogleFonts.notoSansSc(),), 
+                child: Text('设置', style: GoogleFonts.notoSansSc(),), 
                 onPressed: (){
-                  p.nowPage.value=Pages.settings;
                   Navigator.pop(context);
+                  s.setRPC(context);
                 }
               )
             ],
