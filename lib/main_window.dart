@@ -239,27 +239,30 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                 menus: [
                   PlatformMenuItem(
                     label: "拷贝",
-                    shortcut: const SingleActivator(
-                      LogicalKeyboardKey.keyC,
-                      meta: true
-                    ),
-                    onSelected: (){}
+                    onSelected: (){
+                      final focusedContext = FocusManager.instance.primaryFocus?.context;
+                      if (focusedContext != null) {
+                        Actions.invoke(focusedContext, CopySelectionTextIntent.copy);
+                      }
+                    }
                   ),
                   PlatformMenuItem(
                     label: "粘贴",
-                    shortcut: const SingleActivator(
-                      LogicalKeyboardKey.keyV,
-                      meta: true
-                    ),
-                    onSelected: (){}
+                    onSelected: (){
+                      final focusedContext = FocusManager.instance.primaryFocus?.context;
+                      if (focusedContext != null) {
+                        Actions.invoke(focusedContext, const PasteTextIntent(SelectionChangedCause.keyboard));
+                      }
+                    },
                   ),
                   PlatformMenuItem(
                     label: "全选",
-                    shortcut: const SingleActivator(
-                      LogicalKeyboardKey.keyA,
-                      meta: true
-                    ),
-                    onSelected: (){}
+                    onSelected: (){
+                      final focusedContext = FocusManager.instance.primaryFocus?.context;
+                      if (focusedContext != null) {
+                        Actions.invoke(focusedContext, const SelectAllTextIntent(SelectionChangedCause.keyboard));
+                      }
+                    }
                   )
                 ]
               ),
