@@ -20,6 +20,10 @@ class SettingVar extends GetxController{
     TextEditingController secret=TextEditingController();
     final TaskVar t=Get.find();
     final PrefsVar prefs=Get.find();
+    if(this.rpc.value.isNotEmpty && this.secret.value.isNotEmpty){
+      rpc.text=this.rpc.value;
+      secret.text=this.secret.value;
+    }
     showDialog(
       context: context, 
       builder: (context)=>ContentDialog(
