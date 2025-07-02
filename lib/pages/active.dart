@@ -1,4 +1,3 @@
-import 'package:aria_ui/components/add_task.dart';
 import 'package:aria_ui/components/menu_button.dart';
 import 'package:aria_ui/components/task_item.dart';
 import 'package:aria_ui/funcs/services.dart';
@@ -119,7 +118,8 @@ class _ActiveViewState extends State<ActiveView> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>AddTask().addTask(context, setState)),
+                // MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>AddTask().addTask(context, setState)),
+                const AddButton(),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),
