@@ -44,7 +44,11 @@ class AddTask{
     Navigator.pop(context);
   }
 
-  void addTask(BuildContext context, dynamic setState){
+  void addTorrent(BuildContext context, dynamic setState){
+
+  }
+
+  void addMagnet(BuildContext context, dynamic setState){
 
     FocusNode node=FocusNode();
     FocusNode inputNode=FocusNode();
@@ -159,9 +163,7 @@ class AddTask{
         actions: [
           Button(
             child: Text('取消', style: GoogleFonts.notoSansSc(),), 
-            onPressed: (){
-              Navigator.pop(context);
-            }
+            onPressed: () => Navigator.pop(context)
           ),
           FilledButton(
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 

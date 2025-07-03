@@ -119,7 +119,7 @@ class _ActiveViewState extends State<ActiveView> {
               scrollDirection: Axis.horizontal,
               children: [
                 // MenuButton(icon: FontAwesomeIcons.plus, name: '添加', func: ()=>AddTask().addTask(context, setState)),
-                const AddButton(),
+                AddButton(rootContext: context,),
                 const SizedBox(width: 10,),
                 MenuButton(icon: FontAwesomeIcons.squareCheck, name: '选择', func: ()=>selectMode()),
                 const SizedBox(width: 10,),

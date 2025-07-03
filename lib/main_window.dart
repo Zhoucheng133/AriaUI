@@ -30,15 +30,30 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
 
   Future<void> initHotKeys(BuildContext context) async {
     if(!Platform.isMacOS){
-      HotKey hotKey = HotKey(
+      HotKey newMagnet = HotKey(
         key: PhysicalKeyboardKey.keyN,
         modifiers: [ HotKeyModifier.control],
         scope: HotKeyScope.inapp,
       );
       await hotKeyManager.register(
-        hotKey,
+        newMagnet,
         keyDownHandler: (hotKey) {
-          AddTask().addTask(context, setState);
+          AddTask().addMagnet(context, setState);
+        },
+      );
+
+      HotKey newTorrent=HotKey(
+        key: PhysicalKeyboardKey.keyN,
+        modifiers: [
+          HotKeyModifier.control,
+          HotKeyModifier.shift,
+        ],
+        scope: HotKeyScope.inapp
+      );
+      await hotKeyManager.register(
+        newTorrent,
+        keyDownHandler: (hotKey) {
+          AddTask().addTorrent(context, setState);
         },
       );
     }
@@ -223,7 +238,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                       LogicalKeyboardKey.keyN,
                       meta: true
                     ),
-                    onSelected: () => AddTask().addTask(context, setState),
+                    onSelected: () => AddTask().addMagnet(context, setState),
                   ),
                   PlatformMenuItem(
                     label: "完成",
