@@ -45,8 +45,8 @@ class _AddButtonState extends State<AddButton> {
                   leading: const Icon(FontAwesomeIcons.plus),
                   text: Text('添加Torrent', style: GoogleFonts.notoSansSc(),),
                   onPressed: (){
-                    // TODO 添加Torrent
                     Flyout.of(context).close();
+                    AddTask().addTorrent(widget.rootContext, setState);
                   },
                 ),
               ],
