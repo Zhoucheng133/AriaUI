@@ -182,6 +182,19 @@ class Services{
     serviceMain();
   }
 
+  // 添加种子任务
+  Future<void> addTorrentTask(String base64) async {
+    await Requests().addTorrentTask(base64);
+    serviceMain();
+  }
+
+  // 添加自定义种子任务
+  Future<void> addManualTorrentTask(String base64, String path, String agent, int limit) async {
+    await Requests().addTorrentManualTask(base64, path, agent, limit);
+    serviceMain();
+  }
+
+
   // 销毁服务
   void destoryServive(){
     interval.cancel();

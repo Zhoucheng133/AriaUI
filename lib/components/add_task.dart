@@ -18,6 +18,10 @@ class AddTask{
   TextEditingController userAgent=TextEditingController();
   int downloadLimit=0;
 
+  bool manual=false;
+  String filePath="";
+  String base64Torrent="";
+
   bool validLink(String input){
     List urls=input.split("\n");
     for (var url in urls) {
@@ -49,21 +53,38 @@ class AddTask{
     Navigator.pop(context);
   }
 
-  Future<void> addTorrent(BuildContext context, dynamic setState) async {
-    // FilePickerResult? result = await FilePicker.platform.pickFiles(
-    //   allowedExtensions: ['torrent']
-    // );
-    // if (result != null) {
-    //   File file = File(result.files.single.path!);
-    //   final bytes = await file.readAsBytes();
-    //   final base64Torrent = base64Encode(bytes);
+  void addTorrentHandler(BuildContext context, bool manual){
+    if(filePath.isEmpty){
+      showDialog(
+        context: context, 
+        builder: (context)=>ContentDialog(
+          title: Text("添加任务失败", style: GoogleFonts.notoSansSc(),),
+          content: Text("没有选取Torrernt文件", style: GoogleFonts.notoSansSc(),),
+          actions: [
+            FilledButton(
+              child: Text("好的", style: GoogleFonts.notoSansSc(),), 
+              onPressed: ()=>Navigator.pop(context)
+            )
+          ],
+        )
+      );
+      return;
+    }
+    manual ? Services().addManualTorrentTask(base64Torrent, dir.text, userAgent.text, downloadLimit) : Services().addTorrentTask(base64Torrent);
+    Navigator.pop(context);
+  }
 
-    // } else {
-    //   return;
-    // }
+  Future<void> addTorrent(BuildContext context, dynamic setState) async {
     bool manual=false;
-    String filePath="";
-    String base64Torrent="";
+    try {
+      dir.text=s.settings['dir'];
+    } catch (_) {}
+    try {
+      userAgent.text=s.settings['user-agent'];
+    } catch (_) {}
+    try {
+      downloadLimit=int.parse(s.settings['max-overall-download-limit']);
+    } catch (_) {}
     showDialog(
       context: context, 
       builder: (context)=>ContentDialog(
@@ -168,23 +189,7 @@ class AddTask{
           ),
           FilledButton(
             child: Text('添加', style: GoogleFonts.notoSansSc(),), 
-            onPressed: (){
-              if(filePath.isEmpty){
-                showDialog(
-                  context: context, 
-                  builder: (context)=>ContentDialog(
-                    title: Text("添加任务失败", style: GoogleFonts.notoSansSc(),),
-                    content: Text("没有选取Torrernt文件", style: GoogleFonts.notoSansSc(),),
-                    actions: [
-                      FilledButton(
-                        child: Text("好的", style: GoogleFonts.notoSansSc(),), 
-                        onPressed: ()=>Navigator.pop(context)
-                      )
-                    ],
-                  )
-                );
-              }
-            }
+            onPressed: ()=>addTorrentHandler(context, manual)
           )
         ],
       )

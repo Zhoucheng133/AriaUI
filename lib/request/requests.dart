@@ -113,6 +113,34 @@ class Requests{
     }
   }
 
+  // 添加种子任务
+  Future<void> addTorrentTask(String base64) async {
+    try {
+      await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.addTorrent",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", base64, [], {}]
+      });
+    } catch (_) {}
+  }
+
+  // 添加自定义种子任务
+  Future<void> addTorrentManualTask(String base64, String path, String agent, int limit) async {
+    try {
+      await httpRequest({
+        "jsonrpc":"2.0",
+        "method":"aria2.addTorrent",
+        "id":"ariaui",
+        "params":["token:${s.secret.value}", base64, [], {
+          "user-agent": agent,
+          "max-overall-download-limit": limit,
+          "dir": path,
+        }]
+      });
+    } catch (_) {}
+  }
+
   // 移除任务
   Future<void> removeTask(String gid) async {
     try {
@@ -181,6 +209,7 @@ class Requests{
     }
   }
 
+  // 继续所有任务
   Future<String?> continueAll() async {
     try {
       return (await httpRequest({
@@ -193,7 +222,8 @@ class Requests{
       return null;
     }
   }
-
+  
+  // 暂停所有任务
   Future<String?> pauseAll() async {
     try {
       return (await httpRequest({
@@ -207,6 +237,7 @@ class Requests{
     }
   }
 
+  // 获取全局设置
   Future<Map?> getGlobalSettings() async {
     try {
       return (await httpRequest({
@@ -220,6 +251,7 @@ class Requests{
     }
   }
 
+  // 修改全局设置
   Future<String?> changeGlobalSettings(Map settings) async{
     try {
       var resp=(await httpRequest({
