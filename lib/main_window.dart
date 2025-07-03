@@ -233,12 +233,21 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                 label: "任务",
                 menus: [
                   PlatformMenuItem(
-                    label: "新建",
+                    label: "新建磁力任务",
                     shortcut: const SingleActivator(
                       LogicalKeyboardKey.keyN,
                       meta: true
                     ),
                     onSelected: () => AddTask().addMagnet(context, setState),
+                  ),
+                  PlatformMenuItem(
+                    label: "新建Torrent任务",
+                    shortcut: const SingleActivator(
+                      LogicalKeyboardKey.keyN,
+                      shift: true,
+                      meta: true
+                    ),
+                    onSelected: () => AddTask().addTorrent(context, setState),
                   ),
                   PlatformMenuItem(
                     label: "完成",
