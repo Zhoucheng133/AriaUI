@@ -1,9 +1,13 @@
+import 'package:aria_ui/components/add_task.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddButton extends StatefulWidget {
-  const AddButton({super.key});
+
+  final BuildContext rootContext;
+
+  const AddButton({super.key, required this.rootContext});
 
   @override
   State<AddButton> createState() => _AddButtonState();
@@ -33,8 +37,8 @@ class _AddButtonState extends State<AddButton> {
                   leading: const Icon(FontAwesomeIcons.plus),
                   text: Text('添加磁力链接', style: GoogleFonts.notoSansSc(),),
                   onPressed: (){
-                    // TODO 添加磁力链接
                     Flyout.of(context).close();
+                    AddTask().addMagnet(widget.rootContext, setState);
                   },
                 ),
                 MenuFlyoutItem(
