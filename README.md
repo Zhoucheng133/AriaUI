@@ -2,8 +2,8 @@
 
 ## 简介
 
-> [!NOTE]
-> 这是一个Aria的桌面客户端，如果你需要移动端版本可以使用[Aria Remote](https://github.com/Zhoucheng133/Aria-Remote)
+> [!WARNING]
+> 本项目合并至[BitFlow](https://github.com/Zhoucheng133/bitflow)
 
 <img src="demo/icon.png" width="100px">
 
